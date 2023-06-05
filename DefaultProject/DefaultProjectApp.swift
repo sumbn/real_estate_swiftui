@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseCore
 import GoogleMobileAds
 
 @main
@@ -14,7 +14,7 @@ struct DefaultProjectApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            RootView().preferredColorScheme(.dark)
+            RootView().preferredColorScheme(.light)
         }
     }
 }
@@ -27,7 +27,7 @@ struct RootView: View {
     @AppStorage("FIRST_LOAD_APP") var FIRST_LOAD_APP = false
 
     var body: some View {
-        NavigationStack(path: $coordinator.path) {
+//        NavigationStack(path: $coordinator.path) {
             Group{
                 if appController.SHOW_OPEN_APPP{
                     ZStack{
@@ -53,15 +53,15 @@ struct RootView: View {
             //.environmentObject(coordinator)
             .environmentObject(alerter)
             .navigationBarHidden(true)
-            .navigationDestination(for: Page.self) { page in
-                coordinator.build(page: page)
-            }
-            .sheet(item: $coordinator.sheet) { sheet in
-                coordinator.build(sheet: sheet)
-            }
-            .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreencover in
-                coordinator.build(fullScreenCover: fullScreencover)
-            }
+//            .navigationDestination(for: Page.self) { page in
+//                coordinator.build(page: page)
+//            }
+//            .sheet(item: $coordinator.sheet) { sheet in
+//                coordinator.build(sheet: sheet)
+//            }
+//            .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreencover in
+//                coordinator.build(fullScreenCover: fullScreencover)
+//            }
             .onAppear(perform: {
                 if !appController.SHOW_OPEN_APPP{
                     return
@@ -99,7 +99,7 @@ struct RootView: View {
                 alerter.alert ?? Alert(title: Text(""))
             }
         }
-    }
+//    }
     
     func openApp(){
         User.shared.getUser()

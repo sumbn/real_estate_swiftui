@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.272336717899-qv18v3purg7482tcb8n56celpr0jtao4</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
+	</array>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-1005464068564361~1050666756</string>
 	<key>UIAppFonts</key>
@@ -12,6 +29,8 @@
 		<string>Montserrat-Regular.ttf</string>
 		<string>Montserrat-Thin.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
+		<string>WorkSans.ttf</string>
+		<string>WorkSansBold.ttf</string>
 	</array>
 </dict>
 </plist>

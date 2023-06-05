@@ -12,7 +12,7 @@ import SwiftUI
 class CONSTANT{
     static var SHARED = CONSTANT()
     
-    static var USING_MANIFEST = true
+    static var USING_MANIFEST = false
     static var MANIFEST_URL = "/manifest/test/v1_0"
     
     var OBSERVER_MANIFEST: Any?

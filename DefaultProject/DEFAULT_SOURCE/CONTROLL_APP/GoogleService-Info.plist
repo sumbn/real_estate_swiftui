@@ -3,34 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>160070637775-t2ggh4sceilshpvilp0k5tt97nmhv68v.apps.googleusercontent.com</string>
+	<string>272336717899-qv18v3purg7482tcb8n56celpr0jtao4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.160070637775-t2ggh4sceilshpvilp0k5tt97nmhv68v</string>
+	<string>com.googleusercontent.apps.272336717899-qv18v3purg7482tcb8n56celpr0jtao4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBx4g875oRKPeRQnIB-GTS-PZaT4jZr15E</string>
+	<string>AIzaSyAHeO4mO7wXJmQwsqM-sfPPd1poM41J4aE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>160070637775</string>
+	<string>272336717899</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>io.infinitylabs.music</string>
+	<string>com.default.DefaultProject</string>
 	<key>PROJECT_ID</key>
-	<string>music-d4ccc</string>
+	<string>fir-authentication-7b6d9</string>
 	<key>STORAGE_BUCKET</key>
-	<string>music-d4ccc.appspot.com</string>
+	<string>fir-authentication-7b6d9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:160070637775:ios:b1af4c8e0213999b74ffba</string>
-	<key>DATABASE_URL</key>
-	<string>https://music-d4ccc-default-rtdb.firebaseio.com</string>
+	<string>1:272336717899:ios:1b3bc98f60814c4566a5ce</string>
 </dict>
 </plist>

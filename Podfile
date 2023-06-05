@@ -6,15 +6,20 @@ target 'DefaultProject' do
   use_frameworks!
 
   # Pods for DefaultProject
-  pod 'Firebase/Analytics'
+  pod 'FirebaseAnalytics'
   pod 'RealmSwift'
-  pod 'Firebase/Messaging'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Database'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Storage'
+  pod 'FirebaseMessaging'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseDatabase'
+  pod 'FirebaseCrashlytics'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseStorage'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FirebaseAuth'
+  pod 'FBSDKLoginKit'
+  
+  pod 'GoogleSignIn'
+
   
   pod 'lottie-ios'
   pod 'Kingfisher'
