@@ -16,7 +16,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>fb636465094994080</string>
+			</array>
 		</dict>
 	</array>
 	<key>GADApplicationIdentifier</key>
@@ -32,5 +34,19 @@
 		<string>WorkSans.ttf</string>
 		<string>WorkSansBold.ttf</string>
 	</array>
+    
+    <key>FacebookAppID</key>
+    <string>636465094994080</string>
+    <key>FacebookClientToken</key>
+    <string>f5ab995611733515319f8152bc1dce80</string>
+    <key>FacebookDisplayName</key>
+    <string>Authentication</string>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-1005464068564361~1050666756</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+    </array>
 </dict>
 </plist>
