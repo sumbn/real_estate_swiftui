@@ -31,6 +31,42 @@ struct HomeView: View {
                 } label: {
                     Text("Sign Out")
                 }
+                
+                NavigationLink {
+                    PostingScreenView()
+                } label: {
+                
+                    Text("Chuyển sang màn posting")
+                        .font(.custom("Work Sans", size: 17))
+                        .bold()
+                        .foregroundColor(Color.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.blue)
+                        }
+                        .padding(20)
+                    
+                }
+                
+                NavigationLink {
+                    GetAllPostView()
+                } label: {
+                
+                    Text("Chuyển sang màn get all post")
+                        .font(.custom("Work Sans", size: 17))
+                        .bold()
+                        .foregroundColor(Color.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.blue)
+                        }
+                        .padding(20)
+                    
+                }
             }
         }
     }

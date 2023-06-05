@@ -32,3 +32,14 @@ final class Utilities {
     }
 }
 
+func generateUniqueString() -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyyMMddHHmmss" // Định dạng thời gian: năm, tháng, ngày, giờ, phút, giây
+    
+    let currentTimeString = formatter.string(from: Date())
+    let randomString = UUID().uuidString
+    
+    let uniqueString = currentTimeString + randomString
+    return uniqueString
+}
+
