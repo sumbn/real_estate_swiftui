@@ -22,7 +22,7 @@ struct DefaultProjectApp: App {
 struct RootView: View {
     @StateObject var appController = APPCONTROLLER.shared
     @StateObject var user = User.shared
-    @StateObject var coordinator = Coordinator.shared
+    //@StateObject var coordinator = Coordinator.shared
     @StateObject var alerter: Alerter = Alerter.shared
     @AppStorage("FIRST_LOAD_APP") var FIRST_LOAD_APP = false
 
@@ -50,7 +50,7 @@ struct RootView: View {
             }
             .environmentObject(appController)
             .environmentObject(user)
-            .environmentObject(coordinator)
+            //.environmentObject(coordinator)
             .environmentObject(alerter)
             .navigationBarHidden(true)
             .navigationDestination(for: Page.self) { page in
