@@ -142,6 +142,15 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .background(.white)
             .padding(.bottom, 16)
             
+            Button {
+//                viewModel.postVideo(url: urlVideo!)
+                viewModel.testPush(url: urlVideo!)
+            } label: {
+                Text("Test video")
+            }
+            
+            ProgressView(value: viewModel.progressUploadVideo)
+            
             ScrollView(.vertical){
                 VStack(spacing: 16){
                     FakeDropDownView(selection: $selectedCategory, listOptions: listCategory, label: "Danh mục", isRequested: true)

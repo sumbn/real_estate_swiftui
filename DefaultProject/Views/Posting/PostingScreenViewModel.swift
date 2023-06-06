@@ -13,7 +13,10 @@ import Combine
 
 class PostingScreenViewModel : ObservableObject {
     
-    @Published var uploadProgress: Double = 0.0
+    @Published var progressUploadVideo: Double = 0.0
+    
+    
+    
     private var cancellables = Set<AnyCancellable>()
     private var progressSubject = CurrentValueSubject<Double, Never>(0.0)
     
@@ -33,20 +36,24 @@ class PostingScreenViewModel : ObservableObject {
         
         //         Tải video lên Storage Firebase
         if(linkVideoURL != nil){
-            dispatchGroup.enter()
-            storageService.uploadVideo(linkVideoURL!) { result in
-                switch result {
-                case .success(let url):
-                    videoURL = url
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    // Xử lý lỗi tải lên video
-                    // ...
-                case .progress(let double):
-                    print("progress: Viewmodel \(double)")
+            storageService.uploadVideo(videoURL: linkVideoURL!)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    
+                } receiveValue: { result in
+                    switch result {
+                    case .success(let string):
+                        print("success: \(string)")
+                        
+                    case .progress(let double):
+                        self.progressUploadVideo = double/100
+                        print("progress: \(double)")
+                        
+                    case .failure(_) : break
+                    }
+                    
                 }
-                dispatchGroup.leave()
-            }
+                .store(in: &cancellables)
         }
         
         // Tải ảnh lên Storage Firebase
@@ -56,7 +63,7 @@ class PostingScreenViewModel : ObservableObject {
             switch result {
             case .success(let urls):
                 imageUrls = urls
-            case .failure(let error): break
+            case .failure(_): break
                 // Xử lý lỗi tải lên ảnh
                 // ...
             }
@@ -86,6 +93,32 @@ class PostingScreenViewModel : ObservableObject {
             }
         }
         
+    }
+    
+    func testPush(url : String?){
+        
+        //         Tải video lên Storage Firebase
+        if(url != nil){
+            
+            storageService.uploadVideo(videoURL: url!)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    
+                } receiveValue: { result in
+                    switch result {
+                    case .success(let string):
+                        print("success: \(string)")
+                        
+                    case .progress(let double):
+                        self.progressUploadVideo = double/100
+                        print("progress: \(double)")
+                        
+                    case .failure(_) : break
+                        
+                    }
+                }
+                .store(in: &cancellables)
+        }
     }
 }
 
