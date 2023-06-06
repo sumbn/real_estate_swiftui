@@ -33,7 +33,7 @@ struct LoginView: View {
                 } label: {
                     Text("Quên mật khẩu")
                         .font(.custom("Work Sans", size: 15))
-                        .foregroundColor(Color(hex: "#5276F0"))
+                        .foregroundColor(Color("Text3"))
                 }
                 .padding(.top, 16)
                 
@@ -83,13 +83,13 @@ struct LoginView: View {
                 HStack(spacing: 0) {
                     Text("Chưa có tài khoản?")
                         .font(.custom("Work Sans", size: 15))
-                        .foregroundColor(Color(hex: "#222222"))
+                        .foregroundColor(Color("Text4"))
                     NavigationLink {
                         SignUpView()
                     } label: {
                         Text(" Đăng ký ngay")
                             .font(.custom("Work Sans", size: 15))
-                            .foregroundColor(Color(hex: "#5276F0"))
+                            .foregroundColor(Color("Text3"))
                     }
                 }
                 

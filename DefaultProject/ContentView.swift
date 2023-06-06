@@ -28,8 +28,6 @@ struct ContentView: View {
             }
         }
         .environmentObject(shareModel)
-        
-     
     }
 }
 

@@ -27,9 +27,10 @@ struct SignUpSuccessView: View {
                         Image(systemName: "chevron.backward")
                         Text("Đăng ký thành công")
                             .font(.custom("Work sans", size: 17))
+                            .bold()
                     }
-                    .foregroundColor(Color(hex: "#072331"))
-//                    .bold()
+                    .foregroundColor(Color("Background3"))
+
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -38,7 +39,7 @@ struct SignUpSuccessView: View {
             Image(systemName: "checkmark.circle")
                 .resizable()
                 .frame(width: 40, height: 40)
-                .foregroundColor(Color(hex: "#2BD800"))
+                .foregroundColor(Color("Icon"))
                 .padding(.bottom, 16)
             
             Text("Chúc mừng bạn đã đăng ký thành công")
@@ -61,7 +62,7 @@ struct SignUpSuccessView: View {
                     .padding(.horizontal, 39)
                     .background{
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color(hex: "#5276F0"))
+                            .foregroundColor(Color("Text3"))
                     }
             }
             

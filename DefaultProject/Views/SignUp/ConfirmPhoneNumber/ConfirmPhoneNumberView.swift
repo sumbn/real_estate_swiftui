@@ -41,9 +41,9 @@ struct ConfirmPhoneNumberView : View {
                         Image(systemName: "chevron.backward")
                         Text("Xác thực số điện thoại")
                             .font(.custom("Work sans", size: 17))
+                            .bold()
                     }
-                    .foregroundColor(Color(hex: "#072331"))
-//                    .bold()
+                    .foregroundColor(Color("Background3"))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -51,13 +51,13 @@ struct ConfirmPhoneNumberView : View {
             
             
             Text("Xác thực số điện thoại")
+                .font(.custom("Work Sans", size: 24))
+                .bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.custom("Work sans", size: 24))
-//                .bold()
                 .padding(.bottom, 16)
             
             Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động: \(coordinator.userSession?.user?.phoneNumber ?? "")")
-                .font(.custom("Work sans", size: 15))
+                .font(.custom("Work Sans", size: 15))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             OTPField()
@@ -71,7 +71,7 @@ struct ConfirmPhoneNumberView : View {
                     }
                 } label: {
                     Text("Xác thực")
-                        .foregroundColor(Color(hex: "#5276F0"))
+                        .foregroundColor(Color("Text3"))
                         .font(.custom("Work Sans", size: 15))
                 }
             } else {
@@ -81,7 +81,7 @@ struct ConfirmPhoneNumberView : View {
                     }
                 } label: {
                     Text("Gởi lại OTP")
-                        .foregroundColor(Color(hex: "#5276F0"))
+                        .foregroundColor(Color("Text3"))
                         .font(.custom("Work Sans", size: 15))
                         .underline()
                 }
@@ -135,7 +135,7 @@ struct ConfirmPhoneNumberView : View {
                         .stroke(activeField == activeStateForIndex(index: index) ? .blue : .gray, lineWidth: 0.5)
                         .background{
                             RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                .fill(Color(hex: "F8F8F8"))
+                                .fill(Color("Background4"))
                         }
                     
                     TextField("-", text: $viewModel.otpFields[index])

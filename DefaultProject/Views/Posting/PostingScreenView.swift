@@ -14,7 +14,7 @@ import FirebaseFirestore
 struct PostingScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    var viewModel : PostingScreenViewModel
+    @ObservedObject var viewModel : PostingScreenViewModel
     
     init(){
         let container = DependencyContainer()
@@ -47,7 +47,7 @@ struct PostingScreenView: View {
     @State var isShowVideoPicker = false
     @State var isShowPhotoPicker = false
     
-    @State var url : String?
+    @State var urlVideo : String?
     @State var images: [UIImage] = []
     
     //MARK: Real Estate Location
@@ -105,7 +105,7 @@ struct PostingScreenView: View {
     @State var postTitle: String = ""
     @State var tintPostTitle: String = "Nhập tiêu đề tin đăng"
     
-   
+    
     @State private var textEditorValue: String = "Lorem ipsum..."
     @State var textEditorHeight : CGFloat = 20
     @State var postDecription: String = """
@@ -119,6 +119,9 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
     
     var body: some View {
         VStack(spacing: 0){
+            NavigationLink(destination: GetAllPostView(), isActive: $isChangeScreen) {
+                
+            }
             HStack{
                 Button {
                     presentationMode.wrappedValue.dismiss()
@@ -127,9 +130,10 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         Image(systemName: "chevron.backward")
                         Text("Đăng tin")
                             .font(.custom("Work Sans", size: 17))
+                            .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))
-//                    .bold()
+                    
                 }
             }
             .padding(.horizontal, 20)
@@ -137,10 +141,6 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.white)
             .padding(.bottom, 16)
-            
-            NavigationLink(destination: GetAllPostView(), isActive: $isChangeScreen) {
-                
-            }
             
             ScrollView(.vertical){
                 VStack(spacing: 16){
@@ -202,9 +202,9 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 .foregroundColor(.red)
                         }
                     }
-                   
                     
-                    if url == nil {
+                    
+                    if urlVideo == nil {
                         Button {
                             isShowVideoPicker.toggle()
                         } label: {
@@ -247,8 +247,8 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 .frame(maxWidth: 124.4, maxHeight: 70)
                             }
                             
-                            VideoThumbnailView(url: URL(string: url!)!){
-                                url = nil
+                            VideoThumbnailView(url: URL(string: urlVideo!)!){
+                                urlVideo = nil
                             }
                             .cornerRadius(10)
                             .aspectRatio(contentMode: .fit)
@@ -318,7 +318,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         }
                         .padding(.vertical, 12)
                         .padding(.leading, 20)
-                       
+                        
                         .background{
                             Rectangle()
                                 .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
@@ -345,7 +345,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     Text("Vị trí Bất động sản")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Work Sans", size: 17))
-//                        .bold()
+                    //                        .bold()
                     
                     HStack(spacing: 14) {
                         OutlineTextFieldView(label: "Mã căn", input: $apartmentCode, tint: $tintApartmentCode)
@@ -374,7 +374,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     Text("Thông tin chi tiết")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Work Sans", size: 17))
-//                        .bold()
+                    //                        .bold()
                     
                     VStack(spacing: 0) {
                         FakeDropDownView(selection: $apartmentType, tint: $tintApartmentType, listOptions: listApartmentType, label: "Loại hình căn hộ", isRequested: true)
@@ -430,7 +430,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     Text("Thông tin khác")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Work Sans", size: 17))
-//                        .bold()
+                    //                        .bold()
                     
                     FakeDropDownView(selection: $legalDocuments, tint: $tintLegalDocuments, listOptions: listLegalDocuments, label: "Giấy tờ pháp lý")
                     
@@ -447,7 +447,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     Text("Diện tích & giá")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Work Sans", size: 17))
-//                        .bold()
+                    //                        .bold()
                     
                     VStack(spacing: 0) {
                         OutlineTextFieldView(label: "Diện tích", input: $area, tint: $tintArea, isRequired: true)
@@ -485,7 +485,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     Text("Tiêu đề tin đăng và mô tả chi tiết")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Work Sans", size: 17))
-//                        .bold()
+                    //                        .bold()
                     
                     VStack(spacing: 0) {
                         
@@ -516,7 +516,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 .frame(height: max(40,textEditorHeight))
                                 .cornerRadius(10)
                                 .shadow(radius: 1.0)
-                                
+                            
                         }
                         .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0}
                         
@@ -567,7 +567,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
         }
         .fullScreenCover(isPresented: $isShowVideoPicker, content: {
             ImagePicker(typePicker: .video){ urlVideo in
-                url = urlVideo?.absoluteString
+                self.urlVideo = urlVideo?.absoluteString
             }
         })
         .fullScreenCover(isPresented: $isShowPhotoPicker, content: {
@@ -601,7 +601,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .setPostDecription(postDecription)
             .build()
         
-        viewModel.createPost(withVideo: url ?? nil, andImages: images, post: buildModel){ result in
+        viewModel.createPost(withVideo: urlVideo ?? nil, andImages: images, post: buildModel){ result in
             switch result{
             case .success:
                 isChangeScreen = true

@@ -38,7 +38,7 @@ struct CreateNewPasswordView: View {
                         Image(systemName: "chevron.backward")
                         Text("Tạo mật khẩu mới")
                     }
-                    .foregroundColor(Color(hex: "#072331"))
+                    .foregroundColor(Color("Background3"))
                    
                 }
             }

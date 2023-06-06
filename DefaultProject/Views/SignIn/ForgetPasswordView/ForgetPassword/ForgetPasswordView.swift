@@ -40,11 +40,12 @@ struct ForgetPasswordView: View {
                     } label: {
                         HStack{
                             Image(systemName: "chevron.backward")
+                               
+                            
                             Text("Lấy lại mật khẩu")
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom("Work Sans Bold", size: 17))
                         }
-                        .foregroundColor(Color(hex: "#072331"))
-//                        .bold()
+                        .foregroundColor(Color("Background3"))
                     }
                     
 

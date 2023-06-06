@@ -8,8 +8,16 @@
 import Foundation
 import FirebaseStorage
 import UIKit
+import Combine
 
 protocol StorageProtocol {
-    func uploadVideo(_ videoURL: String, completion: @escaping (Result<String, Error>) -> Void)
+//    func uploadVideo(_ videoURL: String, completion: @escaping (Result<String, Error>) -> Void)
+    func uploadVideo(_ videoURL: String, completion: @escaping (UploadResult) -> Void)
     func uploadImages(_ images: [UIImage], completion: @escaping (Result<[String], Error>) -> Void)
+    
+//    func uploadVideo(_ videoURL: String) -> Future<UploadResult, Never>
+//    func uploadVideo(_ videoURL: String) -> AnyPublisher<UploadResult, Never>
+    
+//    func uploadVideo(_ videoURL: String)
+//    func uploadVideo(_ videoURL: String) -> AnyPublisher<UploadResult, Never>
 }

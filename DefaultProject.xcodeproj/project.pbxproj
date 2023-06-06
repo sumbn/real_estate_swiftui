@@ -41,7 +41,6 @@
 		27CB5A852A2DC62D0079FFC8 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A552A2DC62B0079FFC8 /* ForgetPasswordView.swift */; };
 		27CB5A862A2DC62D0079FFC8 /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A562A2DC62B0079FFC8 /* ForgetPasswordViewModel.swift */; };
 		27CB5A872A2DC62D0079FFC8 /* CreateNewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A582A2DC62B0079FFC8 /* CreateNewPasswordView.swift */; };
-		27CB5A882A2DC62D0079FFC8 /* EnterOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A592A2DC62B0079FFC8 /* EnterOTPView.swift */; };
 		27CB5A892A2DC62D0079FFC8 /* PhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A5B2A2DC62B0079FFC8 /* PhoneVerificationView.swift */; };
 		27CB5A8A2A2DC62D0079FFC8 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A5C2A2DC62B0079FFC8 /* PhoneVerificationViewModel.swift */; };
 		27CB5A8B2A2DC62D0079FFC8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CB5A5E2A2DC62B0079FFC8 /* LoginView.swift */; };
@@ -165,7 +164,6 @@
 		27CB5A552A2DC62B0079FFC8 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		27CB5A562A2DC62B0079FFC8 /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
 		27CB5A582A2DC62B0079FFC8 /* CreateNewPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewPasswordView.swift; sourceTree = "<group>"; };
-		27CB5A592A2DC62B0079FFC8 /* EnterOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterOTPView.swift; sourceTree = "<group>"; };
 		27CB5A5B2A2DC62B0079FFC8 /* PhoneVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationView.swift; sourceTree = "<group>"; };
 		27CB5A5C2A2DC62B0079FFC8 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
 		27CB5A5E2A2DC62B0079FFC8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 			children = (
 				27CB5A542A2DC62B0079FFC8 /* ForgetPassword */,
 				27CB5A572A2DC62B0079FFC8 /* CreateNewPassword */,
-				27CB5A592A2DC62B0079FFC8 /* EnterOTPView.swift */,
 				27CB5A5A2A2DC62B0079FFC8 /* PhoneVerification */,
 			);
 			path = ForgetPasswordView;
@@ -995,7 +992,6 @@
 				CA2223C62A2BB34A005164BB /* Font.swift in Sources */,
 				278B4FC62A2DDFE7008AEA1B /* FirestoreService.swift in Sources */,
 				27CB5A7F2A2DC62D0079FFC8 /* ConfirmPhoneNumberView.swift in Sources */,
-				27CB5A882A2DC62D0079FFC8 /* EnterOTPView.swift in Sources */,
 				278B4FA72A2DDEE7008AEA1B /* FirestoreProtocol.swift in Sources */,
 				CA2223C72A2BB34A005164BB /* UIApplication.swift in Sources */,
 				27CB5A862A2DC62D0079FFC8 /* ForgetPasswordViewModel.swift in Sources */,

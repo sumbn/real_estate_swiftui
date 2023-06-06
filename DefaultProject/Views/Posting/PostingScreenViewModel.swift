@@ -8,9 +8,14 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
+import Combine
 
 
-class PostingScreenViewModel {
+class PostingScreenViewModel : ObservableObject {
+    
+    @Published var uploadProgress: Double = 0.0
+    private var cancellables = Set<AnyCancellable>()
+    private var progressSubject = CurrentValueSubject<Double, Never>(0.0)
     
     private let firestoreService: FirestoreProtocol
     private let storageService: StorageProtocol
@@ -18,6 +23,7 @@ class PostingScreenViewModel {
     init(firestoreService: FirestoreProtocol, storageService: StorageProtocol) {
         self.firestoreService = firestoreService
         self.storageService = storageService
+        
     }
     
     func createPost(withVideo linkVideoURL: String?, andImages images: [UIImage], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
@@ -25,16 +31,19 @@ class PostingScreenViewModel {
         var videoURL: String?
         var imageUrls: [String] = []
         
-//         Tải video lên Storage Firebase
+        //         Tải video lên Storage Firebase
         if(linkVideoURL != nil){
             dispatchGroup.enter()
             storageService.uploadVideo(linkVideoURL!) { result in
                 switch result {
                 case .success(let url):
                     videoURL = url
-                case .failure(let error): break
+                case .failure(let error):
+                    print(error.localizedDescription)
                     // Xử lý lỗi tải lên video
                     // ...
+                case .progress(let double):
+                    print("progress: Viewmodel \(double)")
                 }
                 dispatchGroup.leave()
             }
@@ -56,7 +65,7 @@ class PostingScreenViewModel {
         
         
         
-        dispatchGroup.notify(queue: DispatchQueue.main) {            
+        dispatchGroup.notify(queue: DispatchQueue.main) {
             let updatePost = PostModelBuilder(post: post)
                 .setVideoURL(videoURL ?? "Test")
                 .setImageURLs(imageUrls)
@@ -79,3 +88,4 @@ class PostingScreenViewModel {
         
     }
 }
+

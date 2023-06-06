@@ -10,20 +10,20 @@ import FirebaseAuth
 
 struct HomeView: View {
     
-    @EnvironmentObject var coordinator: ShareModel
+    @EnvironmentObject var shareModel: ShareModel
     
     var body: some View {
         NavigationView{
             VStack{
-                Text("tên đăng nhập: \(coordinator.userSession?.user?.displayName ?? "")")
-                Text("uid: \(coordinator.userSession?.user?.uid ?? "")")
-                Text("số điện thoại: \(coordinator.userSession?.user?.phoneNumber ?? "")")
+                Text("tên đăng nhập: \(shareModel.userSession?.user?.displayName ?? "")")
+                Text("uid: \(shareModel.userSession?.user?.uid ?? "")")
+                Text("số điện thoại: \(shareModel.userSession?.user?.phoneNumber ?? "")")
                 
                 Button {
                     Task {
                         do {
                             try Auth.auth().signOut()
-                            coordinator.isNotAuth = true
+                            shareModel.isNotAuth = true
                         } catch {
                             print("Error signing out: \(error)")
                         }

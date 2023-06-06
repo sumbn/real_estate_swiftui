@@ -36,10 +36,9 @@ struct PhoneVerificationView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Lấy lại mật khẩu")
-                            .font(.custom("Work sans", size: 17))
+                            .font(.custom("Work Sans Bold", size: 17))
                     }
                     .foregroundColor(Color(hex: "#072331"))
-//                    .bold()
                 }
             }
             .padding(.horizontal, 20)
@@ -49,14 +48,13 @@ struct PhoneVerificationView: View {
             }
             
             Text("Lấy lại mật khẩu")
-                .font(.custom("Work sans", size: 24))
+                .font(.custom("Work Sans Bold", size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
-//                .bold()
                 .padding(.horizontal, 20)
                 .padding(.top, 40)
             
             Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động \(coordinator.userSession?.user?.phoneNumber ?? "")")
-                .font(.custom("Work sans", size: 15))
+                .font(.custom("Work Sans", size: 15))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -134,10 +132,10 @@ struct PhoneVerificationView: View {
             ForEach(0..<6, id: \.self){ index in
                 ZStack {
                     RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .stroke(activeField == activeStateForIndex(index: index) ? Color.blue : Color(hex: "#000000").opacity(0.1), lineWidth: 1)
+                        .stroke(activeField == activeStateForIndex(index: index) ? Color.blue : Color(.black).opacity(0.1), lineWidth: 1)
                         .background{
                             RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                .fill(Color(hex: "F8F8F8"))
+                                .fill(Color("Background4"))
                         }
                     
                     TextField("-", text: $viewModel.otpFields[index])
@@ -177,7 +175,7 @@ enum OTPField{
     case field6
 }
 
-//
+
 //struct PhoneVerificationView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        PhoneVerificationView()

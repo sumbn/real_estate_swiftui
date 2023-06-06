@@ -70,7 +70,7 @@ struct SignUpView: View {
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 20)
-                        .background(Color(hex: "#5276F0"))
+                        .background(Color("Text3"))
                         .cornerRadius(10)
                 }
             }
@@ -85,7 +85,7 @@ struct SignUpView: View {
                     Text("Điều khoản sử dụng")
                         .font(.custom("Work Sans", size: 13))
                         .underline()
-                        .foregroundColor(Color(hex: "#5276F0"))
+                        .foregroundColor(Color("Text3"))
                 }
                
                 
@@ -144,7 +144,7 @@ struct SignUpView: View {
                 } label: {
                     Text("Đăng nhập ngay")
                         .font(.custom("Work Sans", size: 15))
-                        .foregroundColor(Color(hex: "#5276F0"))
+                        .foregroundColor(Color("Text3"))
                 }
             }
         }
