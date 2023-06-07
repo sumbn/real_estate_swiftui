@@ -143,7 +143,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .padding(.bottom, 16)
             
             Button {
-                viewModel.testPush(url: urlVideo!)
+                viewModel.testComplete(linkVideoURL: urlVideo!)
             } label: {
                 Text("Test video")
             }
@@ -151,7 +151,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             ProgressView(value: viewModel.progressUploadVideo)
             
             Button {
-                viewModel.observeUploadProgress(for: images)
+                viewModel.uploadImages(for: images)
             } label: {
                 Text("Test image")
             }
@@ -164,17 +164,17 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             
             ScrollView(.vertical){
                 
-                ForEach(viewModel.imageResults.indices, id: \.self) { index in
-                                let result = viewModel.imageResults[index]
-                                switch result {
-                                case .progress(let progress):
-                                    ProgressView(value: progress)
-                                case .success(let downloadURL):
-                                    Text("Upload finished")
-                                case .failure(let error):
-                                    Text("Lỗi upload")
-                                }
-                            }
+//                ForEach(viewModel.imageResults.indices, id: \.self) { index in
+//                                let result = viewModel.imageResults[index]
+//                                switch result {
+//                                case .progress(let progress):
+//                                    ProgressView(value: progress)
+//                                case .success(let downloadURL):
+//                                    Text("Upload finished")
+//                                case .failure(let error):
+//                                    Text("Lỗi upload")
+//                                }
+//                            }
                 
                 VStack(spacing: 16){
                     FakeDropDownView(selection: $selectedCategory, listOptions: listCategory, label: "Danh mục", isRequested: true)

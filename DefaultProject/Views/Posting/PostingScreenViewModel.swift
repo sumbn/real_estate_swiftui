@@ -35,10 +35,14 @@ class PostingScreenViewModel : ObservableObject {
     func createPost(withVideo linkVideoURL: String?, andImages images: [UIImage], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
         var videoURL: String?
         var imageUrls: [String] = []
-
-        //    Tải video lên Storage Firebase
+        
+        let dispatchGroup = DispatchGroup()
         if(linkVideoURL != nil){
+            dispatchGroup.enter()
             storageService.uploadVideo(videoURL: linkVideoURL!)
+                .handleEvents(receiveCompletion: { _ in
+                    dispatchGroup.leave()
+                })
                 .sink { result in
                     switch result {
                     case .finished: break
@@ -48,26 +52,26 @@ class PostingScreenViewModel : ObservableObject {
                     switch result {
                     case .success(let url):
                         videoURL = url
-                        print("success: \(url)")
-
+                        dispatchGroup.leave()
+                        
                     case .progress(let double):
                         self.progressUploadVideo = double/100
                         print("progress: \(double)")
-
-                    case .failure(_) : break
+                        
+                    case .failure(_) :
+                        dispatchGroup.leave()
                     }
-
                 }
                 .store(in: &cancellables)
         }
-
-        observeUploadProgress(for: images)
-
+    }
+    
+    private func handleUploadCompletion(videoUrl: String?, imageUrls: [String], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
         let updatePost = PostModelBuilder(post: post)
-            .setVideoURL(videoURL ?? "Test")
+            .setVideoURL(videoUrl ?? "Test")
             .setImageURLs(imageUrls)
             .build()
-
+        
         // Save the post object to Firestore
         self.firestoreService.addDocument(updatePost) { result in
             switch result {
@@ -83,9 +87,16 @@ class PostingScreenViewModel : ObservableObject {
         }
     }
     
-    func observeUploadProgress(for images: [UIImage]) {
+    func uploadImages(for images: [UIImage]) {
+    
+        let dispatcherGroup = DispatchGroup()
+        
+       
         let publishers = images.enumerated().map { index, image in
-            storageService.uploadImage(uiImage: image)
+            
+            dispatcherGroup.enter()
+            
+            return storageService.uploadImage(uiImage: image)
                 .map { result -> (Int, UploadResult) in
                     switch result {
                     case .success(let downloadURL):
@@ -104,12 +115,29 @@ class PostingScreenViewModel : ObservableObject {
         
         Publishers.MergeMany(publishers)
             .sink(receiveValue: { [weak self] (index, result) in
-                DispatchQueue.main.async {
+
+                switch result {
+
+                case .progress(_):
                     self?.updateResult(result, at: index)
+                    print("đã update images")
+                case .success(_):
+                    dispatcherGroup.leave()
+                case .failure(_): break
                 }
             })
             .store(in: &cancellables)
+        
+        dispatcherGroup.notify(queue: .main){
+            print("success")
+        }
+   
     }
+    
+    func testComplete(linkVideoURL: String?){
+        
+    }
+    
     
     private func updateResult(_ result: UploadResult, at index: Int) {
         if index < imageResults.count {
@@ -118,38 +146,6 @@ class PostingScreenViewModel : ObservableObject {
             imageResults.append(result)
         }
     }
-    
-    //    func observeUploadProgress(for images: [UIImage]) {
-    //        storageService.uploadImages(images)
-    //                .sink(receiveCompletion: { completion in
-    //                    // Xử lý khi quá trình theo dõi hoàn thành (hoặc có lỗi)
-    //                    switch completion {
-    //                    case .finished:
-    //                        print("Hoàn thành theo dõi tiến trình upload")
-    //                    case .failure(let error):
-    //                        print("Lỗi khi theo dõi tiến trình upload: \(error)")
-    //                    }
-    //                }, receiveValue: { results in
-    //                    // Xử lý giá trị tiến trình và kết quả từng ảnh
-    //                    for (index, result) in results.enumerated() {
-    //                        switch result {
-    //                        case .success(let downloadURL):
-    //                            print("Download URL của ảnh \(index): \(downloadURL)")
-    //                        case .progress(let progress):
-    //                            self.progressUploadImages.append(progress)
-    //                            print("Tiến trình upload của ảnh \(index): \(progress)%")
-    //                        case .failure(let error):
-    //                            print("Lỗi khi upload ảnh \(index): \(error)")
-    //                        }
-    //                    }
-    //                })
-    //                .store(in: &cancellables)
-    //    }
-    
-    
-    
-    
-    
     
     
     //    func createPost(withVideo linkVideoURL: String?, andImages images: [UIImage], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
@@ -219,28 +215,5 @@ class PostingScreenViewModel : ObservableObject {
     //        }
     //
     //    }
-    
-    func testPush(url : String?){
-        
-        if(url != nil){
-            storageService.uploadVideo(videoURL: url!)
-                .sink { _ in
-                    
-                } receiveValue: { result in
-                    switch result {
-                    case .success(let string):
-                        print("success: \(string)")
-                        
-                    case .progress(let double):
-                        self.progressUploadVideo = double/100
-                        print("progress: \(double)")
-                        
-                    case .failure(_) : break
-                        
-                    }
-                }
-                .store(in: &cancellables)
-        }
-    }
 }
 
