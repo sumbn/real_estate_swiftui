@@ -21,6 +21,7 @@ class StorageService : StorageProtocol {
         // File located on disk
         let localFile = URL(string: videoURL)!
         
+        // Random name
         let randomName = "\(generateUniqueString()).mp4"
         
         // Create a reference to the file you want to upload

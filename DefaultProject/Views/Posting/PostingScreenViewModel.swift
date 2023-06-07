@@ -37,6 +37,7 @@ class PostingScreenViewModel : ObservableObject {
         var imageUrls: [String] = []
         
         let dispatchGroup = DispatchGroup()
+        
         if(linkVideoURL != nil){
             dispatchGroup.enter()
             storageService.uploadVideo(videoURL: linkVideoURL!)
@@ -56,7 +57,7 @@ class PostingScreenViewModel : ObservableObject {
                         
                     case .progress(let double):
                         self.progressUploadVideo = double/100
-                        print("progress: \(double)")
+                        print("progress video: \(double)")
                         
                     case .failure(_) :
                         dispatchGroup.leave()
@@ -64,34 +65,76 @@ class PostingScreenViewModel : ObservableObject {
                 }
                 .store(in: &cancellables)
         }
+        
+        let publishers = images.enumerated().map { index, image in
+            
+            dispatchGroup.enter()
+            
+            return storageService.uploadImage(uiImage: image)
+                .map { result -> (Int, UploadResult) in
+                    switch result {
+                    case .success(let downloadURL):
+                        return (index, .success(downloadURL))
+                    case .progress(let progress):
+                        return (index, .progress(progress))
+                    case .failure(let error):
+                        return (index, .failure(error))
+                    }
+                }
+                .catch { error -> AnyPublisher<(Int, UploadResult), Never> in
+                    return Just((index, .failure(error)))
+                        .eraseToAnyPublisher()
+                }
+        }
+        
+        Publishers.MergeMany(publishers)
+            .sink(receiveValue: { [weak self] (index, result) in
+                
+                switch result {
+                    
+                case .progress(_):
+                    print("progress image: \(result) + \(index)")
+                    self?.updateResult(result, at: index)
+                    
+                case .success(let urlImage):
+                    imageUrls.append(urlImage)
+                    dispatchGroup.leave()
+                case .failure(_): break
+                }
+            })
+            .store(in: &cancellables)
+        
+        
+        dispatchGroup.notify(queue: .main){
+            self.handleUploadCompletion(videoUrl: videoURL, imageUrls: imageUrls, post: post, completionHandler: completion)
+        }
     }
     
-    private func handleUploadCompletion(videoUrl: String?, imageUrls: [String], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
+    private func handleUploadCompletion(videoUrl: String?, imageUrls: [String], post: PostModel, completionHandler: @escaping (Result<String, Error>) -> Void) {
         let updatePost = PostModelBuilder(post: post)
             .setVideoURL(videoUrl ?? "Test")
             .setImageURLs(imageUrls)
             .build()
         
-        // Save the post object to Firestore
-        self.firestoreService.addDocument(updatePost) { result in
-            switch result {
-            case .success(let string):
-                completion(.success(string))
-                // Post saved successfully
-                // ...
-            case .failure(let error):
-                completion(.failure(error))
-                // Handle error while saving post
-                // ...
-            }
-        }
+        firestoreService.addDocument(updatePost)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    completionHandler(.success("thành công"))
+                    print("Hoàn thành")
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                    print("Lỗi: \(error)")
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
     }
     
     func uploadImages(for images: [UIImage]) {
-    
+        
         let dispatcherGroup = DispatchGroup()
         
-       
+        
         let publishers = images.enumerated().map { index, image in
             
             dispatcherGroup.enter()
@@ -115,13 +158,14 @@ class PostingScreenViewModel : ObservableObject {
         
         Publishers.MergeMany(publishers)
             .sink(receiveValue: { [weak self] (index, result) in
-
+                
                 switch result {
-
+                    
                 case .progress(_):
                     self?.updateResult(result, at: index)
                     print("đã update images")
-                case .success(_):
+                case .success(let string):
+                    print("path is: \(string)")
                     dispatcherGroup.leave()
                 case .failure(_): break
                 }
@@ -131,13 +175,8 @@ class PostingScreenViewModel : ObservableObject {
         dispatcherGroup.notify(queue: .main){
             print("success")
         }
-   
-    }
-    
-    func testComplete(linkVideoURL: String?){
         
     }
-    
     
     private func updateResult(_ result: UploadResult, at index: Int) {
         if index < imageResults.count {
@@ -146,74 +185,5 @@ class PostingScreenViewModel : ObservableObject {
             imageResults.append(result)
         }
     }
-    
-    
-    //    func createPost(withVideo linkVideoURL: String?, andImages images: [UIImage], post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
-    //        let dispatchGroup = DispatchGroup()
-    //        var videoURL: String?
-    //        var imageUrls: [String] = []
-    //
-    //        //    Tải video lên Storage Firebase
-    //        if(linkVideoURL != nil){
-    //            storageService.uploadVideo(videoURL: linkVideoURL!)
-    //                .sink { result in
-    //                    switch result {
-    //                    case .finished: break
-    //                    case .failure(_) : break
-    //                    }
-    //                } receiveValue: { result in
-    //                    switch result {
-    //                    case .success(let url):
-    //                        videoURL = url
-    //                        print("success: \(url)")
-    //
-    //                    case .progress(let double):
-    //                        self.progressUploadVideo = double/100
-    //                        print("progress: \(double)")
-    //
-    //                    case .failure(_) : break
-    //                    }
-    //
-    //                }
-    //                .store(in: &cancellables)
-    //        }
-    //
-    //        // Tải ảnh lên Storage Firebase
-    //        dispatchGroup.enter()
-    //
-    //        storageService.uploadImages(images) { result in
-    //            switch result {
-    //            case .success(let urls):
-    //                imageUrls = urls
-    //            case .failure(_): break
-    //                // Xử lý lỗi tải lên ảnh
-    //                // ...
-    //            }
-    //            dispatchGroup.leave()
-    //        }
-    //
-    //
-    //        dispatchGroup.notify(queue: DispatchQueue.main) {
-    //                let updatePost = PostModelBuilder(post: post)
-    //                    .setVideoURL(videoURL ?? "Test")
-    //                    .setImageURLs(imageUrls)
-    //                    .build()
-    //
-    //                // Save the post object to Firestore
-    //                self.firestoreService.addDocument(updatePost) { result in
-    //                    switch result {
-    //                    case .success(let string):
-    //                        completion(.success(string))
-    //                        // Post saved successfully
-    //                        // ...
-    //                    case .failure(let error):
-    //                        completion(.failure(error))
-    //                        // Handle error while saving post
-    //                        // ...
-    //                    }
-    //                }
-    //        }
-    //
-    //    }
 }
 

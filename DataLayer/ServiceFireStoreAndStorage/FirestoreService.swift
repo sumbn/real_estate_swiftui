@@ -7,13 +7,12 @@
 
 import Foundation
 import FirebaseFirestore
+import Combine
 
 class FirestoreService : FirestoreProtocol {
     
     
     func addDocument(_ post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
-        
-        
         
         let db = Firestore.firestore()
         
@@ -26,6 +25,24 @@ class FirestoreService : FirestoreProtocol {
             }
         }
     }
+    
+    func addDocument(_ post: PostModel) -> AnyPublisher<Void, Error> {
+        return Future<Void, Error> { promise in
+            let db = Firestore.firestore()
+            
+            db.collection("DanhMuc/CanHoChungCu/ChoThue").document(post.id).setData(post.toDictionary()) { error in
+                if let error = error {
+                    print("Lỗi khi lưu bài đăng vào Firestore: \(error.localizedDescription)")
+                    promise(.failure(error))
+                } else {
+                    print("Bài đăng đã được lưu thành công vào Firestore")
+                    promise(.success(()))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
     
     func getAllDocument(completion: @escaping (Result<[PostModel], Error>) -> Void) {
         let db = Firestore.firestore()

@@ -141,27 +141,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.white)
             .padding(.bottom, 16)
-            
-            Button {
-                viewModel.testComplete(linkVideoURL: urlVideo!)
-            } label: {
-                Text("Test video")
-            }
-            
-            ProgressView(value: viewModel.progressUploadVideo)
-            
-            Button {
-                viewModel.uploadImages(for: images)
-            } label: {
-                Text("Test image")
-            }
-            
-            //            ForEach(viewModel.progressUploadImages, id: \.self) { double in
-            //                ProgressView(value: double)
-            //            }
-            
-           
-            
+        
             ScrollView(.vertical){
                 
 //                ForEach(viewModel.imageResults.indices, id: \.self) { index in
