@@ -231,6 +231,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         HStack{
                             Button {
                                 isShowVideoPicker = true
+                                self.urlVideo = nil
                             } label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 10)
