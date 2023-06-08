@@ -15,7 +15,7 @@ class FirestoreService : FirestoreProtocol {
         return Future<Void, Error> { promise in
             let db = Firestore.firestore()
             
-            db.collection("DanhMuc/CanHoChungCu/ChoThue").document(post.id).setData(post.toDictionary()) { error in
+            db.collection("DanhMuc/CanHoChungCu/MuaBan").document(post.id).setData(post.toDictionary()) { error in
                 if let error = error {
                     print("Lỗi khi lưu bài đăng vào Firestore: \(error.localizedDescription)")
                     promise(.failure(error))
@@ -29,27 +29,28 @@ class FirestoreService : FirestoreProtocol {
     }
     
     func getAllDocument() -> AnyPublisher<[PostModel], Error> {
-            let subject = PassthroughSubject<[PostModel], Error>()
-            
-            let db = Firestore.firestore()
-            db.collection("DanhMuc/CanHoChungCu/ChoThue").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    subject.send(completion: .failure(err))
-                } else {
-                    var listPost = [PostModel]()
-                    for document in querySnapshot!.documents {
-                        if let postModel = PostModel(dictionary: document.data()) {
-                            listPost.append(postModel)
-                        } else {
-                            print("Cannot convert to PostModel for document: \(document)")
-                            continue
-                        }
+        let subject = PassthroughSubject<[PostModel], Error>()
+        
+        let db = Firestore.firestore()
+        
+        db.collection("DanhMuc/CanHoChungCu/MuaBan").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                subject.send(completion: .failure(err))
+            } else {
+                var listPost = [PostModel]()
+                for document in querySnapshot!.documents {
+                    if let postModel = PostModel(dictionary: document.data()) {
+                        listPost.append(postModel)
+                    } else {
+                        print("Cannot convert to PostModel for document: \(document)")
+                        continue
                     }
-                    subject.send(listPost)
-                    subject.send(completion: .finished)
                 }
+                subject.send(listPost)
+                subject.send(completion: .finished)
             }
-            
-            return subject.eraseToAnyPublisher()
         }
+        
+        return subject.eraseToAnyPublisher()
+    }
 }

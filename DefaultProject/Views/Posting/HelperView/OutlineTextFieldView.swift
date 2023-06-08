@@ -73,12 +73,12 @@ struct OutlineTextFieldView: View {
             
         }
         .frame(height: 56)
-        .onTapGesture {
-            if isFirstClick{
-                tint = ""
-                isFirstClick = false
-            }
-        }
+//        .onTapGesture {
+//            if isFirstClick{
+//                tint = ""
+//                isFirstClick = false
+//            }
+//        }
         .overlay(alignment: .topLeading) {
             Text(labelAtribute + requestAtribute)
                 .font(.custom("Work Sans", size: 13))

@@ -63,8 +63,8 @@ struct ForgetPasswordView: View {
                     .padding(.top, 40)
                 
                 Button {
-                    let phone : String = "+84 \(phoneNumber)"
-//                    let phone = "+1 650-555-1111"
+//                    let phone : String = "+84 \(phoneNumber)"
+                    let phone = "+1 650-555-1111"
                     viewModel.sendOtpToPhoneNumber(phoneNumber: phone) { authen in
                         coordinator.userSession = authen
                         withAnimation(.easeInOut(duration: 0.5)) {

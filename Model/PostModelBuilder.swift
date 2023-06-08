@@ -22,6 +22,11 @@ class PostModelBuilder {
         return self
     }
     
+    func setUId(_ uid: String) -> Self {
+        post.uid = uid
+        return self
+    }
+    
     func setBuildingName(_ buildingName: String?) -> Self {
         post.buildingName = buildingName
         return self

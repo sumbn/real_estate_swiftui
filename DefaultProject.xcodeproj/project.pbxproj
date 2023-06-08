@@ -24,6 +24,7 @@
 		278B4FC12A2DDF16008AEA1B /* PostingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4FB82A2DDF16008AEA1B /* PostingScreenView.swift */; };
 		278B4FC52A2DDFE7008AEA1B /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4FC32A2DDFE7008AEA1B /* StorageService.swift */; };
 		278B4FC62A2DDFE7008AEA1B /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4FC42A2DDFE7008AEA1B /* FirestoreService.swift */; };
+		27B2FBEB2A31D1940084F184 /* PhoneAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2FBEA2A31D1940084F184 /* PhoneAuthViewModel.swift */; };
 		27CB59CB2A2D9AEE0079FFC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27CB59CA2A2D9AEE0079FFC8 /* GoogleService-Info.plist */; };
 		27CB59CE2A2DBDE60079FFC8 /* WorkSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27CB59CD2A2DBD310079FFC8 /* WorkSans.ttf */; };
 		27CB59CF2A2DBDEA0079FFC8 /* WorkSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27CB59CC2A2DBD300079FFC8 /* WorkSansBold.ttf */; };
@@ -146,6 +147,7 @@
 		278B4FB82A2DDF16008AEA1B /* PostingScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostingScreenView.swift; sourceTree = "<group>"; };
 		278B4FC32A2DDFE7008AEA1B /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		278B4FC42A2DDFE7008AEA1B /* FirestoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		27B2FBEA2A31D1940084F184 /* PhoneAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthViewModel.swift; sourceTree = "<group>"; };
 		27CB59CA2A2D9AEE0079FFC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27CB59CC2A2DBD300079FFC8 /* WorkSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSansBold.ttf; sourceTree = "<group>"; };
 		27CB59CD2A2DBD310079FFC8 /* WorkSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSans.ttf; sourceTree = "<group>"; };
@@ -350,6 +352,13 @@
 			path = ServiceFireStoreAndStorage;
 			sourceTree = "<group>";
 		};
+		27B2FBE92A31B1410084F184 /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		27CB5A392A2DC5B50079FFC8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +380,7 @@
 		27CB5A442A2DC62B0079FFC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				27B2FBE92A31B1410084F184 /* User */,
 				27CB5A522A2DC62B0079FFC8 /* SignIn */,
 				27CB5A4F2A2DC62B0079FFC8 /* HomeView */,
 				278B4FAA2A2DDF15008AEA1B /* GetPost */,
@@ -440,7 +450,6 @@
 			children = (
 				27CB5A542A2DC62B0079FFC8 /* ForgetPassword */,
 				27CB5A572A2DC62B0079FFC8 /* CreateNewPassword */,
-				27CB5A5A2A2DC62B0079FFC8 /* PhoneVerification */,
 			);
 			path = ForgetPasswordView;
 			sourceTree = "<group>";
@@ -475,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				27CB5A5E2A2DC62B0079FFC8 /* LoginView.swift */,
+				27CB5A5A2A2DC62B0079FFC8 /* PhoneVerification */,
 				27CB5A5F2A2DC62B0079FFC8 /* SubView */,
 			);
 			path = LoginView;
@@ -523,6 +533,7 @@
 			children = (
 				27CB5A6A2A2DC62B0079FFC8 /* OutlineTextfieldView.swift */,
 				27CB5A6B2A2DC62B0079FFC8 /* PhoneSignInView.swift */,
+				27B2FBEA2A31D1940084F184 /* PhoneAuthViewModel.swift */,
 			);
 			path = PhoneSignInView;
 			sourceTree = "<group>";
@@ -994,6 +1005,7 @@
 				27CB5A7F2A2DC62D0079FFC8 /* ConfirmPhoneNumberView.swift in Sources */,
 				278B4FA72A2DDEE7008AEA1B /* FirestoreProtocol.swift in Sources */,
 				CA2223C72A2BB34A005164BB /* UIApplication.swift in Sources */,
+				27B2FBEB2A31D1940084F184 /* PhoneAuthViewModel.swift in Sources */,
 				27CB5A862A2DC62D0079FFC8 /* ForgetPasswordViewModel.swift in Sources */,
 				CA2223CA2A2BB34A005164BB /* TimeInterval.swift in Sources */,
 				CA2223C12A2BB34A005164BB /* SlimRectangle.swift in Sources */,

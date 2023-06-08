@@ -12,6 +12,10 @@ class SendSmsOTPService : SignInServiceProtocol {
     
     func signIn(with authentication: AuthenticationModel, completion: @escaping (AuthenticationResult) -> Void) {
         Auth.auth().languageCode = "vn"
+        
+        UserDefaults.standard.set(authentication.user?.displayName, forKey: "displayName")
+        
+//        UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(authentication.user?.phoneNumber ?? "+1 650-555-1111", uiDelegate: nil) { verificationID, error in
                 

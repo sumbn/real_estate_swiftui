@@ -66,13 +66,9 @@ struct ImagePicker : UIViewControllerRepresentable {
                         
                         itemProvider.loadItem(forTypeIdentifier: UTType.movie.identifier, options: [:]) { [self] (videoURL, error) in
                             
-                            print("url is: \(videoURL)")
-                            
                             DispatchQueue.main.async {
                                 if let url = videoURL as? URL {
                                     self.parent.getUrlVideo?(url)
-                                    
-                                    print("url is: \(url)")
                                 }
                             }
                         }

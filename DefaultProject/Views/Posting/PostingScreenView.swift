@@ -14,6 +14,8 @@ import FirebaseFirestore
 struct PostingScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var shareModel : ShareModel
+    
     @ObservedObject var viewModel : PostingScreenViewModel
     
     init(){
@@ -587,6 +589,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
     
     func push(){
         let buildModel = PostModelBuilder()
+            .setUId(shareModel.userSession?.user?.uid ?? "")
             .setBuildingName(buildingName)
             .setAddress(address)
             .setApartmentCode(apartmentCode)
@@ -636,7 +639,7 @@ struct ViewHeightKey: PreferenceKey {
 
 struct PostingScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        PostingScreenView( )
+        PostingScreenView()
     }
 }
 

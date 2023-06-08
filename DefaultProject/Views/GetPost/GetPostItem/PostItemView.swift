@@ -20,6 +20,7 @@ struct PostItemView: View {
         VStack {
             ScrollView(.horizontal){
                 HStack{
+                    Text(postModel.uid ?? "")
                     ForEach(postModel.imageURLs!, id: \.self) { image in
                         KFImage.url(URL(string: image))
                             .resizable()

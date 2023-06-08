@@ -10,9 +10,6 @@ import FirebaseAuth
 
 class ConfirmOTPService : SignInServiceProtocol {
     func signIn(with authentication: AuthenticationModel, completion: @escaping (AuthenticationResult) -> Void) {
-        print("provide confirmOTP \(authentication.provider)")
-        print("provide confirmOTP \(authentication.user?.verificationCode)")
-        
         signInWithPhoneNumber(authentication: authentication)(authenticateByPhone(completion: completion, authentication: authentication))
     }
     
@@ -42,14 +39,27 @@ class ConfirmOTPService : SignInServiceProtocol {
                     return
                 }
                 
-                var authentication = authentication
-                authentication.user?.uid = user.uid
-                authentication.user?.displayName = user.displayName
-                authentication.user?.photoURL = user.photoURL
+                let changeRequest = user.createProfileChangeRequest()
+                changeRequest.displayName = authentication.user?.displayName
                 
-                completion(.success(authentication))
+                changeRequest.commitChanges { error in
+                    if let error = error {
+                        // Xử lý lỗi khi cập nhật displayName
+                        print("Lỗi khi cập nhật displayName: \(error.localizedDescription)")
+                    } else {
+                        
+                        var authentication = authentication
+                        authentication.user?.uid = user.uid
+                        authentication.user?.displayName = user.displayName
+                        authentication.user?.photoURL = user.photoURL
+                        
+                        completion(.success(authentication))
+                        // Cập nhật displayName thành công
+                        print("Cập nhật displayName thành công")
+                    }
+                }
+                }
             }
         }
+        
     }
-    
-}

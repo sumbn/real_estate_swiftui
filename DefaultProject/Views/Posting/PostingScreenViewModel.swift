@@ -123,7 +123,6 @@ class PostingScreenViewModel : ObservableObject {
                 switch completion {
                 case .finished:
                     completionHandler(.success("thành công"))
-//                    print("Hoàn thành")
                 case .failure(let error):
                     completionHandler(.failure(error))
                     print("Lỗi: \(error)")
@@ -131,6 +130,8 @@ class PostingScreenViewModel : ObservableObject {
             }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
+    
+    
     
 //    private func updateResult(_ result: UploadResult, at index: Int) {
 ////        if index < imageResults.count {

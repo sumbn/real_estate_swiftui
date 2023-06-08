@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
-    @EnvironmentObject var coordinator: ShareModel
+    @EnvironmentObject var shareModel: ShareModel
     var body: some View {
         NavigationView{
             
@@ -28,14 +28,14 @@ struct LoginView: View {
                 
                 PhoneSignInView()
                 
-                NavigationLink {
-                    ForgetPasswordView()
-                } label: {
-                    Text("Quên mật khẩu")
-                        .font(.custom("Work Sans", size: 15))
-                        .foregroundColor(Color("Text3"))
-                }
-                .padding(.top, 16)
+//                NavigationLink {
+//                    ForgetPasswordView()
+//                } label: {
+//                    Text("Quên mật khẩu")
+//                        .font(.custom("Work Sans", size: 15))
+//                        .foregroundColor(Color("Text3"))
+//                }
+//                .padding(.top, 16)
                 
                 
                 Spacer()
@@ -50,8 +50,8 @@ struct LoginView: View {
                     FacebookSignInView{
                         switch $0{
                         case .success(let auth):
-                            coordinator.userSession = auth
-                            coordinator.isNotAuth = false
+                            shareModel.userSession = auth
+                            shareModel.isNotAuth = false
                         case .failure(let err):
                             print(err)
                         }
@@ -60,8 +60,8 @@ struct LoginView: View {
                     GoogleSignInView{
                         switch $0{
                         case .success(let auth):
-                            coordinator.userSession = auth
-                            coordinator.isNotAuth = false
+                            shareModel.userSession = auth
+                            shareModel.isNotAuth = false
                         case .failure(let err):
                             print(err)
                         }
@@ -70,8 +70,8 @@ struct LoginView: View {
                     AppleSignInView{
                         switch $0{
                         case .success(let auth):
-                            coordinator.userSession = auth
-                            coordinator.isNotAuth = false
+                            shareModel.userSession = auth
+                            shareModel.isNotAuth = false
                         case .failure(let err):
                             print(err)
                         }

@@ -11,13 +11,13 @@ struct PhoneVerificationView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel : PhoneVerificationViewModel
-    @EnvironmentObject var coordinator: ShareModel
+    @EnvironmentObject var shareModel: ShareModel
     
     @ObservedObject var viewModelForResentOTP: ForgetPasswordViewModel
     
     @FocusState var activeField : OTPField?
     
-    @State var isChangeScreen: Bool = false
+//    @State var isChangeScreen: Bool = false
     
     init(){
         let confirmOtpService = AuthService(signInService: ConfirmOTPService())
@@ -44,8 +44,8 @@ struct PhoneVerificationView: View {
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            NavigationLink(destination: CreateNewPasswordView(), isActive: $isChangeScreen) {
-            }
+//            NavigationLink(destination: HomeView(), isActive: $isChangeScreen) {
+//            }
             
             Text("Lấy lại mật khẩu")
                 .font(.custom("Work Sans Bold", size: 24))
@@ -53,7 +53,7 @@ struct PhoneVerificationView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 40)
             
-            Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động \(coordinator.userSession?.user?.phoneNumber ?? "")")
+            Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động \(shareModel.userSession?.user?.phoneNumber ?? "")")
                 .font(.custom("Work Sans", size: 15))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -66,9 +66,9 @@ struct PhoneVerificationView: View {
             
             if(checkStates()){
                 Button {
-                    viewModel.comFirmOTP(authentication: coordinator.userSession!) { result in
-                        coordinator.userSession = result
-                        isChangeScreen = true
+                    viewModel.comFirmOTP(authentication: shareModel.userSession!) { result in
+                        shareModel.userSession = result
+                        shareModel.isNotAuth = false
                     }
                 } label: {
                     Text("Xác thực")
@@ -77,8 +77,8 @@ struct PhoneVerificationView: View {
                 }
             } else {
                 Button {
-                    viewModelForResentOTP.sendOtpToPhoneNumber(phoneNumber: (coordinator.userSession?.user?.phoneNumber)!) { result in
-                        coordinator.userSession = result
+                    viewModelForResentOTP.sendOtpToPhoneNumber(phoneNumber: (shareModel.userSession?.user?.phoneNumber)!) { result in
+                        shareModel.userSession = result
                         
                     }
                 } label: {

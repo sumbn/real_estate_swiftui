@@ -10,6 +10,7 @@ import Foundation
 struct PostModel {
     
     var id : String = generateUniqueString()
+    var uid: String?
     
     var buildingName: String?
     var address: String?
@@ -44,6 +45,7 @@ extension PostModel {
         var dictionary: [String: Any] = [:]
         
         dictionary["id"] = id
+        dictionary["uid"] = uid
         
         dictionary["buildingName"] = buildingName
         dictionary["address"] = address
@@ -81,6 +83,8 @@ extension PostModel {
         }
         
         self.id = id
+        
+        self.uid = dictionary["uid"] as? String
         self.buildingName = dictionary["buildingName"] as? String
         self.address = dictionary["address"] as? String
         self.videoURL = dictionary["videoURL"] as? String
