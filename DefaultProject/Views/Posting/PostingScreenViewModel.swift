@@ -17,7 +17,7 @@ class PostingScreenViewModel : ObservableObject {
     
     @Published var progressUploadImages: [Double] = []
     
-    @Published var imageResults: [UploadResult] = []
+//    @Published var imageResults: [UploadResult] = []
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -56,7 +56,7 @@ class PostingScreenViewModel : ObservableObject {
                         dispatchGroup.leave()
                         
                     case .progress(let double):
-                        self.progressUploadVideo = double/100
+                        self.progressUploadVideo = double / 100
                         print("progress video: \(double)")
                         
                     case .failure(_) :
@@ -92,9 +92,11 @@ class PostingScreenViewModel : ObservableObject {
                 
                 switch result {
                     
-                case .progress(_):
-                    print("progress image: \(result) + \(index)")
-                    self?.updateResult(result, at: index)
+                case .progress(let double):
+//                    print("progress image: \(result) + \(index)")
+                    print("viewmodel + image: \(double)")
+                    self?.progressUploadImages[index] = double / 100
+//                    self?.updateResult(result, at: index)
                     
                 case .success(let urlImage):
                     imageUrls.append(urlImage)
@@ -121,7 +123,7 @@ class PostingScreenViewModel : ObservableObject {
                 switch completion {
                 case .finished:
                     completionHandler(.success("thành công"))
-                    print("Hoàn thành")
+//                    print("Hoàn thành")
                 case .failure(let error):
                     completionHandler(.failure(error))
                     print("Lỗi: \(error)")
@@ -130,60 +132,21 @@ class PostingScreenViewModel : ObservableObject {
             .store(in: &cancellables)
     }
     
-    func uploadImages(for images: [UIImage]) {
-        
-        let dispatcherGroup = DispatchGroup()
-        
-        
-        let publishers = images.enumerated().map { index, image in
-            
-            dispatcherGroup.enter()
-            
-            return storageService.uploadImage(uiImage: image)
-                .map { result -> (Int, UploadResult) in
-                    switch result {
-                    case .success(let downloadURL):
-                        return (index, .success(downloadURL))
-                    case .progress(let progress):
-                        return (index, .progress(progress))
-                    case .failure(let error):
-                        return (index, .failure(error))
-                    }
-                }
-                .catch { error -> AnyPublisher<(Int, UploadResult), Never> in
-                    return Just((index, .failure(error)))
-                        .eraseToAnyPublisher()
-                }
-        }
-        
-        Publishers.MergeMany(publishers)
-            .sink(receiveValue: { [weak self] (index, result) in
-                
-                switch result {
-                    
-                case .progress(_):
-                    self?.updateResult(result, at: index)
-                    print("đã update images")
-                case .success(let string):
-                    print("path is: \(string)")
-                    dispatcherGroup.leave()
-                case .failure(_): break
-                }
-            })
-            .store(in: &cancellables)
-        
-        dispatcherGroup.notify(queue: .main){
-            print("success")
-        }
-        
-    }
-    
-    private func updateResult(_ result: UploadResult, at index: Int) {
-        if index < imageResults.count {
-            imageResults[index] = result
-        } else {
-            imageResults.append(result)
-        }
-    }
+//    private func updateResult(_ result: UploadResult, at index: Int) {
+////        if index < imageResults.count {
+////            imageResults[index] = result
+////        } else {
+////            imageResults.append(result)
+////        }
+//
+//        switch result{
+//        case .progress(let double):
+//            print("viewmodel + image2: \(double)")
+//            progressUploadImages[index] = double
+//        case .success(_): break
+//
+//        case .failure(_): break
+//
+//        }
+//    }
 }
-

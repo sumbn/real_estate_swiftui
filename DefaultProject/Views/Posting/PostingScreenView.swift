@@ -144,18 +144,6 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
         
             ScrollView(.vertical){
                 
-//                ForEach(viewModel.imageResults.indices, id: \.self) { index in
-//                                let result = viewModel.imageResults[index]
-//                                switch result {
-//                                case .progress(let progress):
-//                                    ProgressView(value: progress)
-//                                case .success(let downloadURL):
-//                                    Text("Upload finished")
-//                                case .failure(let error):
-//                                    Text("Lỗi upload")
-//                                }
-//                            }
-                
                 VStack(spacing: 16){
                     FakeDropDownView(selection: $selectedCategory, listOptions: listCategory, label: "Danh mục", isRequested: true)
                         .padding(.top, 10)
@@ -260,7 +248,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 .frame(maxWidth: 124.4, maxHeight: 70)
                             }
                             
-                            VideoThumbnailView(url: URL(string: urlVideo!)!){
+                            VideoThumbnailView(url: URL(string: urlVideo!)!, progress: $viewModel.progressUploadVideo){
                                 urlVideo = nil
                             }
                             .cornerRadius(10)
@@ -314,16 +302,18 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                     }
                                     
                                     ForEach(images.indices, id: \.self) { index in
-                                        ShowImagesView(uiImage: images[index]) {
+                                        ShowImagesView(uiImage: images[index], progress: $viewModel.progressUploadImages[index]) {
                                             images.remove(at: index)
+                                            viewModel.progressUploadImages.remove(at: index)
                                         }
                                     }
                                 }
                             } else {
                                 LazyHStack {
                                     ForEach(images.indices, id: \.self) { index in
-                                        ShowImagesView(uiImage: images[index]) {
+                                        ShowImagesView(uiImage: images[index], progress: $viewModel.progressUploadImages[index]) {
                                             images.remove(at: index)
+                                            viewModel.progressUploadImages.remove(at: index)
                                         }
                                     }
                                 }
@@ -585,6 +575,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
         })
         .fullScreenCover(isPresented: $isShowPhotoPicker, content: {
             ImagePicker(typePicker: .image, getUIImage: { uiImage in
+                viewModel.progressUploadImages.append(0.0)
                 images.append(uiImage)
             })
         })
@@ -647,5 +638,6 @@ struct PostingScreenView_Previews: PreviewProvider {
         PostingScreenView( )
     }
 }
+
 
 

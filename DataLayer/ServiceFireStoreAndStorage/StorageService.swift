@@ -56,7 +56,6 @@ class StorageService : StorageProtocol {
             
             subject.send(.progress(percentComplete))
         }
-        
         return subject.eraseToAnyPublisher()
     }
     
@@ -84,13 +83,12 @@ class StorageService : StorageProtocol {
             guard let metadata = metadata else {
                 return
             }
-            
-            
-            let size = metadata.size
+            _ = metadata.size
             
             reference.downloadURL { (url, error) in
                 guard let downloadURL = url else {
-                    
+                    let error = NSError(domain: "YourDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error url to Data"])
+                    subject.send(.failure(error))
                     return
                 }
                 
@@ -107,7 +105,6 @@ class StorageService : StorageProtocol {
         
         return subject.eraseToAnyPublisher()
     }
-    
 }
 
 

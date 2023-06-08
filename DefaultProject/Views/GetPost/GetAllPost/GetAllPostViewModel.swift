@@ -6,22 +6,32 @@
 //
 
 import Foundation
+import Combine
 
-class GetAllPostViewModel {
-    let fireStoreService : FirestoreProtocol
+class GetAllPostViewModel : ObservableObject {
+    
+    let fireStoreService: FirestoreProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    @Published var list = [PostModel]()
+    
     init(fireStoreService: FirestoreProtocol) {
         self.fireStoreService = fireStoreService
     }
     
-    func getAllData(completion: @escaping (Result<[PostModel], Error>) -> Void){
-        
-        fireStoreService.getAllDocument { result in
-            switch result {
-            case .success(let list):
-                completion(.success(list))
-            case .failure(let err):
-                completion(.failure(err))
+    func getAllData() {
+        fireStoreService.getAllDocument()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] list in
+                self?.list = list
             }
-        }
+            .store(in: &cancellables)
     }
 }

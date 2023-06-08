@@ -14,10 +14,5 @@ protocol StorageProtocol {
     
     func uploadImage(uiImage : UIImage) -> AnyPublisher<UploadResult, Error>
     
-    
     func uploadVideo(videoURL : String) -> AnyPublisher<UploadResult, Error>
-    
-//    func uploadImages(_ uiImages: [UIImage]) -> AnyPublisher<[UploadResult], Error>
-    
-    
 }

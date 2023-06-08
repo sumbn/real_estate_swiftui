@@ -23,20 +23,30 @@ class VideoThumbnailViewModel: ObservableObject {
 
 struct VideoThumbnailView: View {
     @StateObject private var viewModel: VideoThumbnailViewModel
+    @Binding var progress: Double
+    
     let deleteVideo: () -> Void
     
-    init(url: URL, deleteVideo: @escaping () -> Void) {
+    init(url: URL, progress: Binding<Double> ,deleteVideo: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: VideoThumbnailViewModel(url: url))
         self.deleteVideo = deleteVideo
+        self._progress = progress
     }
     
     var body: some View {
         
         HStack{
             if let image = viewModel.thumbnailImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                ZStack{
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    
+                    ProgressView(value: progress)
+                        .progressViewStyle(CustomCircularProgressViewStyle(color: .white))
+                        .scaleEffect(0.5, anchor: .center)
+                    
+                }
             } else {
                 ProgressView()
             }
@@ -46,11 +56,10 @@ struct VideoThumbnailView: View {
                 withAnimation {
                     deleteVideo()
                 }
-                
             } label: {
                 Image(systemName: "x.circle.fill")
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundColor(Color.black)
-//                    .bold()
                     .background(
                         Circle()
                             .fill(Color.white)
@@ -58,7 +67,25 @@ struct VideoThumbnailView: View {
                     .padding(7)
             }
         }
-           
+    }
+}
+
+struct CustomCircularProgressViewStyle: ProgressViewStyle {
+    var color: Color
+    
+    func makeBody(configuration: Configuration) -> some View {
+        let progress = configuration.fractionCompleted ?? 0.0
+        
+        return ZStack {
+            Circle()
+                .stroke(Color.gray.opacity(0.3), style: StrokeStyle(lineWidth: 10))
+            
+            Circle()
+                .trim(from: 0.0, to: CGFloat(progress))
+                .stroke(color, style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                .rotationEffect(Angle(degrees: -90))
+        }
+        .rotationEffect(Angle(degrees: 90))
     }
 }
 
@@ -79,5 +106,6 @@ extension AVAsset {
         }
     }
 }
+
 
 

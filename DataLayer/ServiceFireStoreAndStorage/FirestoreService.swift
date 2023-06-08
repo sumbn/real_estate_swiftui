@@ -11,21 +11,6 @@ import Combine
 
 class FirestoreService : FirestoreProtocol {
     
-    
-    func addDocument(_ post: PostModel, completion: @escaping (Result<String, Error>) -> Void) {
-        
-        let db = Firestore.firestore()
-        
-        db.collection("DanhMuc/CanHoChungCu/ChoThue").document(post.id).setData(post.toDictionary()) { (error) in
-            if let error = error {
-                print("Lỗi khi lưu bài đăng vào Firestore: \(error.localizedDescription)")
-            } else {
-                print("Bài đăng đã được lưu thành công vào Firestore")
-                completion(.success("sucess"))
-            }
-        }
-    }
-    
     func addDocument(_ post: PostModel) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             let db = Firestore.firestore()
@@ -43,29 +28,28 @@ class FirestoreService : FirestoreProtocol {
         .eraseToAnyPublisher()
     }
     
-    
-    func getAllDocument(completion: @escaping (Result<[PostModel], Error>) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("DanhMuc/CanHoChungCu/ChoThue").getDocuments() { (querySnapshot, err) in
-            var listPost = [PostModel]()
+    func getAllDocument() -> AnyPublisher<[PostModel], Error> {
+            let subject = PassthroughSubject<[PostModel], Error>()
             
-            if let err = err {
-                completion(.failure(err))
-            } else {
-                for document in querySnapshot!.documents {
-                    if let postModel = PostModel(dictionary: document.data()) {
-                        listPost.append(postModel)
-                    } else {
-                        print("Cannot convert to PostModel for document: \(document)")
-                                continue
+            let db = Firestore.firestore()
+            db.collection("DanhMuc/CanHoChungCu/ChoThue").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    subject.send(completion: .failure(err))
+                } else {
+                    var listPost = [PostModel]()
+                    for document in querySnapshot!.documents {
+                        if let postModel = PostModel(dictionary: document.data()) {
+                            listPost.append(postModel)
+                        } else {
+                            print("Cannot convert to PostModel for document: \(document)")
+                            continue
+                        }
                     }
-                    
+                    subject.send(listPost)
+                    subject.send(completion: .finished)
                 }
             }
             
-            completion(.success(listPost))
+            return subject.eraseToAnyPublisher()
         }
-        
-        
-    }
 }
