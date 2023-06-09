@@ -17,8 +17,6 @@ struct PhoneVerificationView: View {
     
     @FocusState var activeField : OTPField?
     
-//    @State var isChangeScreen: Bool = false
-    
     init(){
         let confirmOtpService = AuthService(signInService: ConfirmOTPService())
         self.viewModel = PhoneVerificationViewModel(authService: confirmOtpService)
@@ -43,9 +41,6 @@ struct PhoneVerificationView: View {
             }
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
-            
-//            NavigationLink(destination: HomeView(), isActive: $isChangeScreen) {
-//            }
             
             Text("Lấy lại mật khẩu")
                 .font(.custom("Work Sans Bold", size: 24))
@@ -175,9 +170,9 @@ enum OTPField{
     case field6
 }
 
-
-//struct PhoneVerificationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PhoneVerificationView()
-//    }
-//}
+struct PhoneVerificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        PhoneVerificationView()
+            .environmentObject(ShareModel())
+    }
+}

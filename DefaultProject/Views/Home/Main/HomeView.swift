@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var shareModel: ShareModel
     
     var body: some View {
-        NavigationView{
+        
             VStack{
                 Text("tên đăng nhập: \(shareModel.userSession?.user?.displayName ?? "")")
                 Text("uid: \(shareModel.userSession?.user?.uid ?? "")")
@@ -68,7 +68,7 @@ struct HomeView: View {
                     
                 }
             }
-        }
+        
     }
 }
 
@@ -76,5 +76,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(ShareModel())
     }
 }

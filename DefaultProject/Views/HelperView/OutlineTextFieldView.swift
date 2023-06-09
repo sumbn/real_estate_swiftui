@@ -14,13 +14,15 @@ struct OutlineTextFieldView: View {
     @State var isFirstClick = true
     
     @Binding var tint : String
-    @State var isRequired = false
+    
+    var isOneLine : Bool
     
     var labelAtribute: AttributedString
     var requestAtribute: AttributedString
+    
    
     
-    init(label: String, input: Binding<String>, tint: Binding<String> ,isRequired: Bool = false) {
+    init(label: String, input: Binding<String>, tint: Binding<String> ,isRequired: Bool = false, isOneLine: Bool = true) {
         
         self._tint = tint
         self._input = input
@@ -45,6 +47,8 @@ struct OutlineTextFieldView: View {
                 return result
             }()
         }
+        
+        self.isOneLine = isOneLine
     }
 
     var body: some View {
@@ -59,7 +63,7 @@ struct OutlineTextFieldView: View {
             
             if input == "" {
                 Text(tint)
-                    .lineLimit(1)
+                    .lineLimit(isOneLine ? 1 : nil)
                     .opacity(0.5)
                     .font(.custom("Work Sans", size: 17))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,18 +71,12 @@ struct OutlineTextFieldView: View {
             }
             
             TextField("", text: $input)
-                .lineLimit(1)
+                .lineLimit(isOneLine ? 1 : nil)
                 .font(.custom("Work Sans", size: 17))
                 .padding(.horizontal, 20)
             
         }
         .frame(height: 56)
-//        .onTapGesture {
-//            if isFirstClick{
-//                tint = ""
-//                isFirstClick = false
-//            }
-//        }
         .overlay(alignment: .topLeading) {
             Text(labelAtribute + requestAtribute)
                 .font(.custom("Work Sans", size: 13))

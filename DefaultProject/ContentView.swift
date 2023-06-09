@@ -15,11 +15,12 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView {
-            HomeView()
+            MainView()
         }
         .fullScreenCover(isPresented: $shareModel.isNotAuth) {
             LoginView()
         }
+        .environmentObject(shareModel)
         .onAppear{
             if let user = Auth.auth().currentUser {
                 shareModel.isNotAuth = false
@@ -27,7 +28,7 @@ struct ContentView: View {
                 shareModel.userSession?.user = UserModel(uid: user.uid, displayName: user.displayName, phoneNumber: user.phoneNumber)
             }
         }
-        .environmentObject(shareModel)
+       
     }
 }
 
