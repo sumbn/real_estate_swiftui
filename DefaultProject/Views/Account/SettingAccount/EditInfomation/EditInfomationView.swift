@@ -29,7 +29,11 @@ struct EditInfomationView: View {
     @State var gender: String = ""
     @State var tintGender: String = "Chọn giới tính của bạn"
     
-    @State var isCFDDate = false
+    @State var isShowDatePicker = false
+    @State var date : Date = {
+        let date = "01/01/1900"
+        return convertStringToDate(from: date)!
+    }()
     @State var birthDay : String = ""
     @State var tintBirthDay : String = "Chọn ngày, tháng, năm sinh"
     
@@ -69,7 +73,7 @@ struct EditInfomationView: View {
                     OutlineTextFieldView(label: "Họ và tên", input: $name, tint: $tintName, isRequired: true)
                     
                     OutlineWithOptionView(label: "Địa chỉ", input: $address, tint: $tintAddress) {
-                       
+                        
                         NavigationLink {
                             AddressView()
                         } label: {
@@ -105,7 +109,7 @@ struct EditInfomationView: View {
                     OutlineTextFieldView(label: "Giới thiệu", input: $introduce, tint: $tintIntroduce, isOneLine: false)
                     
                     OutlineWithOptionView(label: "CMND/CCCD/Hộ chiếu", input: $identification, tint: $tintIdentification) {
-                       
+                        
                         NavigationLink {
                             IdentificationView()
                         } label: {
@@ -126,17 +130,60 @@ struct EditInfomationView: View {
                         .padding(.trailing,20)
                     }
                     
-                    OutlineWithOptionView(label: "Ngày, tháng, năm sinh", input: $birthDay, tint: $tintBirthDay) {
-                        
-                        Button {
-                            isCFDDate = true
-                        } label: {
-                            Image(systemName: "chevron.down")
-                                .foregroundColor(.black)
+                    VStack(spacing: 5) {
+                        OutlineWithOptionView(label: "Ngày, tháng, năm sinh", input: $birthDay, tint: $tintBirthDay) {
+                            
+                            Button {
+                                isShowDatePicker.toggle()
+                            } label: {
+                                Image(systemName: isShowDatePicker ? "chevron.up" : "chevron.down")
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.trailing,20)
                         }
-                        .padding(.trailing,20)
+                        
+                        if isShowDatePicker {
+                            VStack {
+                                DatePicker(selection: $date, displayedComponents: .date) {
+                                    Text("Chọn ngày sinh của bạn")
+                                        .padding(.horizontal, 20)
+                                }
+                                .datePickerStyle(.compact)
+                                
+                                HStack{
+                                    Spacer()
+                                    Button {
+                                        birthDay = convertDateToString(from: date)
+                                        isShowDatePicker = false
+                                    } label: {
+                                        Text("Done")
+                                            .font(.custom("Work Sans", size: 17))
+                                            .bold()
+                                            .foregroundColor(Color.white)
+                                            .padding(.vertical, 10)
+                                            .padding(.horizontal, 20)
+                                            .background(Color("Text3"))
+                                            .cornerRadius(10)
+                                    }
+                                }
+                            }
+                        }
                     }
                     
+                    Button {
+                        
+                    } label: {
+                        Text("Lưu")
+                            .font(.custom("Work Sans", size: 17))
+                            .bold()
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .accentColor(Color.white)
+                            .background(Color("Text3"))
+                            .cornerRadius(10)
+                    }
+                    .padding(.bottom, 16)
+
                 }
                 .padding(.top, 8)
                 .padding(.horizontal, 20)
@@ -145,13 +192,6 @@ struct EditInfomationView: View {
                 }
             }
         }
-        .fullScreenCover(isPresented: $isCFDDate, content: {
-            Button {
-                isCFDDate = false
-            } label: {
-                Text("Test")
-            }
-        })
         .confirmationDialog("Gender selection", isPresented: $isCFDGender) {
             Button("Nam") {
                 gender = "Nam"
@@ -178,3 +218,6 @@ struct EditInfomationView_Previews: PreviewProvider {
         EditInfomationView()
     }
 }
+
+
+

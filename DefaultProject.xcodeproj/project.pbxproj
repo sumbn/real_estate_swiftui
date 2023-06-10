@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2782EE642A340C4E00010BDA /* ChosingProvince.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE632A340C4E00010BDA /* ChosingProvince.swift */; };
+		2782EE662A340CAC00010BDA /* ChosingDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE652A340CAC00010BDA /* ChosingDistrictView.swift */; };
+		2782EE6C2A3418E400010BDA /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE6B2A3418E400010BDA /* FakeData.swift */; };
+		2782EE6F2A3426E300010BDA /* fakeJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2782EE6E2A3426E300010BDA /* fakeJson.json */; };
+		2782EE712A342D9800010BDA /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE702A342D9800010BDA /* Extentions.swift */; };
 		278B4FA12A2DDEBB008AEA1B /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4F9E2A2DDEBA008AEA1B /* PostModel.swift */; };
 		278B4FA22A2DDEBB008AEA1B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4F9F2A2DDEBB008AEA1B /* ImagePicker.swift */; };
 		278B4FA32A2DDEBB008AEA1B /* PostModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */; };
@@ -136,6 +141,11 @@
 
 /* Begin PBXFileReference section */
 		1C8F34F3EB7BBB7C28CA6A6D /* Pods-DefaultProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DefaultProject.debug.xcconfig"; path = "Target Support Files/Pods-DefaultProject/Pods-DefaultProject.debug.xcconfig"; sourceTree = "<group>"; };
+		2782EE632A340C4E00010BDA /* ChosingProvince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingProvince.swift; sourceTree = "<group>"; };
+		2782EE652A340CAC00010BDA /* ChosingDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingDistrictView.swift; sourceTree = "<group>"; };
+		2782EE6B2A3418E400010BDA /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
+		2782EE6E2A3426E300010BDA /* fakeJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeJson.json; sourceTree = "<group>"; };
+		2782EE702A342D9800010BDA /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		278B4F9E2A2DDEBA008AEA1B /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		278B4F9F2A2DDEBB008AEA1B /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModelBuilder.swift; sourceTree = "<group>"; };
@@ -291,6 +301,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2782EE602A340BA200010BDA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				27D436F42A330E85003CD4F8 /* AddressView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2782EE612A340BB300010BDA /* ChosingProvince */ = {
+			isa = PBXGroup;
+			children = (
+				2782EE632A340C4E00010BDA /* ChosingProvince.swift */,
+			);
+			path = ChosingProvince;
+			sourceTree = "<group>";
+		};
+		2782EE622A340BCF00010BDA /* ChosingDistrict */ = {
+			isa = PBXGroup;
+			children = (
+				2782EE652A340CAC00010BDA /* ChosingDistrictView.swift */,
+			);
+			path = ChosingDistrict;
+			sourceTree = "<group>";
+		};
+		2782EE6A2A3418CB00010BDA /* FakeData */ = {
+			isa = PBXGroup;
+			children = (
+				2782EE6B2A3418E400010BDA /* FakeData.swift */,
+				2782EE6E2A3426E300010BDA /* fakeJson.json */,
+			);
+			path = FakeData;
+			sourceTree = "<group>";
+		};
 		278B4F9D2A2DDD61008AEA1B /* Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +419,9 @@
 		27CB5A392A2DC5B50079FFC8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				27CB5A4E2A2DC62B0079FFC8 /* ExtensionView.swift */,
 				27CB5A3A2A2DC5B50079FFC8 /* Utilities.swift */,
+				2782EE702A342D9800010BDA /* Extentions.swift */,
 			);
 			name = Utilities;
 			path = ../Utilities;
@@ -398,7 +443,6 @@
 				27B2FBE92A31B1410084F184 /* Account */,
 				27CB5A4F2A2DC62B0079FFC8 /* Home */,
 				278B4FB22A2DDF16008AEA1B /* HelperView */,
-				27CB5A4E2A2DC62B0079FFC8 /* ExtensionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -647,7 +691,10 @@
 		27D436F32A330E35003CD4F8 /* Address */ = {
 			isa = PBXGroup;
 			children = (
-				27D436F42A330E85003CD4F8 /* AddressView.swift */,
+				2782EE6A2A3418CB00010BDA /* FakeData */,
+				2782EE602A340BA200010BDA /* Main */,
+				2782EE612A340BB300010BDA /* ChosingProvince */,
+				2782EE622A340BCF00010BDA /* ChosingDistrict */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -933,6 +980,7 @@
 				CA2223DE2A2BBADC005164BB /* Launch Screen.storyboard in Resources */,
 				CA2223B52A2BB34A005164BB /* SF-Pro-Display-Medium.otf in Resources */,
 				CA2223B42A2BB34A005164BB /* SF-Pro-Display-Bold.otf in Resources */,
+				2782EE6F2A3426E300010BDA /* fakeJson.json in Resources */,
 				CA22234B2A2BB32A005164BB /* Assets.xcassets in Resources */,
 				CA2223B32A2BB34A005164BB /* SF-Pro-Display-Regular.otf in Resources */,
 				27CB59CB2A2D9AEE0079FFC8 /* GoogleService-Info.plist in Resources */,
@@ -999,6 +1047,7 @@
 				CA2223A42A2BB34A005164BB /* RewardedAd.swift in Sources */,
 				CA2223982A2BB34A005164BB /* TextShimer.swift in Sources */,
 				CA22239A2A2BB34A005164BB /* WebView.swift in Sources */,
+				2782EE712A342D9800010BDA /* Extentions.swift in Sources */,
 				CA2223E92A2BCF30005164BB /* Shimmer.swift in Sources */,
 				278B4FC02A2DDF16008AEA1B /* VideoThumbnailView.swift in Sources */,
 				27CB5A9F2A2DC62D0079FFC8 /* SignInServiceProtocol.swift in Sources */,
@@ -1019,6 +1068,8 @@
 				CA2223972A2BB34A005164BB /* SkeletonView.swift in Sources */,
 				CA2223B82A2BB34A005164BB /* FileManager.swift in Sources */,
 				CA2223C32A2BB34A005164BB /* BytesConverter.swift in Sources */,
+				2782EE662A340CAC00010BDA /* ChosingDistrictView.swift in Sources */,
+				2782EE642A340C4E00010BDA /* ChosingProvince.swift in Sources */,
 				27CB5A952A2DC62D0079FFC8 /* AuthenticationModel.swift in Sources */,
 				27B2FBED2A31EC580084F184 /* AccountView.swift in Sources */,
 				CA2223472A2BB329005164BB /* DefaultProjectApp.swift in Sources */,
@@ -1053,6 +1104,7 @@
 				278B4FBF2A2DDF16008AEA1B /* ShowImagesView.swift in Sources */,
 				27CB5A822A2DC62D0079FFC8 /* ExtensionView.swift in Sources */,
 				278B4FA22A2DDEBB008AEA1B /* ImagePicker.swift in Sources */,
+				2782EE6C2A3418E400010BDA /* FakeData.swift in Sources */,
 				CA2223E42A2BC0B1005164BB /* LottieView.swift in Sources */,
 				27CB5A932A2DC62D0079FFC8 /* PhoneSignInView.swift in Sources */,
 				27CB5A902A2DC62D0079FFC8 /* GoogleSignInViewModel.swift in Sources */,

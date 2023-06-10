@@ -1,0 +1,37 @@
+[
+    {
+        "id" : "pro01",
+        "name" : "HoChiMinh",
+        "districts" : [
+            {
+                "id" : "dis01",
+                "name" : "Quận 1",
+                "communes" : [
+                    {
+                        "id" : "com 01",
+                        "name" : "Phường 01"
+                    },
+                    {
+                        "id" : "com 02",
+                        "name" : "Phường 02"
+                    },
+                ]
+            },
+            {
+                "id" : "dis02",
+                "name" : "Quận 2",
+                "communes" : [
+                    {
+                        "id" : "com 01",
+                        "name" : "Phường 01"
+                    },
+                    {
+                        "id" : "com 02",
+                        "name" : "Phường 02"
+                    },
+                ]
+            }
+        ]
+    }
+]
+
