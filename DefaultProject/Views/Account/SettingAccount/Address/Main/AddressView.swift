@@ -11,17 +11,43 @@ struct AddressView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var province_city: String = ""
+    @State var listProvince = [Province]()
+    @State var indexSelectedProvince : Int?
+    @State var province_city: String{
+        didSet {
+            district = ""
+            indexSelectedDistrict = nil
+        }
+    }
     @State var tintProvince_city: String = "Chọn Tỉnh, thành phố"
     
-    @State var district: String = ""
+    @State var indexSelectedDistrict: Int?
+    @State var district: String{
+        didSet {
+            commune = ""
+            indexSelectedCommune = nil
+        }
+    }
     @State var tintDistrict: String = "Chọn Quận, huyện"
     
-    @State var ward: String = ""
-    @State var tintWard: String = "Chọn Phường, xã, thị trấn"
+    @State var indexSelectedCommune: Int?
+    @State var commune: String
+    @State var tintCommune: String = "Chọn Phường, xã, thị trấn"
     
-    @State var specificAddress = ""
+    @State var specificAddress: String
     @State var tintSpecificAddress = "Nhập địa chỉ cụ thể của bạn"
+    
+    let getAddressModel: (AddressModel) -> Void
+   
+    
+    init(addressModel: AddressModel, getAddress: @escaping (AddressModel) -> Void){
+        
+        getAddressModel = getAddress
+        _province_city = State(initialValue: addressModel.province)
+        _district = State(initialValue: addressModel.district)
+        _commune = State(initialValue: addressModel.commune)
+        _specificAddress = State(initialValue: addressModel.specific)
+    }
     
     var body: some View {
         VStack{
@@ -46,10 +72,14 @@ struct AddressView: View {
             
             ScrollView {
                 VStack(spacing: 16){
+                    
                     OutlineWithOptionView(label: "Tỉnh/ thành phố", input: $province_city, tint: $tintProvince_city, isRequired: true) {
                         
                         NavigationLink {
-                            ChosingProvince()
+                            ChosingProvince(listProvince: listProvince, selectedItem: indexSelectedProvince){ index in
+                                indexSelectedProvince = index
+                                province_city = listProvince[indexSelectedProvince!].name
+                            }
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)
@@ -58,31 +88,46 @@ struct AddressView: View {
                     }
                     
                     OutlineWithOptionView(label: "Quận/ huyện", input: $district, tint: $tintDistrict, isRequired: true) {
-                        
                         NavigationLink {
-                            ChosingDistrictView()
+                            if(indexSelectedProvince != nil) {
+                                ChosingDistrictView(listDistrict: listProvince[indexSelectedProvince!].districts, selectedItem: indexSelectedDistrict){ index in
+                                    indexSelectedDistrict = index
+                                    district = listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].name
+                                }
+                            }
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)
                         }
                         .padding(.trailing,20)
                     }
+                    .disabled(province_city == "")
                     
-                    OutlineWithOptionView(label: "Phường/ xã/ thị trấn", input: $ward, tint: $tintWard, isRequired: true) {
+                    OutlineWithOptionView(label: "Phường/ xã/ thị trấn", input: $commune, tint: $tintCommune, isRequired: true) {
                         
                         NavigationLink {
-                            ChosingProvince()
+                            if(indexSelectedDistrict != nil) {
+                                ChosingCommuneView(listCommune: listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].communes, selectedItem: indexSelectedCommune){ index in
+                                    indexSelectedDistrict = index
+                                    commune = listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].communes[indexSelectedProvince!].name
+                                }
+                            }
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)
                         }
                         .padding(.trailing,20)
+                        
                     }
+                    .disabled(district == "")
                     
                     OutlineTextFieldView(label: "Địa chỉ cụ thể", input: $specificAddress, tint: $tintSpecificAddress)
                     
                     Button {
+                        let address = AddressModel(province: province_city, district: district, commune: commune, specific: specificAddress)
+                        getAddressModel(address)
                         
+                        presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("Xong")
                             .font(.custom("Work Sans", size: 17))
@@ -102,6 +147,9 @@ struct AddressView: View {
                 }
             }
         }
+        .onAppear{
+            listProvince = Bundle.main.decode(type: [Province].self, from: "fakeJson.json")
+        }
         .frame(maxHeight: .infinity, alignment: .top)
         .background(Color(hex: "EFEDED"))
         .navigationBarBackButtonHidden(true)
@@ -110,6 +158,8 @@ struct AddressView: View {
 
 struct AddressView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressView()
+        AddressView(addressModel: AddressModel(province: "", district: "", commune: "", specific: "")){ address in
+            
+        }
     }
 }

@@ -32,6 +32,40 @@
                 ]
             }
         ]
+    },
+    {
+        "id" : "pro02",
+        "name" : "Ha Noi",
+        "districts" : [
+            {
+                "id" : "dis01",
+                "name" : "Quận Hoan Kiem",
+                "communes" : [
+                    {
+                        "id" : "com 01",
+                        "name" : "Phường 01"
+                    },
+                    {
+                        "id" : "com 02",
+                        "name" : "Phường 02"
+                    },
+                ]
+            },
+            {
+                "id" : "dis02",
+                "name" : "Quận Hoang Mai",
+                "communes" : [
+                    {
+                        "id" : "com 01",
+                        "name" : "Phường 01"
+                    },
+                    {
+                        "id" : "com 02",
+                        "name" : "Phường 02"
+                    },
+                ]
+            }
+        ]
     }
 ]
 

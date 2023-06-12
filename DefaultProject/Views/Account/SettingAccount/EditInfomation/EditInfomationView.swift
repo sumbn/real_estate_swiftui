@@ -38,6 +38,8 @@ struct EditInfomationView: View {
     @State var tintBirthDay : String = "Chọn ngày, tháng, năm sinh"
     
     
+    @State var addressModel : AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
+    
     @State var isToggle = false
     
     var body: some View {
@@ -75,7 +77,10 @@ struct EditInfomationView: View {
                     OutlineWithOptionView(label: "Địa chỉ", input: $address, tint: $tintAddress) {
                         
                         NavigationLink {
-                            AddressView()
+                            AddressView(addressModel: addressModel) { addressModel in
+                                self.addressModel = addressModel
+                                address = addressModel.province
+                            }
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)

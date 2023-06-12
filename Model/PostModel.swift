@@ -83,7 +83,6 @@ extension PostModel {
         }
         
         self.id = id
-        
         self.uid = dictionary["uid"] as? String
         self.buildingName = dictionary["buildingName"] as? String
         self.address = dictionary["address"] as? String

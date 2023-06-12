@@ -1,20 +1,19 @@
 //
-//  ChosingProvince.swift
+//  ChosingCommuneView.swift
 //  DefaultProject
 //
-//  Created by daktech on 6/10/23.
+//  Created by daktech on 6/12/23.
 //
 
 import SwiftUI
 
-struct ChosingProvince: View {
-    
+struct ChosingCommuneView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    let listProvince : [Province]
-    let selectedItem: Int?
+    let listCommune : [Commune]
     
-    let getResultProvince: (Int) -> Void
+    let selectedItem: Int?
+    let getResultCommune: (Int) -> Void
     
     var body: some View {
         VStack{
@@ -24,7 +23,7 @@ struct ChosingProvince: View {
                 } label: {
                     HStack{
                         Image(systemName: "chevron.backward")
-                        Text("Chọn Tỉnh/ thành phố")
+                        Text("Chọn Phường/ xã/ thị trấn")
                             .font(.custom("Work Sans", size: 17))
                             .bold()
                     }
@@ -37,25 +36,19 @@ struct ChosingProvince: View {
             .padding(.bottom, 16)
             
             List {
-                ForEach(Array(listProvince.enumerated()), id: \.element.id) { index, province in
-                    
-                   
-                        Button {
-                            getResultProvince(index)
-                            presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            HStack{
-                                Text(province.name)
-                                if selectedItem == index {
-                                    Image(systemName: "checkmark")
-                                }
+                ForEach(Array(listCommune.enumerated()), id: \.element.id) { index, commune in
+                    Button {
+                        getResultCommune(index)
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack {
+                            Text(commune.name)
+                            if selectedItem == index {
+                                Image(systemName: "checkmark")
                             }
-                            
                         }
                         
-                        
-                    
-                   
+                    }
                 }
             }
         }
@@ -64,9 +57,9 @@ struct ChosingProvince: View {
     }
 }
 
-struct ChosingProvince_Previews: PreviewProvider {
+struct ChosingCommuneView_Previews: PreviewProvider {
     static var previews: some View {
-        ChosingProvince(listProvince: [], selectedItem: nil) { index in
+        ChosingCommuneView(listCommune: [], selectedItem: nil){ index in
             
         }
     }
