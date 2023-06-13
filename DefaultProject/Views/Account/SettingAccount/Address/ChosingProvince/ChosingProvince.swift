@@ -12,9 +12,9 @@ struct ChosingProvince: View {
     @Environment(\.presentationMode) var presentationMode
     
     let listProvince : [Province]
-    let selectedItem: Int?
+    let selectedItem: String?
     
-    let getResultProvince: (Int) -> Void
+    let getResultProvince: (Province) -> Void
     
     var body: some View {
         VStack{
@@ -41,12 +41,12 @@ struct ChosingProvince: View {
                     
                    
                         Button {
-                            getResultProvince(index)
+                            getResultProvince(province)
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             HStack{
                                 Text(province.name)
-                                if selectedItem == index {
+                                if selectedItem == province.name {
                                     Image(systemName: "checkmark")
                                 }
                             }

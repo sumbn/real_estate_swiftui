@@ -12,8 +12,8 @@ struct ChosingDistrictView: View {
     
     let listDistrict : [District]
     
-    let selectedItem: Int?
-    let getResultDistrict : (Int) -> Void
+    let selectedItem: String?
+    let getResultDistrict : (District) -> Void
     
     var body: some View {
         VStack{
@@ -38,12 +38,12 @@ struct ChosingDistrictView: View {
             List {
                 ForEach(Array(listDistrict.enumerated()), id: \.element.id) { index, district in
                     Button {
-                        getResultDistrict(index)
+                        getResultDistrict(district)
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         HStack {
                             Text(district.name)
-                            if selectedItem == index {
+                            if selectedItem == district.name {
                                 Image(systemName: "checkmark")
                             }
                         }

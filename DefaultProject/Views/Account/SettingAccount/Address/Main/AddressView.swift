@@ -12,25 +12,39 @@ struct AddressView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var listProvince = [Province]()
-    @State var indexSelectedProvince : Int?
-    @State var province_city: String{
-        didSet {
-            district = ""
-            indexSelectedDistrict = nil
+    @State var selectedProvince : Province? {
+        didSet{
+            if(selectedProvince != nil){
+                for disstric in selectedProvince!.districts {
+                    if (district == disstric.name){
+                        selectedDistrict = disstric
+                    }
+                }
+            }
         }
     }
+    
+    @State var province_city: String{
+        willSet(newValue){
+            if(newValue != province_city){
+                district = ""
+                selectedDistrict = nil
+            }
+        }
+    }
+    
     @State var tintProvince_city: String = "Chọn Tỉnh, thành phố"
     
-    @State var indexSelectedDistrict: Int?
+    @State var selectedDistrict: District?
     @State var district: String{
-        didSet {
-            commune = ""
-            indexSelectedCommune = nil
+        willSet(newValue){
+            if(newValue != district){
+                commune = ""
+            }
         }
     }
     @State var tintDistrict: String = "Chọn Quận, huyện"
     
-    @State var indexSelectedCommune: Int?
     @State var commune: String
     @State var tintCommune: String = "Chọn Phường, xã, thị trấn"
     
@@ -38,7 +52,7 @@ struct AddressView: View {
     @State var tintSpecificAddress = "Nhập địa chỉ cụ thể của bạn"
     
     let getAddressModel: (AddressModel) -> Void
-   
+    
     
     init(addressModel: AddressModel, getAddress: @escaping (AddressModel) -> Void){
         
@@ -76,9 +90,9 @@ struct AddressView: View {
                     OutlineWithOptionView(label: "Tỉnh/ thành phố", input: $province_city, tint: $tintProvince_city, isRequired: true) {
                         
                         NavigationLink {
-                            ChosingProvince(listProvince: listProvince, selectedItem: indexSelectedProvince){ index in
-                                indexSelectedProvince = index
-                                province_city = listProvince[indexSelectedProvince!].name
+                            ChosingProvince(listProvince: listProvince, selectedItem: province_city){ province in
+                                selectedProvince = province
+                                province_city = province.name
                             }
                         } label: {
                             Image(systemName: "chevron.forward")
@@ -89,10 +103,10 @@ struct AddressView: View {
                     
                     OutlineWithOptionView(label: "Quận/ huyện", input: $district, tint: $tintDistrict, isRequired: true) {
                         NavigationLink {
-                            if(indexSelectedProvince != nil) {
-                                ChosingDistrictView(listDistrict: listProvince[indexSelectedProvince!].districts, selectedItem: indexSelectedDistrict){ index in
-                                    indexSelectedDistrict = index
-                                    district = listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].name
+                            if(selectedProvince != nil) {
+                                ChosingDistrictView(listDistrict: selectedProvince!.districts, selectedItem: district){ result in
+                                    selectedDistrict = result
+                                    district = result.name
                                 }
                             }
                         } label: {
@@ -106,10 +120,9 @@ struct AddressView: View {
                     OutlineWithOptionView(label: "Phường/ xã/ thị trấn", input: $commune, tint: $tintCommune, isRequired: true) {
                         
                         NavigationLink {
-                            if(indexSelectedDistrict != nil) {
-                                ChosingCommuneView(listCommune: listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].communes, selectedItem: indexSelectedCommune){ index in
-                                    indexSelectedDistrict = index
-                                    commune = listProvince[indexSelectedProvince!].districts[indexSelectedDistrict!].communes[indexSelectedProvince!].name
+                            if(selectedDistrict != nil) {
+                                ChosingCommuneView(listCommune: selectedDistrict!.communes, selectedItem: commune){ communeResult in
+                                    commune = communeResult.name
                                 }
                             }
                         } label: {
@@ -117,7 +130,6 @@ struct AddressView: View {
                                 .foregroundColor(.black)
                         }
                         .padding(.trailing,20)
-                        
                     }
                     .disabled(district == "")
                     
@@ -149,6 +161,11 @@ struct AddressView: View {
         }
         .onAppear{
             listProvince = Bundle.main.decode(type: [Province].self, from: "fakeJson.json")
+            for province in listProvince {
+                if (province.name == province_city){
+                    selectedProvince = province
+                }
+            }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .background(Color(hex: "EFEDED"))

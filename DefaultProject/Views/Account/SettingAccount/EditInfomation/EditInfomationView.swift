@@ -38,7 +38,13 @@ struct EditInfomationView: View {
     @State var tintBirthDay : String = "Chọn ngày, tháng, năm sinh"
     
     
-    @State var addressModel : AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
+    @State var addressModel: AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
+    
+    @State var identify: IDModel = IDModel(no: "", dateOfIssued: "", issuedBy: ""){
+        didSet{
+            identification = identify.no
+        }
+    }
     
     @State var isToggle = false
     
@@ -116,7 +122,9 @@ struct EditInfomationView: View {
                     OutlineWithOptionView(label: "CMND/CCCD/Hộ chiếu", input: $identification, tint: $tintIdentification) {
                         
                         NavigationLink {
-                            IdentificationView()
+                            IdentificationView(idModel: identify){
+                                identify = $0
+                            }
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)

@@ -12,8 +12,8 @@ struct ChosingCommuneView: View {
     
     let listCommune : [Commune]
     
-    let selectedItem: Int?
-    let getResultCommune: (Int) -> Void
+    let selectedItem: String?
+    let getResultCommune: (Commune) -> Void
     
     var body: some View {
         VStack{
@@ -38,12 +38,12 @@ struct ChosingCommuneView: View {
             List {
                 ForEach(Array(listCommune.enumerated()), id: \.element.id) { index, commune in
                     Button {
-                        getResultCommune(index)
+                        getResultCommune(commune)
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         HStack {
                             Text(commune.name)
-                            if selectedItem == index {
+                            if selectedItem == commune.name {
                                 Image(systemName: "checkmark")
                             }
                         }
