@@ -20,7 +20,7 @@ class GetAllPostViewModel : ObservableObject {
     }
     
     func getAllData() {
-        fireStoreService.getAllDocument()
+        fireStoreService.getAllDocument(path: Constants.pathDocument)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

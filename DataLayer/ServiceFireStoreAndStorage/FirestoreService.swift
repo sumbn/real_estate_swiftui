@@ -11,11 +11,11 @@ import Combine
 
 class FirestoreService : FirestoreProtocol {
     
-    func addDocument(_ post: PostModel) -> AnyPublisher<Void, Error> {
+    func addDocument(path: String, id: String,_ post: [String : Any]) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             let db = Firestore.firestore()
             
-            db.collection("DanhMuc/CanHoChungCu/MuaBan").document(post.id).setData(post.toDictionary()) { error in
+            db.collection(path).document(id).setData(post) { error in
                 if let error = error {
                     print("Lỗi khi lưu bài đăng vào Firestore: \(error.localizedDescription)")
                     promise(.failure(error))
@@ -28,12 +28,12 @@ class FirestoreService : FirestoreProtocol {
         .eraseToAnyPublisher()
     }
     
-    func getAllDocument() -> AnyPublisher<[PostModel], Error> {
+    func getAllDocument(path: String) -> AnyPublisher<[PostModel], Error> {
         let subject = PassthroughSubject<[PostModel], Error>()
         
         let db = Firestore.firestore()
         
-        db.collection("DanhMuc/CanHoChungCu/MuaBan").getDocuments() { (querySnapshot, err) in
+        db.collection(path).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 subject.send(completion: .failure(err))
             } else {
@@ -53,4 +53,30 @@ class FirestoreService : FirestoreProtocol {
         
         return subject.eraseToAnyPublisher()
     }
+    
+    func checkExistOfDocument(path: String, _ document: String) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            
+            let db = Firestore.firestore()
+            let docRef = db.collection(path).document(document)
+
+            docRef.getDocument { (document, error) in
+                if let error {
+                    promise(.failure(error))
+                }
+                
+                if let document = document, document.exists {
+//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data: \(dataDescription)")
+                    promise(.success(true))
+                } else {
+                    print("Document does not exist")
+                    promise(.success(false))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    
 }

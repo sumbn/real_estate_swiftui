@@ -48,6 +48,8 @@ struct EditInfomationView: View {
     
     @State var isToggle = false
     
+    @State var isSheet = false
+    
     var body: some View {
         VStack{
             HStack{
@@ -148,6 +150,7 @@ struct EditInfomationView: View {
                             
                             Button {
                                 isShowDatePicker.toggle()
+                                isSheet = true
                             } label: {
                                 Image(systemName: isShowDatePicker ? "chevron.up" : "chevron.down")
                                     .foregroundColor(.black)

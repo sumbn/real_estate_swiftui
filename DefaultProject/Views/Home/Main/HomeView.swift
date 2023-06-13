@@ -14,6 +14,9 @@ struct HomeView: View {
     
     var body: some View {
         
+        NavigationView {
+            
+      
             VStack{
                 Text("tên đăng nhập: \(shareModel.userSession?.user?.displayName ?? "")")
                 Text("uid: \(shareModel.userSession?.user?.uid ?? "")")
@@ -23,6 +26,7 @@ struct HomeView: View {
                     Task {
                         do {
                             try Auth.auth().signOut()
+                            shareModel.userSession = nil
                             shareModel.isNotAuth = true
                         } catch {
                             print("Error signing out: \(error)")
@@ -65,10 +69,9 @@ struct HomeView: View {
                                 .fill(Color.blue)
                         }
                         .padding(20)
-                    
                 }
             }
-        
+        }
     }
 }
 
@@ -76,6 +79,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(ShareModel())
+            .environmentObject(ShareModel(fireStore: FirestoreService()))
     }
 }

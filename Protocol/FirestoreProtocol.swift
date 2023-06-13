@@ -10,7 +10,9 @@ import Combine
 
 protocol FirestoreProtocol {
     
-    func addDocument(_ post: PostModel) -> AnyPublisher<Void, Error>
+    func addDocument(path: String, id: String,_ post: [String : Any]) -> AnyPublisher<Void, Error>
     
-    func getAllDocument() -> AnyPublisher<[PostModel], Error>
+    func getAllDocument(path: String) -> AnyPublisher<[PostModel], Error>
+    
+    func checkExistOfDocument(path: String, _ document: String) -> AnyPublisher<Bool, Error>
 }

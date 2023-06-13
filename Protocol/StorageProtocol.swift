@@ -12,7 +12,7 @@ import Combine
 
 protocol StorageProtocol {
     
-    func uploadImage(uiImage : UIImage) -> AnyPublisher<UploadResult, Error>
+    func uploadImage(uiImage: UIImage) -> AnyPublisher<UploadResult, Error>
     
-    func uploadVideo(videoURL : String) -> AnyPublisher<UploadResult, Error>
+    func uploadVideo(videoURL: String) -> AnyPublisher<UploadResult, Error>
 }

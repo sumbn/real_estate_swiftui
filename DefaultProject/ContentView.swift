@@ -11,10 +11,10 @@ import FirebaseAuth
 
 
 struct ContentView: View {
-    @StateObject var shareModel: ShareModel = .init()
+    @StateObject var shareModel: ShareModel = .init(fireStore: FirestoreService())
     var body: some View {
         
-        NavigationView {
+        VStack {
             MainView()
         }
         .fullScreenCover(isPresented: $shareModel.isNotAuth) {
@@ -28,7 +28,6 @@ struct ContentView: View {
                 shareModel.userSession?.user = UserModel(uid: user.uid, displayName: user.displayName, phoneNumber: user.phoneNumber)
             }
         }
-       
     }
 }
 

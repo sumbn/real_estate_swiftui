@@ -13,7 +13,6 @@ struct MainView: View {
     
     var body: some View {
         
-        NavigationView {
             ZStack{
                 TabView {
                     HomeView()
@@ -72,7 +71,7 @@ struct MainView: View {
             .fullScreenCover(isPresented: $isFSCShowPosting) {
                 PostingScreenView()
             }
-        }
+        
        
     }
 }
@@ -80,6 +79,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(ShareModel())
+            .environmentObject(ShareModel(fireStore: FirestoreService()))
     }
 }

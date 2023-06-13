@@ -120,6 +120,10 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
     @State var isChangeScreen = false
     
     var body: some View {
+        
+        NavigationView {
+            
+        
         VStack(spacing: 0){
             NavigationLink(destination: GetAllPostView(), isActive: $isChangeScreen) {
                 
@@ -585,6 +589,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
         .frame(maxHeight: .infinity, alignment: .top)
         .background(Color(hex: "EFEDED"))
         .navigationBarBackButtonHidden(true)
+        }
     }
     
     func push(){

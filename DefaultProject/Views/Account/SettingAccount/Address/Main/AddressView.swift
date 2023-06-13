@@ -23,7 +23,6 @@ struct AddressView: View {
             }
         }
     }
-    
     @State var province_city: String{
         willSet(newValue){
             if(newValue != province_city){
@@ -32,7 +31,6 @@ struct AddressView: View {
             }
         }
     }
-    
     @State var tintProvince_city: String = "Chọn Tỉnh, thành phố"
     
     @State var selectedDistrict: District?
@@ -43,6 +41,7 @@ struct AddressView: View {
             }
         }
     }
+    
     @State var tintDistrict: String = "Chọn Quận, huyện"
     
     @State var commune: String

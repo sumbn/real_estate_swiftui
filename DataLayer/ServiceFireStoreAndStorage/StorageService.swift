@@ -25,7 +25,7 @@ class StorageService : StorageProtocol {
         let randomName = "\(generateUniqueString()).mp4"
         
         // Create a reference to the file you want to upload
-        let reference = Storage.storage().reference().child("video/\(randomName)")
+        let reference = Storage.storage().reference().child("videos/\(randomName)")
         
         // Create the file metadata
         let metadata = StorageMetadata()
@@ -77,7 +77,7 @@ class StorageService : StorageProtocol {
         
         let randomName = "\(generateUniqueString()).jpg"
         
-        let reference = Storage.storage().reference().child("upload/\(randomName)")
+        let reference = Storage.storage().reference().child("images/\(randomName)")
         
         let uploadTask = reference.putData(dataImage, metadata: metadata) { (metadata, error) in
             guard let metadata = metadata else {

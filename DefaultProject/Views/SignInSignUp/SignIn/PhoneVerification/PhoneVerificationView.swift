@@ -173,6 +173,6 @@ enum OTPField{
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         PhoneVerificationView()
-            .environmentObject(ShareModel())
+            .environmentObject(ShareModel(fireStore: FirestoreService()))
     }
 }

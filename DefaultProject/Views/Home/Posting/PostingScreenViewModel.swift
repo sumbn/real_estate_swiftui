@@ -118,7 +118,7 @@ class PostingScreenViewModel : ObservableObject {
             .setImageURLs(imageUrls)
             .build()
         
-        firestoreService.addDocument(updatePost)
+        firestoreService.addDocument(path: Constants.pathDocument, id: updatePost.id, updatePost.toDictionary())
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
