@@ -11,7 +11,7 @@ import FirebaseAuth
 
 
 struct ContentView: View {
-    @StateObject var shareModel: ShareModel = .init(fireStore: FirestoreService())
+    @StateObject var shareModel: ShareModel = .init()
     var body: some View {
         
         VStack {

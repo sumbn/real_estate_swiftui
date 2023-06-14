@@ -8,44 +8,30 @@
 import Foundation
 
 struct AccountModel {
-    var uid: String
-    var image: String
-    var name : String
-    var address: AddressModel
-    var phoneNumber: String
-    var bio: String
-    var identify: IDModel
-    var gender: String
-    var dayOfBirth: String
+    var uid: String?
+    var image: String?
+    var name : String?
+    var address: AddressModel?
+    var phoneNumber: String?
+    var bio: String?
+    var identify: IDModel?
+    var gender: String?
+    var dayOfBirth: String?
 }
 
-extension AccountModel {
+extension AccountModel : InitializableProtocol{
+
     init?(dictionary: [String: Any]) {
-        guard
-            let uid = dictionary["uid"] as? String,
-            let image = dictionary["image"] as? String,
-            let name = dictionary["name"] as? String,
-            let addressDict = dictionary["address"] as? [String: Any],
-            let address = AddressModel(dictionary: addressDict),
-            let phoneNumber = dictionary["phoneNumber"] as? String,
-            let bio = dictionary["bio"] as? String,
-            let identifyDict = dictionary["identify"] as? [String: Any],
-            let identify = IDModel(dictionary: identifyDict),
-            let gender = dictionary["gender"] as? String,
-            let dayOfBirth = dictionary["dayOfBirth"] as? String
-        else {
-            return nil
-        }
         
-        self.uid = uid
-        self.image = image
-        self.name = name
-        self.address = address
-        self.phoneNumber = phoneNumber
-        self.bio = bio
-        self.identify = identify
-        self.gender = gender
-        self.dayOfBirth = dayOfBirth
+        self.uid = dictionary["uid"] as? String
+        self.image = dictionary["image"] as? String
+        self.name = dictionary["name"] as? String
+        self.address = AddressModel(dictionary: ((dictionary["address"] as? [String: Any])!))
+        self.phoneNumber = dictionary["phoneNumber"] as? String
+        self.bio = dictionary["bio"] as? String
+        self.identify = IDModel(dictionary: ((dictionary["identify"] as? [String: Any])!))
+        self.gender = dictionary["gender"] as? String
+        self.dayOfBirth = dictionary["dayOfBirth"] as? String
     }
 }
 
@@ -56,10 +42,10 @@ extension AccountModel {
         dictionary["uid"] = uid
         dictionary["image"] = image
         dictionary["name"] = name
-        dictionary["address"] = address.toDictionary()
+        dictionary["address"] = address!.toDictionary()
         dictionary["phoneNumber"] = phoneNumber
         dictionary["bio"] = bio
-        dictionary["identify"] = identify.toDictionary()
+        dictionary["identify"] = identify!.toDictionary()
         dictionary["gender"] = gender
         dictionary["dayOfBirth"] = dayOfBirth
         
@@ -69,27 +55,18 @@ extension AccountModel {
 
 
 struct AddressModel {
-    var province: String
-    var district: String
-    var commune: String
-    var specific: String
+    var province: String?
+    var district: String?
+    var commune: String?
+    var specific: String?
 }
 
 extension AddressModel {
     init?(dictionary: [String: Any]) {
-        guard
-            let province = dictionary["province"] as? String,
-            let district = dictionary["district"] as? String,
-            let commune = dictionary["commune"] as? String,
-            let specific = dictionary["specific"] as? String
-        else {
-            return nil
-        }
-        
-        self.province = province
-        self.district = district
-        self.commune = commune
-        self.specific = specific
+        self.province = dictionary["province"] as? String
+        self.district = dictionary["district"] as? String
+        self.commune = dictionary["commune"] as? String
+        self.specific = dictionary["specific"] as? String
     }
 }
 
@@ -108,24 +85,16 @@ extension AddressModel {
 
 
 struct IDModel {
-    var no : String
-    var dateOfIssued: String
-    var issuedBy: String
+    var no : String?
+    var dateOfIssued: String?
+    var issuedBy: String?
 }
 
 extension IDModel {
     init?(dictionary: [String: Any]) {
-        guard
-            let no = dictionary["no"] as? String,
-            let dateOfIssued = dictionary["dateOfIssued"] as? String,
-            let issuedBy = dictionary["issuedBy"] as? String
-        else {
-            return nil
-        }
-        
-        self.no = no
-        self.dateOfIssued = dateOfIssued
-        self.issuedBy = issuedBy
+        self.no = dictionary["no"] as? String
+        self.dateOfIssued = dictionary["dateOfIssued"] as? String
+        self.issuedBy = dictionary["issuedBy"] as? String
     }
 }
 

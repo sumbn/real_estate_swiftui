@@ -24,9 +24,9 @@ struct IdentificationView: View {
     
     init(idModel: IDModel, getIdentify: @escaping (IDModel) -> Void) {
         self.getIdentify = getIdentify
-        _id = State(initialValue: idModel.no)
-        _dateOfIssued = State(initialValue: idModel.dateOfIssued)
-        _issuedBy = State(initialValue: idModel.issuedBy)
+        _id = State(initialValue: idModel.no ?? "")
+        _dateOfIssued = State(initialValue: idModel.dateOfIssued ?? "")
+        _issuedBy = State(initialValue: idModel.issuedBy ?? "")
         
     }
     

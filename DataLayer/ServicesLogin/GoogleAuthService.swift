@@ -28,7 +28,7 @@ class GoogleAuthService: BaseService, SignInServiceProtocol {
             GIDSignIn.sharedInstance.configuration = config
             
             // Start the sign in flow!
-            GIDSignIn.sharedInstance.signIn(withPresenting: Utilities.shared.rootViewController()!) { [unowned self] result, error in
+            GIDSignIn.sharedInstance.signIn(withPresenting: Utilities.shared.rootViewController()!) { result, error in
                 guard error == nil else { return }
                 
                 guard let user = result?.user,

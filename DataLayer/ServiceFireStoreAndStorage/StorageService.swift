@@ -13,7 +13,6 @@ import Combine
 
 class StorageService : StorageProtocol {
     
-    
     func uploadVideo(videoURL : String) -> AnyPublisher<UploadResult, Error> {
         
         let subject = PassthroughSubject<UploadResult, Error>()

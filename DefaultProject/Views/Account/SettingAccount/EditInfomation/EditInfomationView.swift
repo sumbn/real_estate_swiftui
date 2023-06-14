@@ -42,7 +42,7 @@ struct EditInfomationView: View {
     
     @State var identify: IDModel = IDModel(no: "", dateOfIssued: "", issuedBy: ""){
         didSet{
-            identification = identify.no
+            identification = identify.no ?? ""
         }
     }
     
@@ -87,7 +87,7 @@ struct EditInfomationView: View {
                         NavigationLink {
                             AddressView(addressModel: addressModel) { addressModel in
                                 self.addressModel = addressModel
-                                address = addressModel.province
+                                address = addressModel.province ?? ""
                             }
                         } label: {
                             Image(systemName: "chevron.forward")

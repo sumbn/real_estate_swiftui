@@ -76,7 +76,7 @@ extension PostModel {
     }
 }
 
-extension PostModel {
+extension PostModel : InitializableProtocol {
     init?(dictionary: [String: Any]) {
         guard let id = dictionary["id"] as? String else {
             return nil

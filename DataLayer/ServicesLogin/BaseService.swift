@@ -27,7 +27,7 @@ class BaseService {
                 }
                 
                 var authentication = authentication
-                authentication.user = UserModel(uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL)
+                authentication.user = UserModel(uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL?.absoluteString)
                 
                 completion(.success(authentication))
             }

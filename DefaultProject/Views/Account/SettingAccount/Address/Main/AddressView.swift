@@ -56,10 +56,10 @@ struct AddressView: View {
     init(addressModel: AddressModel, getAddress: @escaping (AddressModel) -> Void){
         
         getAddressModel = getAddress
-        _province_city = State(initialValue: addressModel.province)
-        _district = State(initialValue: addressModel.district)
-        _commune = State(initialValue: addressModel.commune)
-        _specificAddress = State(initialValue: addressModel.specific)
+        _province_city = State(initialValue: addressModel.province ?? "")
+        _district = State(initialValue: addressModel.district ?? "")
+        _commune = State(initialValue: addressModel.commune ?? "")
+        _specificAddress = State(initialValue: addressModel.specific ?? "")
     }
     
     var body: some View {

@@ -109,7 +109,7 @@ extension AppleAuthService: ASAuthorizationControllerDelegate {
                 }
                 guard let user = authResult?.user else { return }
                 
-                self.authentication?.user = UserModel(uid: user.uid, displayName: user.uid, email: user.email, photoURL: user.photoURL)
+                self.authentication?.user = UserModel(uid: user.uid, displayName: user.uid, email: user.email, photoURL: user.photoURL?.absoluteString)
                 completion!(.success(self.authentication!))
                 print(authResult?.user.displayName)
                 

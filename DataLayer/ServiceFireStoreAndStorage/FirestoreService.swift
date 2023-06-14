@@ -28,8 +28,32 @@ class FirestoreService : FirestoreProtocol {
         .eraseToAnyPublisher()
     }
     
-    func getAllDocument(path: String) -> AnyPublisher<[PostModel], Error> {
-        let subject = PassthroughSubject<[PostModel], Error>()
+    func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<String, Error>{
+        
+        return Future<String, Error> { promise in
+            let db = Firestore.firestore()
+            
+            let ref = db.collection(collection).document(document)
+            
+            ref.updateData(data) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                    promise(.failure(err))
+                } else {
+                    
+                    if let identifier = data.values.first {
+//                        print("\(String(describing: identifier) as String)")
+                        
+                        promise(.success((String(describing: identifier) as String)))
+                    }
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func getAllDocument<T: InitializableProtocol>(path: String) -> AnyPublisher<[T], Error> {
+        let subject = PassthroughSubject<[T], Error>()
         
         let db = Firestore.firestore()
         
@@ -37,46 +61,52 @@ class FirestoreService : FirestoreProtocol {
             if let err = err {
                 subject.send(completion: .failure(err))
             } else {
-                var listPost = [PostModel]()
+                var listDocument = [T]()
                 for document in querySnapshot!.documents {
-                    if let postModel = PostModel(dictionary: document.data()) {
-                        listPost.append(postModel)
+                    if let doc = T(dictionary: document.data()) {
+                        listDocument.append(doc)
                     } else {
                         print("Cannot convert to PostModel for document: \(document)")
                         continue
                     }
                 }
-                subject.send(listPost)
+                subject.send(listDocument)
                 subject.send(completion: .finished)
             }
         }
-        
         return subject.eraseToAnyPublisher()
     }
     
-    func checkExistOfDocument(path: String, _ document: String) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
+    func getDocument<T : InitializableProtocol>(path: String, _ document: String) -> AnyPublisher<ResultGetDocument<T>, Error> {
+        return Future<ResultGetDocument, Error> { promise in
             
             let db = Firestore.firestore()
             let docRef = db.collection(path).document(document)
-
+            
             docRef.getDocument { (document, error) in
                 if let error {
                     promise(.failure(error))
                 }
                 
                 if let document = document, document.exists {
-//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                    print("Document data: \(dataDescription)")
-                    promise(.success(true))
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    promise(.success(.success(T(dictionary: document.data() ?? ["lỗi":"không thể ép kiểu sang"])!)))
                 } else {
+                    
+                    let error = NSError(domain: "FirestoreService", code: 0, userInfo: [NSLocalizedDescriptionKey: "Document không tồn tại"])
                     print("Document does not exist")
-                    promise(.success(false))
+                    promise(.success(.failure(error)))
                 }
             }
         }
         .eraseToAnyPublisher()
     }
-    
-    
 }
+
+enum ResultGetDocument <T> {
+    case success(T)
+    case failure(Error)
+}
+

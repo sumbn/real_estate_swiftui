@@ -51,7 +51,7 @@ class ConfirmOTPService : SignInServiceProtocol {
                         var authentication = authentication
                         authentication.user?.uid = user.uid
                         authentication.user?.displayName = user.displayName
-                        authentication.user?.photoURL = user.photoURL
+                        authentication.user?.photoURL = user.photoURL?.absoluteString
                         
                         completion(.success(authentication))
                         // Cập nhật displayName thành công

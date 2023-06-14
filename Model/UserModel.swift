@@ -11,7 +11,7 @@ struct UserModel {
     var uid: String
     var displayName: String?
     var email: String?
-    var photoURL: URL?
+    var photoURL: String?
     var phoneNumber: String? = nil
     var verificationCode: String? = nil
     var verificationID : String? = nil

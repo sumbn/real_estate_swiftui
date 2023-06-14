@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270FF88B2A39534500087873 /* InitializableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FF88A2A39534500087873 /* InitializableProtocol.swift */; };
+		270FF88D2A399C4400087873 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FF88C2A399C4400087873 /* AccountViewModel.swift */; };
 		2782EE642A340C4E00010BDA /* ChosingProvince.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE632A340C4E00010BDA /* ChosingProvince.swift */; };
 		2782EE662A340CAC00010BDA /* ChosingDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE652A340CAC00010BDA /* ChosingDistrictView.swift */; };
 		2782EE6C2A3418E400010BDA /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE6B2A3418E400010BDA /* FakeData.swift */; };
@@ -147,6 +149,8 @@
 
 /* Begin PBXFileReference section */
 		1C8F34F3EB7BBB7C28CA6A6D /* Pods-DefaultProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DefaultProject.debug.xcconfig"; path = "Target Support Files/Pods-DefaultProject/Pods-DefaultProject.debug.xcconfig"; sourceTree = "<group>"; };
+		270FF88A2A39534500087873 /* InitializableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializableProtocol.swift; sourceTree = "<group>"; };
+		270FF88C2A399C4400087873 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		2782EE632A340C4E00010BDA /* ChosingProvince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingProvince.swift; sourceTree = "<group>"; };
 		2782EE652A340CAC00010BDA /* ChosingDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingDistrictView.swift; sourceTree = "<group>"; };
 		2782EE6B2A3418E400010BDA /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
@@ -615,10 +619,10 @@
 				27CB5A422A2DC62A0079FFC8 /* ShareModel */,
 				278B4F9F2A2DDEBB008AEA1B /* ImagePicker.swift */,
 				278B4F9E2A2DDEBA008AEA1B /* PostModel.swift */,
+				27CED14C2A370D1500EFFC6E /* AccountModel.swift */,
 				278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */,
 				27CB5A6E2A2DC62C0079FFC8 /* AuthenticationModel.swift */,
 				27CB5A6F2A2DC62C0079FFC8 /* UserModel.swift */,
-				27CED14C2A370D1500EFFC6E /* AccountModel.swift */,
 				2782EE6A2A3418CB00010BDA /* FakeData */,
 			);
 			name = Model;
@@ -655,6 +659,7 @@
 				27CB5A7B2A2DC62D0079FFC8 /* SignInServiceProtocol.swift */,
 				278B4FA52A2DDEE7008AEA1B /* FirestoreProtocol.swift */,
 				278B4FA42A2DDEE6008AEA1B /* StorageProtocol.swift */,
+				270FF88A2A39534500087873 /* InitializableProtocol.swift */,
 			);
 			name = Protocol;
 			path = ../Protocol;
@@ -690,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				27B2FBEC2A31EC580084F184 /* AccountView.swift */,
+				270FF88C2A399C4400087873 /* AccountViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1119,6 +1125,7 @@
 				278D14E12A386C2E00F23B0B /* EditAvatarView.swift in Sources */,
 				278B4FBB2A2DDF16008AEA1B /* PostItemView.swift in Sources */,
 				CA2223A82A2BB34A005164BB /* LocalNotification.swift in Sources */,
+				270FF88D2A399C4400087873 /* AccountViewModel.swift in Sources */,
 				27CB5A8D2A2DC62D0079FFC8 /* AppleSignInView.swift in Sources */,
 				CA2223CD2A2BB6F8005164BB /* AppDelegate.swift in Sources */,
 				CA2223952A2BB34A005164BB /* User.swift in Sources */,
@@ -1166,6 +1173,7 @@
 				27CB5A9A2A2DC62D0079FFC8 /* BaseService.swift in Sources */,
 				27CB5A812A2DC62D0079FFC8 /* SignUpSuccessView.swift in Sources */,
 				CA2223962A2BB34A005164BB /* IAPHandler.swift in Sources */,
+				270FF88B2A39534500087873 /* InitializableProtocol.swift in Sources */,
 				27CB5A3E2A2DC5B50079FFC8 /* Utilities.swift in Sources */,
 				278B4FA62A2DDEE7008AEA1B /* StorageProtocol.swift in Sources */,
 				CA2223C62A2BB34A005164BB /* Font.swift in Sources */,

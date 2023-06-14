@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct AccountView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var shareModel : ShareModel
     
+    @State var name : String = ""
+    
+    @State var imageURL: URL? = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png")
+    
     @State var toggle = false
+    
+    var viewModel : AccountViewModel
+    
+    init(){
+        let container = DependencyContainer()
+        viewModel = AccountViewModel(fireStore: container.firestoreService, storage: container.storageService)
+    }
     
     var body: some View {
         NavigationView {
@@ -26,7 +38,7 @@ struct AccountView: View {
                 
                 HStack{
                     
-                    Image("chooseImage")
+                    KFImage(imageURL)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 74, height: 74)
@@ -40,7 +52,7 @@ struct AccountView: View {
                             }
                         }
                     
-                    Text(shareModel.userSession?.user?.displayName ?? "Test")
+                    Text(name)
                         .font(.custom("Work Sans", size: 20))
                     
                 }
@@ -155,12 +167,29 @@ struct AccountView: View {
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
+        .onAppear{
+            guard let uid = shareModel.userSession?.user?.uid else { return }
+            viewModel.getAccountOrCreate(uid: uid) { account in
+                name = account.name ?? ""
+                
+                if let photoURL = account.image {
+                    shareModel.userSession?.user?.photoURL = photoURL
+                }
+            }
+        }
+        .onChange(of: shareModel.userSession?.user?.photoURL) { newValue in
+            if let newValue{
+                if let url = URL(string: newValue) {
+                    imageURL = url
+                }
+            }
+        }
     }
 }
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         AccountView()
-            .environmentObject(ShareModel(fireStore: FirestoreService()))
+            .environmentObject(ShareModel())
     }
 }
