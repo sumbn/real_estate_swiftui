@@ -28,24 +28,20 @@ class FirestoreService : FirestoreProtocol {
         .eraseToAnyPublisher()
     }
     
-    func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<String, Error>{
+    func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<[String : Any], Error>{
         
-        return Future<String, Error> { promise in
+        return Future<[String : Any], Error> { promise in
             let db = Firestore.firestore()
             
             let ref = db.collection(collection).document(document)
             
             ref.updateData(data) { err in
                 if let err = err {
-                    print("Error updating document: \(err)")
+                    
                     promise(.failure(err))
                 } else {
-                    
-                    if let identifier = data.values.first {
-//                        print("\(String(describing: identifier) as String)")
-                        
-                        promise(.success((String(describing: identifier) as String)))
-                    }
+
+                    promise(.success(data))
                 }
             }
         }
@@ -90,7 +86,6 @@ class FirestoreService : FirestoreProtocol {
                 
                 if let document = document, document.exists {
                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
                     
                     promise(.success(.success(T(dictionary: document.data() ?? ["lỗi":"không thể ép kiểu sang"])!)))
                 } else {

@@ -9,6 +9,7 @@ import Foundation
 
 struct AccountModel {
     var uid: String?
+    var subcriber: [String]?
     var image: String?
     var name : String?
     var address: AddressModel?
@@ -24,6 +25,7 @@ extension AccountModel : InitializableProtocol{
     init?(dictionary: [String: Any]) {
         
         self.uid = dictionary["uid"] as? String
+        self.subcriber = dictionary["subcriber"] as? [String]
         self.image = dictionary["image"] as? String
         self.name = dictionary["name"] as? String
         self.address = AddressModel(dictionary: ((dictionary["address"] as? [String: Any])!))
@@ -40,6 +42,7 @@ extension AccountModel {
         var dictionary: [String: Any] = [:]
         
         dictionary["uid"] = uid
+        dictionary["subcriber"] = subcriber
         dictionary["image"] = image
         dictionary["name"] = name
         dictionary["address"] = address!.toDictionary()
@@ -54,7 +57,7 @@ extension AccountModel {
 }
 
 
-struct AddressModel {
+struct AddressModel : Codable {
     var province: String?
     var district: String?
     var commune: String?

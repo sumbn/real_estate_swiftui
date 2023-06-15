@@ -16,5 +16,5 @@ protocol FirestoreProtocol {
     
     func getDocument<T : InitializableProtocol>(path: String, _ document: String) -> AnyPublisher<ResultGetDocument<T>, Error>
     
-    func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<String, Error>
+    func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<[String : Any], Error>
 }

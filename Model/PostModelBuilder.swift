@@ -22,6 +22,16 @@ class PostModelBuilder {
         return self
     }
     
+    func setCategory(_ category: String) -> Self {
+        post.category = category
+        return self
+    }
+    
+    func setRealEstateCategory(_ realEstateCategory: String) -> Self {
+        post.realEstateCategory = realEstateCategory
+        return self
+    }
+    
     func setUId(_ uid: String) -> Self {
         post.uid = uid
         return self

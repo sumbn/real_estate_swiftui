@@ -7,11 +7,14 @@
 
 import SwiftUI
 import Kingfisher
+import FirebaseAuth
 
 struct AccountView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var shareModel : ShareModel
+    
+    @Binding var selectedIndex: Int
     
     @State var name : String = ""
     
@@ -21,7 +24,8 @@ struct AccountView: View {
     
     var viewModel : AccountViewModel
     
-    init(){
+    init(index : Binding<Int>){
+        _selectedIndex = index
         let container = DependencyContainer()
         viewModel = AccountViewModel(fireStore: container.firestoreService, storage: container.storageService)
     }
@@ -144,21 +148,37 @@ struct AccountView: View {
                                 .opacity(0.25))
                     }
                     
-                    HStack{
-                        Image("SignOut")
-                            .padding(12)
-                        
-                        Text("Đăng xuất")
-                            .font(.custom("Work Sans", size: 15))
-                        
-                        
+                    Button {
+                        Task {
+                            do {
+                                try Auth.auth().signOut()
+                                shareModel.userSession = nil
+                                shareModel.isNotAuth = true
+                                selectedIndex = 0
+                            } catch {
+                                print("Error signing out: \(error)")
+                            }
+                        }
+                    } label: {
+                        HStack{
+                            Image("SignOut")
+                                .padding(12)
+                            
+                            Text("Đăng xuất")
+                                .font(.custom("Work Sans", size: 15))
+                                .foregroundColor(.black)
+                            
+                            
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 56, alignment: .leading)
+                        .background {
+                            RoundedRectangle(cornerRadius: 36)
+                                .fill(Color("Background5")
+                                    .opacity(0.25))
+                        }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 56, alignment: .leading)
-                    .background {
-                        RoundedRectangle(cornerRadius: 36)
-                            .fill(Color("Background5")
-                                .opacity(0.25))
-                    }
+
+                    
                     
                 }
                 .padding(.horizontal, 10)
@@ -189,7 +209,7 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        AccountView(index: .constant(1))
             .environmentObject(ShareModel())
     }
 }

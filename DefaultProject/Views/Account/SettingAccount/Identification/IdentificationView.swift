@@ -11,24 +11,15 @@ struct IdentificationView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var id : String
+    @Binding var id : String
     @State var tintId : String = "CMND/CCCD/Hộ chiếu của bạn"
     
-    @State var dateOfIssued : String
+    @Binding var dateOfIssued : String
     @State var tintDateOfIssued : String = "Nhập ngày cấp"
     
-    @State var issuedBy : String
+    @Binding var issuedBy : String
     @State var tintIssuedBy : String = "Địa chỉ nơi cấp"
     
-    let getIdentify: (IDModel) -> Void
-    
-    init(idModel: IDModel, getIdentify: @escaping (IDModel) -> Void) {
-        self.getIdentify = getIdentify
-        _id = State(initialValue: idModel.no ?? "")
-        _dateOfIssued = State(initialValue: idModel.dateOfIssued ?? "")
-        _issuedBy = State(initialValue: idModel.issuedBy ?? "")
-        
-    }
     
     var body: some View {
         VStack{
@@ -59,8 +50,8 @@ struct IdentificationView: View {
                 OutlineTextFieldView(label: "Nơi cấp", input: $issuedBy, tint: $tintIssuedBy)
                 
                 Button {
-                    let idModel = IDModel(no: id, dateOfIssued: dateOfIssued, issuedBy: issuedBy)
-                    getIdentify(idModel)
+//                    let idModel = IDModel(no: id, dateOfIssued: dateOfIssued, issuedBy: issuedBy)
+                    
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Xong")
@@ -88,8 +79,6 @@ struct IdentificationView: View {
 
 struct IdentificationView_Previews: PreviewProvider {
     static var previews: some View {
-        IdentificationView(idModel: IDModel(no: "", dateOfIssued: "", issuedBy: "")){ identify in
-            
-        }
+        IdentificationView(id: .constant(""), dateOfIssued: .constant(""), issuedBy: .constant(""))
     }
 }

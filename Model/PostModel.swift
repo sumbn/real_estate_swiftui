@@ -12,6 +12,9 @@ struct PostModel {
     var id : String = generateUniqueString()
     var uid: String?
     
+    var category: String?
+    var realEstateCategory: String?
+    
     var buildingName: String?
     var address: String?
     var videoURL: String?
@@ -46,6 +49,9 @@ extension PostModel {
         
         dictionary["id"] = id
         dictionary["uid"] = uid
+        
+        dictionary["category"] = category
+        dictionary["realEstateCategory"] = realEstateCategory
         
         dictionary["buildingName"] = buildingName
         dictionary["address"] = address
@@ -84,6 +90,8 @@ extension PostModel : InitializableProtocol {
         
         self.id = id
         self.uid = dictionary["uid"] as? String
+        self.category = dictionary["category"] as? String
+        self.realEstateCategory = dictionary["realEstateCategory"] as? String
         self.buildingName = dictionary["buildingName"] as? String
         self.address = dictionary["address"] as? String
         self.videoURL = dictionary["videoURL"] as? String

@@ -595,6 +595,8 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
     func push(){
         let buildModel = PostModelBuilder()
             .setUId(shareModel.userSession?.user?.uid ?? "")
+            .setCategory(selectedCategory)
+            .setRealEstateCategory(selectedChip ?? "")
             .setBuildingName(buildingName)
             .setAddress(address)
             .setApartmentCode(apartmentCode)

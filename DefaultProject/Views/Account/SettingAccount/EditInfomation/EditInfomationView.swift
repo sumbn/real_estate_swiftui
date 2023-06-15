@@ -9,6 +9,9 @@ import SwiftUI
 
 struct EditInfomationView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var shareModel : ShareModel
+    
+    let viewModel : EditInfomationViewModel
     
     @State var name: String = ""
     @State var tintName: String = "Tên của bạn"
@@ -22,7 +25,10 @@ struct EditInfomationView: View {
     @State var introduce: String = ""
     @State var tintIntroduce: String = "Viết vài dòng giới thiệu về gian hàng của bạn...( tối đa 60 từ)"
     
-    @State var identification: String = ""
+//    @State var identification: String = ""
+    @State var id : String = ""
+    @State var dayOfIssue: String = ""
+    @State var issueBy: String = ""
     @State var tintIdentification: String = "CMND/CCCD/Hộ chiếu của bạn"
     
     @State var isCFDGender = false
@@ -39,16 +45,22 @@ struct EditInfomationView: View {
     
     
     @State var addressModel: AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
-    
-    @State var identify: IDModel = IDModel(no: "", dateOfIssued: "", issuedBy: ""){
-        didSet{
-            identification = identify.no ?? ""
+    {
+        willSet(newValue){
+            address = newValue.province ?? ""
         }
     }
+    
+    
     
     @State var isToggle = false
     
     @State var isSheet = false
+    
+    init(){
+        let container = DependencyContainer()
+        viewModel = EditInfomationViewModel(storageService: container.storageService, firestoreService: container.firestoreService)
+    }
     
     var body: some View {
         VStack{
@@ -121,12 +133,10 @@ struct EditInfomationView: View {
                     
                     OutlineTextFieldView(label: "Giới thiệu", input: $introduce, tint: $tintIntroduce, isOneLine: false)
                     
-                    OutlineWithOptionView(label: "CMND/CCCD/Hộ chiếu", input: $identification, tint: $tintIdentification) {
+                    OutlineWithOptionView(label: "CMND/CCCD/Hộ chiếu", input: $id, tint: $tintIdentification) {
                         
                         NavigationLink {
-                            IdentificationView(idModel: identify){
-                                identify = $0
-                            }
+                            IdentificationView(id: $id, dateOfIssued: $dayOfIssue, issuedBy: $issueBy)
                         } label: {
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.black)
@@ -187,6 +197,9 @@ struct EditInfomationView: View {
                     }
                     
                     Button {
+                        handlerEventButtonSave{
+                            presentationMode.wrappedValue.dismiss()
+                        }
                         
                     } label: {
                         Text("Lưu")
@@ -226,12 +239,41 @@ struct EditInfomationView: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .background(Color(hex: "EFEDED"))
         .navigationBarBackButtonHidden(true)
+        .onAppear{
+            if name == ""{
+                viewModel.getData(collection: Constants.pathAccount, document: shareModel.userSession?.user?.uid ?? "") { [self] account in
+                    name = account.name ?? ""
+                    addressModel = account.address ?? AddressModel(province: "", district: "", commune: "", specific: "")
+                    phoneNumber = account.phoneNumber ?? ""
+                    introduce = account.bio ?? ""
+                    
+                    id = account.identify?.no ?? ""
+                    dayOfIssue = account.identify?.dateOfIssued ?? ""
+                    issueBy = account.identify?.issuedBy ?? ""
+
+                    gender = account.gender ?? ""
+                    
+                    birthDay = account.dayOfBirth ?? ""
+                }
+                print("on appear")
+            }
+            
+        }
+    }
+    
+    
+    func handlerEventButtonSave(completion: @escaping () -> Void){
+        
+        let account = AccountModel(name: name, address: addressModel, phoneNumber: phoneNumber, bio: introduce, identify: IDModel(no: id, dateOfIssued: dayOfIssue, issuedBy: issueBy), gender: gender, dayOfBirth: birthDay)
+        
+        viewModel.updateDataFireStore(uid: shareModel.userSession?.user?.uid ?? "", data: account, completion: completion)
     }
 }
 
 struct EditInfomationView_Previews: PreviewProvider {
     static var previews: some View {
         EditInfomationView()
+            .environmentObject(ShareModel())
     }
 }
 

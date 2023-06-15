@@ -12,65 +12,28 @@ struct HomeView: View {
     
     @EnvironmentObject var shareModel: ShareModel
     
+    @State var realEstateCategory = "Mua bán"
+    
     var body: some View {
         
         NavigationView {
-            
-      
-            VStack{
-                Text("tên đăng nhập: \(shareModel.userSession?.user?.displayName ?? "")")
-                Text("uid: \(shareModel.userSession?.user?.uid ?? "")")
-                Text("số điện thoại: \(shareModel.userSession?.user?.phoneNumber ?? "")")
-                
-                Button {
-                    Task {
-                        do {
-                            try Auth.auth().signOut()
-                            shareModel.userSession = nil
-                            shareModel.isNotAuth = true
-                        } catch {
-                            print("Error signing out: \(error)")
-                        }
-                    }
-                } label: {
-                    Text("Sign Out")
-                }
-                
-                NavigationLink {
-                    PostingScreenView()
-                } label: {
-                
-                    Text("Chuyển sang màn posting")
-                        .font(.custom("Work Sans", size: 17))
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 20)
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.blue)
-                        }
-                        .padding(20)
+            VStack {
+                HStack{
                     
-                }
-                
-                NavigationLink {
-                    GetAllPostView()
-                } label: {
-                
-                    Text("Chuyển sang màn get all post")
-                        .font(.custom("Work Sans", size: 17))
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 20)
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.blue)
-                        }
-                        .padding(20)
+                    HStack{
+                        Text(realEstateCategory)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 45)
+                    .background {
+                        RoundedRectangle(cornerRadius: 9)
+                            .fill(Color("Background6"))
+                    }
+                    
+                    Image("NotifyHome")
+                        .padding(16)
                 }
             }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
     }
 }

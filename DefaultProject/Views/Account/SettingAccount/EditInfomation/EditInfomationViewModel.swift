@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 import Combine
 
-class EditInfomationViewModel : ObservableObject {
-    
-    @Published var progress : Double = 0.0
+class EditInfomationViewModel {
     
     let storageService : StorageProtocol
     let firestoreService : FirestoreProtocol
@@ -33,11 +31,36 @@ class EditInfomationViewModel : ObservableObject {
                     switch result {
                     case .success(_): break
                     case .failure(_): break
-                    case .progress(let double):
-                        self.progress = double / 100
+                    case .progress(_): break
+//                        self.progress = double / 100
                     }
                 }
                 .store(in: &cancellables)
         }
+    }
+    
+    func updateDataFireStore(uid: String, data: AccountModel, completion: @escaping ()->Void){
+        firestoreService.updateDocument(collection: Constants.pathAccount, document: uid, data: data.toDictionary())
+            .sink { result in
+                completion()
+            } receiveValue: { result in
+               print(AccountModel(dictionary: result))
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getData(collection: String, document: String, completion: @escaping (AccountModel) -> Void){
+        let account : AnyPublisher<ResultGetDocument<AccountModel>, Error> = firestoreService.getDocument(path: collection, document)
+        account.sink { completion in
+            
+        } receiveValue: { result in
+            switch result {
+            case .success(let account):
+                completion(account)
+            case .failure(_): break
+            }
+        }
+        .store(in: &cancellables)
+
     }
 }

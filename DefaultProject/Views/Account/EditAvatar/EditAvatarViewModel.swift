@@ -22,7 +22,7 @@ class EditAvatarViewModel {
     
     func updateImage(uiImage: UIImage, path: String, document: String, param: String, completion: @escaping (String?) -> Void) {
         storage.uploadImage(uiImage: uiImage)
-            .flatMap { result -> AnyPublisher<String, Error> in
+            .flatMap { result -> AnyPublisher<[String : Any], Error> in
                 switch result {
                 case .failure(_):
                     return Empty().eraseToAnyPublisher()
@@ -40,9 +40,9 @@ class EditAvatarViewModel {
                 case .finished:
                     print("Request finished")
                 }
-            } receiveValue: { path in
-                
-                completion(path)
+            } receiveValue: { result in
+                let data = result.values.map { String(describing: $0) }
+                completion(data.first)
             }
             .store(in: &cancellables)
     }

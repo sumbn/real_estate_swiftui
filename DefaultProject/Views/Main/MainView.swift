@@ -11,10 +11,12 @@ struct MainView: View {
     
     @State var isFSCShowPosting = false
     
+    @State private var selectedIndex: Int = 0
+    
     var body: some View {
         
             ZStack{
-                TabView {
+                TabView(selection: $selectedIndex) {
                     HomeView()
                         .tabItem {
                             Image("HomePage")
@@ -23,6 +25,7 @@ struct MainView: View {
                             Text("Trang chủ")
                                 .font(.custom("Work Sans", size: 11))
                         }
+                        .tag(0)
                     
                     PostingScreenView()
                         .tabItem {
@@ -32,8 +35,9 @@ struct MainView: View {
                             Text("Quản lý tin")
                                 .font(.custom("Work Sans", size: 11))
                         }
+                        .tag(1)
                     
-                    AccountView()
+                    AccountView(index: $selectedIndex)
                         .tabItem {
                             Image("AccountPage")
                                 .renderingMode(.template)
@@ -41,6 +45,7 @@ struct MainView: View {
                             Text("Tài khoản")
                                 .font(.custom("Work Sans", size: 11))
                         }
+                        .tag(2)
                 }
                 .accentColor(Color("Text3"))
                 
