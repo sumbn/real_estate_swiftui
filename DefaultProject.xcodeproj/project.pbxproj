@@ -14,6 +14,8 @@
 		2782EE6C2A3418E400010BDA /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE6B2A3418E400010BDA /* FakeData.swift */; };
 		2782EE6F2A3426E300010BDA /* fakeJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2782EE6E2A3426E300010BDA /* fakeJson.json */; };
 		2782EE712A342D9800010BDA /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782EE702A342D9800010BDA /* Extentions.swift */; };
+		2789AC0E2A3C059600AE6694 /* RealEstateHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789AC0D2A3C059600AE6694 /* RealEstateHomeView.swift */; };
+		2789AC102A3C4DA200AE6694 /* SupporModelFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789AC0F2A3C4DA200AE6694 /* SupporModelFirestoreService.swift */; };
 		278B4FA12A2DDEBB008AEA1B /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4F9E2A2DDEBA008AEA1B /* PostModel.swift */; };
 		278B4FA22A2DDEBB008AEA1B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4F9F2A2DDEBB008AEA1B /* ImagePicker.swift */; };
 		278B4FA32A2DDEBB008AEA1B /* PostModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */; };
@@ -156,6 +158,8 @@
 		2782EE6B2A3418E400010BDA /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
 		2782EE6E2A3426E300010BDA /* fakeJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeJson.json; sourceTree = "<group>"; };
 		2782EE702A342D9800010BDA /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		2789AC0D2A3C059600AE6694 /* RealEstateHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateHomeView.swift; sourceTree = "<group>"; };
+		2789AC0F2A3C4DA200AE6694 /* SupporModelFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupporModelFirestoreService.swift; sourceTree = "<group>"; };
 		278B4F9E2A2DDEBA008AEA1B /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		278B4F9F2A2DDEBB008AEA1B /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModelBuilder.swift; sourceTree = "<group>"; };
@@ -348,6 +352,14 @@
 				2782EE6E2A3426E300010BDA /* fakeJson.json */,
 			);
 			path = FakeData;
+			sourceTree = "<group>";
+		};
+		2789AC0C2A3C051C00AE6694 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				2789AC0D2A3C059600AE6694 /* RealEstateHomeView.swift */,
+			);
+			path = SubView;
 			sourceTree = "<group>";
 		};
 		278B4F9D2A2DDD61008AEA1B /* Container */ = {
@@ -623,6 +635,7 @@
 				278B4FA02A2DDEBB008AEA1B /* PostModelBuilder.swift */,
 				27CB5A6E2A2DC62C0079FFC8 /* AuthenticationModel.swift */,
 				27CB5A6F2A2DC62C0079FFC8 /* UserModel.swift */,
+				2789AC0F2A3C4DA200AE6694 /* SupporModelFirestoreService.swift */,
 				2782EE6A2A3418CB00010BDA /* FakeData */,
 			);
 			name = Model;
@@ -703,6 +716,7 @@
 		27D436EB2A32D57C003CD4F8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2789AC0C2A3C051C00AE6694 /* SubView */,
 				27CB5A502A2DC62B0079FFC8 /* HomeViewModel.swift */,
 				27CB5A512A2DC62B0079FFC8 /* HomeView.swift */,
 			);
@@ -1191,10 +1205,12 @@
 				27CB5A992A2DC62D0079FFC8 /* GoogleAuthService.swift in Sources */,
 				278B4FBC2A2DDF16008AEA1B /* PostingScreenViewModel.swift in Sources */,
 				CA2223992A2BB34A005164BB /* CustomActivity.swift in Sources */,
+				2789AC102A3C4DA200AE6694 /* SupporModelFirestoreService.swift in Sources */,
 				27CB5A912A2DC62D0079FFC8 /* GoogleSignInView.swift in Sources */,
 				CA2223A92A2BB34A005164BB /* MyAlert.swift in Sources */,
 				CA2223C52A2BB34A005164BB /* Views.swift in Sources */,
 				27D436F82A331964003CD4F8 /* IdentificationView.swift in Sources */,
+				2789AC0E2A3C059600AE6694 /* RealEstateHomeView.swift in Sources */,
 				27CB5A972A2DC62D0079FFC8 /* AuthService.swift in Sources */,
 				278D14E32A38705E00F23B0B /* EditAvatarViewModel.swift in Sources */,
 				CA2223BE2A2BB34A005164BB /* String.swift in Sources */,

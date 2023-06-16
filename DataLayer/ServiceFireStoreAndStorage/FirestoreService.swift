@@ -40,7 +40,7 @@ class FirestoreService : FirestoreProtocol {
                     
                     promise(.failure(err))
                 } else {
-
+                    
                     promise(.success(data))
                 }
             }
@@ -48,8 +48,8 @@ class FirestoreService : FirestoreProtocol {
         .eraseToAnyPublisher()
     }
     
-    func getAllDocument<T: InitializableProtocol>(path: String) -> AnyPublisher<[T], Error> {
-        let subject = PassthroughSubject<[T], Error>()
+    func getAllDocument<T: InitializableProtocol>(path: String) -> AnyPublisher<T, Error> {
+        let subject = PassthroughSubject<T, Error>()
         
         let db = Firestore.firestore()
         
@@ -57,19 +57,79 @@ class FirestoreService : FirestoreProtocol {
             if let err = err {
                 subject.send(completion: .failure(err))
             } else {
-                var listDocument = [T]()
+                DispatchQueue.global().async {
+                    for document in querySnapshot!.documents {
+                        if let doc = T(dictionary: document.data()) {
+                            subject.send(doc)
+                        } else {
+                            print("Cannot convert to PostModel for document: \(document)")
+                            continue
+                        }
+                    }
+                    
+                    subject.send(completion: .finished)
+                }
+            }
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    
+    
+    
+    func getDocumentsWithCondition<T: InitializableProtocol>(collection: String, conditions: [FilterCondition]?, orderBy: String?, decending: Bool? , limit: Int? ) -> AnyPublisher<T, Error> {
+        
+        let subject = PassthroughSubject<T, Error>()
+        
+        let db = Firestore.firestore()
+        
+        var query : Query = db.collection(collection)
+        
+        if let conditions{
+            for condition in conditions {
+                let field = condition.field
+                let filterOperator = condition.filterOperator
+                let value = condition.value
+                
+                switch filterOperator {
+                case .isEqualTo:
+                    query = query.whereField(field, isEqualTo: value)
+                case .isGreaterThan:
+                    query = query.whereField(field, isGreaterThan: value)
+                case .isLessThan:
+                    query = query.whereField(field, isLessThan: value)
+                }
+            }
+        }
+        
+        if let orderBy {
+            if let decending {
+                query = query.order(by: orderBy, descending: decending)
+            }
+        }
+        
+        if let limit {
+            query = query.limit(to: limit)
+        }
+        
+        query.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                subject.send(completion: .failure(err))
+            } else {
+              
                 for document in querySnapshot!.documents {
                     if let doc = T(dictionary: document.data()) {
-                        listDocument.append(doc)
+                        subject.send(doc)
                     } else {
                         print("Cannot convert to PostModel for document: \(document)")
                         continue
                     }
                 }
-                subject.send(listDocument)
                 subject.send(completion: .finished)
             }
         }
+        
         return subject.eraseToAnyPublisher()
     }
     
@@ -100,8 +160,4 @@ class FirestoreService : FirestoreProtocol {
     }
 }
 
-enum ResultGetDocument <T> {
-    case success(T)
-    case failure(Error)
-}
 

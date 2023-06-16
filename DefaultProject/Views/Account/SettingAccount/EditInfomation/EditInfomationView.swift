@@ -237,7 +237,7 @@ struct EditInfomationView: View {
             Text("Chọn giới tính")
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(Color(hex: "EFEDED"))
+        .background(Color("Background7"))
         .navigationBarBackButtonHidden(true)
         .onAppear{
             if name == ""{
@@ -246,13 +246,13 @@ struct EditInfomationView: View {
                     addressModel = account.address ?? AddressModel(province: "", district: "", commune: "", specific: "")
                     phoneNumber = account.phoneNumber ?? ""
                     introduce = account.bio ?? ""
-                    
+
                     id = account.identify?.no ?? ""
                     dayOfIssue = account.identify?.dateOfIssued ?? ""
                     issueBy = account.identify?.issuedBy ?? ""
 
                     gender = account.gender ?? ""
-                    
+
                     birthDay = account.dayOfBirth ?? ""
                 }
                 print("on appear")
@@ -271,9 +271,14 @@ struct EditInfomationView: View {
 }
 
 struct EditInfomationView_Previews: PreviewProvider {
+   
     static var previews: some View {
-        EditInfomationView()
-            .environmentObject(ShareModel())
+        let shareModel = ShareModel()
+        var modifiedShareModel = shareModel
+        modifiedShareModel.userSession = AuthenticationModel(provider: .google, user: UserModel(uid: "123", displayName: "", email: "", photoURL: "", phoneNumber: "", verificationCode: "", verificationID: ""))
+        
+        return EditInfomationView()
+            .environmentObject(modifiedShareModel)
     }
 }
 

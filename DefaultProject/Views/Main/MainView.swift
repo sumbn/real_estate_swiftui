@@ -27,7 +27,7 @@ struct MainView: View {
                         }
                         .tag(0)
                     
-                    PostingScreenView()
+                    GetAllPostView()
                         .tabItem {
                             Image("ManagingPostingNews")
                                 .renderingMode(.template)

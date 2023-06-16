@@ -72,7 +72,7 @@ struct IdentificationView: View {
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(Color(hex: "EFEDED"))
+        .background(Color("Background7"))
         .navigationBarBackButtonHidden(true)
     }
 }

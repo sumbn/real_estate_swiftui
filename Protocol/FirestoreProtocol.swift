@@ -12,9 +12,11 @@ protocol FirestoreProtocol {
     
     func addDocument(path: String, id: String,_ post: [String : Any]) -> AnyPublisher<Void, Error>
     
-    func getAllDocument<T: InitializableProtocol>(path: String) -> AnyPublisher<[T], Error> 
+    func getAllDocument<T: InitializableProtocol>(path: String) -> AnyPublisher<T, Error> 
     
     func getDocument<T : InitializableProtocol>(path: String, _ document: String) -> AnyPublisher<ResultGetDocument<T>, Error>
     
     func updateDocument(collection: String, document: String, data: [String : Any]) -> AnyPublisher<[String : Any], Error>
+    
+    func getDocumentsWithCondition<T: InitializableProtocol>(collection: String, conditions: [FilterCondition]?, orderBy: String?, decending: Bool?, limit: Int?) -> AnyPublisher<T, Error>
 }

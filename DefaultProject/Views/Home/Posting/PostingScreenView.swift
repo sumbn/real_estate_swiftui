@@ -241,7 +241,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                             } label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color(hex: "#EFEDED"))
+                                        .fill(Color("Background7"))
                                     VStack{
                                         Image(systemName: "video.and.waveform")
                                             .foregroundColor(.black)
@@ -587,7 +587,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             })
         })
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(Color(hex: "EFEDED"))
+        .background(Color("Background7"))
         .navigationBarBackButtonHidden(true)
         }
     }

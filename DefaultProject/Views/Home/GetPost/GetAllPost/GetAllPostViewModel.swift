@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class GetAllPostViewModel : ObservableObject {
     
@@ -20,7 +21,9 @@ class GetAllPostViewModel : ObservableObject {
     }
     
     func getAllData() {
-        fireStoreService.getAllDocument(path: Constants.pathDocument)
+        let service : AnyPublisher<PostModel, Error> = fireStoreService.getAllDocument(path: Constants.pathDocument)
+        
+        service
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -29,8 +32,10 @@ class GetAllPostViewModel : ObservableObject {
                 case .finished:
                     break
                 }
-            } receiveValue: { [weak self] list in
-                self?.list = list
+            } receiveValue: { [weak self] element in
+                withAnimation(.easeInOut) {
+                    self?.list.append(element)
+                }
             }
             .store(in: &cancellables)
     }
