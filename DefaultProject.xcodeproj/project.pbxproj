@@ -86,6 +86,8 @@
 		27D436F22A330777003CD4F8 /* OutlineWithOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D436F12A330777003CD4F8 /* OutlineWithOptionView.swift */; };
 		27D436F52A330E85003CD4F8 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D436F42A330E85003CD4F8 /* AddressView.swift */; };
 		27D436F82A331964003CD4F8 /* IdentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D436F72A331964003CD4F8 /* IdentificationView.swift */; };
+		27F357082A403F4D00AF266F /* SearchingProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F357072A403F4D00AF266F /* SearchingProjectView.swift */; };
+		27F3570A2A404B6E00AF266F /* SearchingProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F357092A404B6E00AF266F /* SearchingProjectViewModel.swift */; };
 		340090F9B0030B98E9B936B5 /* Pods_DefaultProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00295B6C25695233567020 /* Pods_DefaultProject.framework */; };
 		CA2223472A2BB329005164BB /* DefaultProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2223462A2BB329005164BB /* DefaultProjectApp.swift */; };
 		CA22234B2A2BB32A005164BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA22234A2A2BB32A005164BB /* Assets.xcassets */; };
@@ -231,6 +233,8 @@
 		27D436F12A330777003CD4F8 /* OutlineWithOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineWithOptionView.swift; sourceTree = "<group>"; };
 		27D436F42A330E85003CD4F8 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		27D436F72A331964003CD4F8 /* IdentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationView.swift; sourceTree = "<group>"; };
+		27F357072A403F4D00AF266F /* SearchingProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingProjectView.swift; sourceTree = "<group>"; };
+		27F357092A404B6E00AF266F /* SearchingProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingProjectViewModel.swift; sourceTree = "<group>"; };
 		568923DA4B8560D0A166B908 /* Pods-DefaultProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DefaultProject.release.xcconfig"; path = "Target Support Files/Pods-DefaultProject/Pods-DefaultProject.release.xcconfig"; sourceTree = "<group>"; };
 		CA2223432A2BB329005164BB /* DefaultProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DefaultProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2223462A2BB329005164BB /* DefaultProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProjectApp.swift; sourceTree = "<group>"; };
@@ -525,6 +529,7 @@
 		27CB5A4F2A2DC62B0079FFC8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				27F357062A403F1C00AF266F /* Searching */,
 				27D436EB2A32D57C003CD4F8 /* Main */,
 				278B4FB02A2DDF16008AEA1B /* Posting */,
 				278B4FAA2A2DDF15008AEA1B /* GetPost */,
@@ -759,6 +764,15 @@
 				27D436F72A331964003CD4F8 /* IdentificationView.swift */,
 			);
 			path = Identification;
+			sourceTree = "<group>";
+		};
+		27F357062A403F1C00AF266F /* Searching */ = {
+			isa = PBXGroup;
+			children = (
+				27F357072A403F4D00AF266F /* SearchingProjectView.swift */,
+				27F357092A404B6E00AF266F /* SearchingProjectViewModel.swift */,
+			);
+			path = Searching;
 			sourceTree = "<group>";
 		};
 		CA22233A2A2BB329005164BB = {
@@ -1141,6 +1155,7 @@
 				CA2223A82A2BB34A005164BB /* LocalNotification.swift in Sources */,
 				270FF88D2A399C4400087873 /* AccountViewModel.swift in Sources */,
 				27CB5A8D2A2DC62D0079FFC8 /* AppleSignInView.swift in Sources */,
+				27F357082A403F4D00AF266F /* SearchingProjectView.swift in Sources */,
 				CA2223CD2A2BB6F8005164BB /* AppDelegate.swift in Sources */,
 				CA2223952A2BB34A005164BB /* User.swift in Sources */,
 				CA2223C92A2BB34A005164BB /* Color.swift in Sources */,
@@ -1205,6 +1220,7 @@
 				27CB5A992A2DC62D0079FFC8 /* GoogleAuthService.swift in Sources */,
 				278B4FBC2A2DDF16008AEA1B /* PostingScreenViewModel.swift in Sources */,
 				CA2223992A2BB34A005164BB /* CustomActivity.swift in Sources */,
+				27F3570A2A404B6E00AF266F /* SearchingProjectViewModel.swift in Sources */,
 				2789AC102A3C4DA200AE6694 /* SupporModelFirestoreService.swift in Sources */,
 				27CB5A912A2DC62D0079FFC8 /* GoogleSignInView.swift in Sources */,
 				CA2223A92A2BB34A005164BB /* MyAlert.swift in Sources */,

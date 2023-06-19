@@ -74,10 +74,6 @@ class FirestoreService : FirestoreProtocol {
         return subject.eraseToAnyPublisher()
     }
     
-    
-    
-    
-    
     func getDocumentsWithCondition<T: InitializableProtocol>(collection: String, conditions: [FilterCondition]?, orderBy: String?, decending: Bool? , limit: Int? ) -> AnyPublisher<T, Error> {
         
         let subject = PassthroughSubject<T, Error>()

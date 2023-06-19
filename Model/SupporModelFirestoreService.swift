@@ -23,3 +23,4 @@ enum ResultGetDocument <T> {
     case success(T)
     case failure(Error)
 }
+

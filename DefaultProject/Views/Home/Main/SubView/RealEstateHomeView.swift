@@ -16,7 +16,8 @@ struct RealEstateHomeView: View {
             if let url = URL(string: post.imageURLs?.first ?? ""){
                 KFImage(url)
                     .resizable()
-                    .scaledToFill()
+//                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
                     .frame(maxHeight: 106)
                     .cornerRadius(6)
             }
@@ -24,6 +25,8 @@ struct RealEstateHomeView: View {
             if let title = post.postTitle {
                 Text(title)
                     .font(.custom("Work Sans", size: 13))
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
                     .padding(.top, 9)
                     .padding(.bottom,4)
             }
@@ -45,7 +48,7 @@ struct RealEstateHomeView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: 188)
+        .frame(maxWidth: 188, alignment: .top)
     }
 }
 

@@ -57,12 +57,13 @@ extension AccountModel {
 }
 
 
-struct AddressModel : Codable {
+struct AddressModel : Codable, Hashable {
     var province: String?
     var district: String?
     var commune: String?
     var specific: String?
 }
+
 
 extension AddressModel {
     init?(dictionary: [String: Any]) {

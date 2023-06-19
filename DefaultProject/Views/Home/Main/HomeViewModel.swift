@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     
     private let firestore : FirestoreProtocol
     @Published var listPurchasingRealEstate : [PostModel] = []
+    @Published var listLeaseRealEstate : [PostModel] = []
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -23,7 +24,7 @@ class HomeViewModel: ObservableObject {
     func getAllPurchasingPost(){
         
         let fiter = FilterCondition(field: "realEstateCategory", filterOperator: .isEqualTo, value: "Cần bán")
-        let getDoc : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: [fiter], orderBy: nil, decending: nil, limit: nil)
+        let getDoc : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: [fiter], orderBy: nil, decending: nil, limit: 4)
         
         getDoc
             .sink { completion in
@@ -34,6 +35,20 @@ class HomeViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func getAllLeasePost(){
+        let fiter = FilterCondition(field: "realEstateCategory", filterOperator: .isEqualTo, value: "Cho thuê")
+        let getDoc : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: [fiter], orderBy: nil, decending: nil, limit: 4)
         
+        getDoc
+            .sink { completion in
+                
+            } receiveValue: { element in
+                withAnimation {
+                    self.listLeaseRealEstate.append(element)
+                }
+            }
+            .store(in: &cancellables)
     }
 }
