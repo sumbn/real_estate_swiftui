@@ -79,12 +79,12 @@ class PostModelBuilder {
         return self
     }
     
-    func setBedrooms(_ bedrooms: String?) -> Self {
+    func setBedrooms(_ bedrooms: Int?) -> Self {
         post.bedrooms = bedrooms
         return self
     }
     
-    func setBathrooms(_ bathrooms: String?) -> Self {
+    func setBathrooms(_ bathrooms: Int?) -> Self {
         post.bathrooms = bathrooms
         return self
     }
@@ -111,12 +111,12 @@ class PostModelBuilder {
     }
     
     
-    func setArea(_ area: String?) -> Self {
+    func setArea(_ area: Int?) -> Self {
         post.area = area
         return self
     }
     
-    func setPrice(_ price: String?) -> Self {
+    func setPrice(_ price: Int?) -> Self {
         post.price = price
         return self
     }

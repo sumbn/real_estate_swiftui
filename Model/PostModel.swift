@@ -25,16 +25,16 @@ struct PostModel {
     var floor: String?
     
     var apartmentType: String?
-    var bedrooms: String?
-    var bathrooms: String?
+    var bedrooms: Int?
+    var bathrooms: Int?
     var balconyDirection: String?
     var entranceDirection: String?
     
     var legalDocuments: String?
     var interiorStatus: String?
 
-    var area: String?
-    var price: String?
+    var area: Int?
+    var price: Int?
     var depositAmount: String?
     
     var postTitle: String?
@@ -100,14 +100,14 @@ extension PostModel : InitializableProtocol {
         self.block = dictionary["block"] as? String
         self.floor = dictionary["floor"] as? String
         self.apartmentType = dictionary["apartmentType"] as? String
-        self.bedrooms = dictionary["bedrooms"] as? String
-        self.bathrooms = dictionary["bathrooms"] as? String
+        self.bedrooms = dictionary["bedrooms"] as? Int
+        self.bathrooms = dictionary["bathrooms"] as? Int
         self.balconyDirection = dictionary["balconyDirection"] as? String
         self.entranceDirection = dictionary["entranceDirection"] as? String
         self.legalDocuments = dictionary["legalDocuments"] as? String
         self.interiorStatus = dictionary["interiorStatus"] as? String
-        self.area = dictionary["area"] as? String
-        self.price = dictionary["price"] as? String
+        self.area = dictionary["area"] as? Int
+        self.price = dictionary["price"] as? Int
         self.depositAmount = dictionary["depositAmount"] as? String
         self.postTitle = dictionary["postTitle"] as? String
         self.postDescription = dictionary["postDescription"] as? String

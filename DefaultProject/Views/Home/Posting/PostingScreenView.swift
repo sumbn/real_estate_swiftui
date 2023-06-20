@@ -32,8 +32,8 @@ struct PostingScreenView: View {
     
     //MARK: Options title
     
-    @State var selectedCategory = "Căn hộ/ chung cư"
-    let listCategory = ["Căn hộ/ chung cư","Nhà ở", "Đất", "Văn phòng, mặt bằng kinh doanh", "Phòng trọ"]
+    @State var selectedCategory = "Biệt thự, liền kề"
+    let listCategory = ["Biệt thự, liền kề","Khu đô thị mới","Khu nghỉ dưỡng", "Khu dân cư", "Cao ốc văn phòng", "Trung tâm thương mại"]
     
     @State private var selectedChip: String? = nil
     let chipOptions = ["Cần bán", "Cho thuê"]
@@ -603,14 +603,14 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .setBlock(block)
             .setFloor(floor)
             .setApartmentType(apartmentType)
-            .setBedrooms(bedrooms)
-            .setBathrooms(bathrooms)
+            .setBedrooms(Int(bedrooms))
+            .setBathrooms(Int(bathrooms))
             .setBalconyDirection(balconyDirection)
             .setEntranceDirection(entranceDirection)
             .setLegalDocuments(legalDocuments)
             .setInteriorStatus(interiorStatus)
-            .setArea(area)
-            .setPrice(price)
+            .setArea(Int(area))
+            .setPrice(Int(price))
             .setDepositAmount(depositAmount)
             .setPostTitle(postTitle)
             .setPostDecription(postDecription)

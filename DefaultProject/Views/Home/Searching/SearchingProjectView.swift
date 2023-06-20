@@ -8,21 +8,33 @@
 import SwiftUI
 
 struct SearchingProjectView: View {
+    @Environment(\.presentationMode) var presentationMode
     
     @State var search = ""
     @State var address = "Ho Chi Minh"
     let viewModel : SearchingProjectViewModel
     
     init(){
-        viewModel = SearchingProjectViewModel()
+        let container = DependencyContainer()
+        viewModel = SearchingProjectViewModel(firestore: container.firestoreService)
     }
+    
+    @State var listSelected = [String]()
     
     var body: some View {
         VStack{
             HStack(spacing: 0){
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack{
+                        Image(systemName: "chevron.backward")
+                    }
+                    .foregroundColor(Color(hex: "#072331"))
+                }
+                .padding(.trailing, 12)
                 
                 HStack(spacing: 0){
-                    
                     Button {
                         
                     } label: {
@@ -32,7 +44,6 @@ struct SearchingProjectView: View {
                     
                     TextField("Tìm kiếm nhà, đất, khu vực", text: $search)
                         .font(.custom("Work Sans Bold", size: 15))
-                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: 45)
                 .background {
@@ -80,7 +91,7 @@ struct SearchingProjectView: View {
                 
                 LazyHStack {
                     Button {
-                        
+                        viewModel.test()
                     } label: {
                         HStack(spacing: 4) {
                             Image("SearchingFilterIcon")
@@ -97,7 +108,9 @@ struct SearchingProjectView: View {
                     }
                     
                     NavigationLink {
-                        
+                        TypeOfRealEstateView(listName: ["Biệt thự, liền kề","Khu đô thị mới","Khu nghỉ dưỡng", "Khu dân cư", "Cao ốc văn phòng", "Trung tâm thương mại"], listSelected: listSelected) { [self] list in
+                            listSelected = list
+                        }
                     } label: {
                         HStack(spacing: 4) {
                             Text("Biệt thự, liền kề")
@@ -109,7 +122,6 @@ struct SearchingProjectView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(Color("Text6").opacity(0.7))
-                                
                         }
                     }
                     
@@ -126,7 +138,6 @@ struct SearchingProjectView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(Color("Text6").opacity(0.7))
-                                
                         }
                     }
                     
@@ -171,6 +182,7 @@ struct SearchingProjectView: View {
                 .foregroundColor(Color("Background7"))
                 
         }
+        .navigationBarBackButtonHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
     }
 }

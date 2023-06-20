@@ -17,6 +17,10 @@ enum FilterOperator {
     case isEqualTo
     case isGreaterThan
     case isLessThan
+    case inQuery
+    case notInQuery
+    case arrayContains
+    case arrayContainsAny
 }
 
 enum ResultGetDocument <T> {

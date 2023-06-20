@@ -139,7 +139,7 @@ struct HomeView: View {
                             
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                                 ForEach(viewModel.listPurchasingRealEstate, id: \.id) { post in
-                                    RealEstateHomeView(post: post)
+                                    ItemRealEstateHomeView(post: post)
                                 }
                             }
                             
@@ -161,7 +161,7 @@ struct HomeView: View {
                             
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                                 ForEach(viewModel.listLeaseRealEstate, id: \.id) { post in
-                                    RealEstateHomeView(post: post)
+                                    ItemRealEstateHomeView(post: post)
                                 }
                             }
                             
@@ -194,7 +194,7 @@ struct HomeView: View {
                             ScrollView(.horizontal) {
                                 LazyHStack{
                                     ForEach(viewModel.listPurchasingRealEstate, id: \.id) { post in
-                                        RealEstateHomeView(post: post)
+                                        ItemRealEstateHomeView(post: post)
                                             .frame(width: 188, height: 170)
                                     }
                                 }
