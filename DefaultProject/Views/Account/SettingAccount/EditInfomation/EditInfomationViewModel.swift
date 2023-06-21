@@ -39,12 +39,13 @@ class EditInfomationViewModel {
         }
     }
     
-    func updateDataFireStore(uid: String, data: AccountModel, completion: @escaping ()->Void){
+    func updateDataFireStore(uid: String, data: AccountModel, completion: @escaping (AccountModel)->Void){
         firestoreService.updateDocument(collection: Constants.pathAccount, document: uid, data: data.toDictionary())
             .sink { result in
-                completion()
+                
             } receiveValue: { result in
-               print(AccountModel(dictionary: result))
+//               print(AccountModel(dictionary: result))
+                completion(AccountModel(dictionary: result)!)
             }
             .store(in: &cancellables)
     }

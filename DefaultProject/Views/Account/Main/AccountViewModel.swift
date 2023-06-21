@@ -21,7 +21,7 @@ class AccountViewModel {
     
     func getAccountOrCreate(uid: String, getUser: @escaping (AccountModel) -> Void ) {
         
-        let account = AccountModel(uid: uid, image: "", name: "", address: AddressModel(province: "", district: "", commune: "", specific: ""), phoneNumber: "", bio: "", identify: IDModel(no: "", dateOfIssued: "", issuedBy: ""), gender: "", dayOfBirth: "")
+        let account = AccountModel(uid: uid, image: "", name: "", province: "", district: "", commune: "", specific: "", noId: "", dateOfIssued: "", issuedBy: "", phoneNumber: "", bio: "", gender: "", dayOfBirth: "")
         
         let result : AnyPublisher<ResultGetDocument<AccountModel>, Error> = fireStore.getDocument(path: Constants.pathAccount, uid)
         result.flatMap { result in

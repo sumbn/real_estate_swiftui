@@ -17,11 +17,9 @@ class SearchingProjectViewModel {
         self.firestore = firestore
     }
     
-    var listProvince : [AddressModel] {
+    var listProvince : [Province] {
         let list = Bundle.main.decode(type: [Province].self, from: "fakeJson.json")
-        return list.map { province in
-            AddressModel(province: province.name )
-        }
+        return list
     }
     
     func test(){

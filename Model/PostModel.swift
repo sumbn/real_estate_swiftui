@@ -16,7 +16,13 @@ struct PostModel {
     var realEstateCategory: String?
     
     var buildingName: String?
-    var address: String?
+//    var address: String?
+    
+    var province_city: String?
+    var district: String?
+    var commune: String?
+    var specificAddress: String?
+    
     var videoURL: String?
     var imageURLs: [String]?
     
@@ -54,7 +60,15 @@ extension PostModel {
         dictionary["realEstateCategory"] = realEstateCategory
         
         dictionary["buildingName"] = buildingName
-        dictionary["address"] = address
+//        dictionary["address"] = address
+        dictionary["province_city"] = province_city
+        dictionary["district"] = district
+        dictionary["commune"] = commune
+        dictionary["specificAddress"] = specificAddress
+        
+        
+        
+        
         dictionary["videoURL"] = videoURL
         dictionary["imageURLs"] = imageURLs
         
@@ -93,7 +107,12 @@ extension PostModel : InitializableProtocol {
         self.category = dictionary["category"] as? String
         self.realEstateCategory = dictionary["realEstateCategory"] as? String
         self.buildingName = dictionary["buildingName"] as? String
-        self.address = dictionary["address"] as? String
+        
+        self.province_city = dictionary["province_city"] as? String
+        self.district = dictionary["district"] as? String
+        self.commune = dictionary["commune"] as? String
+        self.specificAddress = dictionary["specificAddress"] as? String
+        
         self.videoURL = dictionary["videoURL"] as? String
         self.imageURLs = dictionary["imageURLs"] as? [String]
         self.apartmentCode = dictionary["apartmentCode"] as? String

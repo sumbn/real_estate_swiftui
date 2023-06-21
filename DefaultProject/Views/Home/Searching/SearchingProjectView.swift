@@ -74,11 +74,11 @@ struct SearchingProjectView: View {
                     .frame(maxWidth: 235, alignment: .leading)
                 
                 Menu {
-                    ForEach(viewModel.listProvince, id: \.self) { add in
-                        Button(add.province ?? "") {
-                            address = add.province ?? ""
-                        }
-                    }
+//                    ForEach(viewModel.listProvince, id: \.self) { add in
+//                        Button(add.province ?? "") {
+//                            address = add.province ?? ""
+//                        }
+//                    }
                     
                 } label: {
                     Image("TriangleDownHome")

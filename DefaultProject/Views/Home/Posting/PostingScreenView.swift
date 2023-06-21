@@ -43,6 +43,10 @@ struct PostingScreenView: View {
     @State var buildingName: String = ""
     @State var tintBuildingName : String = "Nhập tên toà nhà/ khu dân cư/ dự án"
     
+    @State var province: String = ""
+    @State var district: String = ""
+    @State var commune: String = ""
+    @State var specific: String = ""
     @State var address: String = ""
     @State var tintAddress : String = "Nhập địa chỉ"
     
@@ -201,7 +205,22 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     OutlineTextFieldView(label: "Tên toà nhà", input: $buildingName, tint: $tintBuildingName)
                     
                     VStack(spacing: 0){
-                        OutlineTextFieldView(label: "Địa chỉ", input: $address, tint: $tintAddress, isRequired: true)
+//                        OutlineTextFieldView(label: "Địa chỉ", input: $address, tint: $tintAddress, isRequired: true)
+                        
+                        OutlineWithOptionView(label: "Địa chỉ", input: $address, tint: $tintAddress, isRequired: true) {
+                            
+                            NavigationLink {
+                                AddressView(province_city: $province, district: $district, commune: $commune, specificAddress: $specific){ text1, text2, text3 in
+                                    address = text1 + text2 + text3
+                                }
+                            } label: {
+                                Image(systemName: "chevron.forward")
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.trailing,20)
+                            
+                        }
+
                         
                         if address == "" {
                             Text("Vui lòng nhập thông tin")
@@ -598,7 +617,10 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .setCategory(selectedCategory)
             .setRealEstateCategory(selectedChip ?? "")
             .setBuildingName(buildingName)
-            .setAddress(address)
+            .setProvince(province)
+            .setDistrict(district)
+            .setCommune(commune)
+            .setSpecificAddress(specific)
             .setApartmentCode(apartmentCode)
             .setBlock(block)
             .setFloor(floor)

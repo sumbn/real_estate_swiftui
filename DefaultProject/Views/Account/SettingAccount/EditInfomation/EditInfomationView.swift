@@ -16,7 +16,7 @@ struct EditInfomationView: View {
     @State var name: String = ""
     @State var tintName: String = "Tên của bạn"
     
-    @State var address: String = ""
+    @State var address: String  = ""
     @State var tintAddress: String = "Địa chỉ của bạn"
     
     @State var phoneNumber: String = ""
@@ -25,7 +25,6 @@ struct EditInfomationView: View {
     @State var introduce: String = ""
     @State var tintIntroduce: String = "Viết vài dòng giới thiệu về gian hàng của bạn...( tối đa 60 từ)"
     
-//    @State var identification: String = ""
     @State var id : String = ""
     @State var dayOfIssue: String = ""
     @State var issueBy: String = ""
@@ -44,18 +43,23 @@ struct EditInfomationView: View {
     @State var tintBirthDay : String = "Chọn ngày, tháng, năm sinh"
     
     
-    @State var addressModel: AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
-    {
-        willSet(newValue){
-            address = newValue.province ?? ""
-        }
-    }
+//    @State var addressModel: AddressModel = AddressModel(province: "", district: "", commune: "", specific: "")
+//    {
+//        willSet(newValue){
+//            address = newValue.province ?? ""
+//        }
+//    }
     
-    
+    @State var province: String = ""
+    @State var district: String = ""
+    @State var commune: String = ""
+    @State var specific: String = ""
     
     @State var isToggle = false
     
     @State var isSheet = false
+    
+    @State var isFirstLoad = true
     
     init(){
         let container = DependencyContainer()
@@ -94,12 +98,13 @@ struct EditInfomationView: View {
                     
                     OutlineTextFieldView(label: "Họ và tên", input: $name, tint: $tintName, isRequired: true)
                     
+                    
+                    
                     OutlineWithOptionView(label: "Địa chỉ", input: $address, tint: $tintAddress) {
                         
                         NavigationLink {
-                            AddressView(addressModel: addressModel) { addressModel in
-                                self.addressModel = addressModel
-                                address = addressModel.province ?? ""
+                            AddressView(province_city: $province, district: $district, commune: $commune, specificAddress: $specific){ text1, text2, text3 in
+                                address = text1 + text2 + text3
                             }
                         } label: {
                             Image(systemName: "chevron.forward")
@@ -108,6 +113,8 @@ struct EditInfomationView: View {
                         .padding(.trailing,20)
                         
                     }
+                    
+                    
                     
                     OutlineTextFieldView(label: "Số điện thoại", input: $phoneNumber, tint: $tintphoneNumber, isRequired: true)
                     
@@ -197,7 +204,9 @@ struct EditInfomationView: View {
                     }
                     
                     Button {
-                        handlerEventButtonSave{
+                        handlerEventButtonSave{ account in
+                            shareModel.userSession?.user?.displayName = account.name
+                            print(account)
                             presentationMode.wrappedValue.dismiss()
                         }
                         
@@ -240,20 +249,29 @@ struct EditInfomationView: View {
         .background(Color("Background7"))
         .navigationBarBackButtonHidden(true)
         .onAppear{
-            if name == ""{
+            if isFirstLoad{
                 viewModel.getData(collection: Constants.pathAccount, document: shareModel.userSession?.user?.uid ?? "") { [self] account in
                     name = account.name ?? ""
-                    addressModel = account.address ?? AddressModel(province: "", district: "", commune: "", specific: "")
+                    
+                    address = (account.province ?? "") + (account.district ?? "") + (account.commune ?? "")
+                    
+                    province = account.province ?? ""
+                    district = account.district ?? ""
+                    commune = account.commune ?? ""
+                    specific = account.specific ?? ""
+                    
                     phoneNumber = account.phoneNumber ?? ""
                     introduce = account.bio ?? ""
 
-                    id = account.identify?.no ?? ""
-                    dayOfIssue = account.identify?.dateOfIssued ?? ""
-                    issueBy = account.identify?.issuedBy ?? ""
+                    id = account.noId ?? ""
+                    dayOfIssue = account.dateOfIssued ?? ""
+                    issueBy = account.issuedBy ?? ""
 
                     gender = account.gender ?? ""
 
                     birthDay = account.dayOfBirth ?? ""
+                    
+                    isFirstLoad = false
                 }
                 print("on appear")
             }
@@ -262,11 +280,27 @@ struct EditInfomationView: View {
     }
     
     
-    func handlerEventButtonSave(completion: @escaping () -> Void){
+    func handlerEventButtonSave(completion: @escaping (AccountModel) -> Void){
         
-        let account = AccountModel(name: name, address: addressModel, phoneNumber: phoneNumber, bio: introduce, identify: IDModel(no: id, dateOfIssued: dayOfIssue, issuedBy: issueBy), gender: gender, dayOfBirth: birthDay)
+        let account = AccountModel(name: name,
+                                   
+                                   province: province,
+                                   district: district,
+                                   commune: commune,
+                                   specific: specific,
+                                   
+                                   noId: id,
+                                   dateOfIssued: dayOfIssue,
+                                   issuedBy: issueBy,
+                                   
+                                   phoneNumber: phoneNumber,
+                                   bio: introduce,
+
+                                   gender: gender,
+                                   dayOfBirth: birthDay)
         
         viewModel.updateDataFireStore(uid: shareModel.userSession?.user?.uid ?? "", data: account, completion: completion)
+        
     }
 }
 

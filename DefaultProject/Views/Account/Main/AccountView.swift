@@ -188,6 +188,9 @@ struct AccountView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
         .onAppear{
+            
+            print("đây là on appear")
+            
             guard let uid = shareModel.userSession?.user?.uid else { return }
             viewModel.getAccountOrCreate(uid: uid) { account in
                 name = account.name ?? ""
@@ -202,6 +205,11 @@ struct AccountView: View {
                 if let url = URL(string: newValue) {
                     imageURL = url
                 }
+            }
+        }
+        .onChange(of: shareModel.userSession?.user?.displayName) { newValue in
+            if let newValue{
+                name = newValue
             }
         }
     }

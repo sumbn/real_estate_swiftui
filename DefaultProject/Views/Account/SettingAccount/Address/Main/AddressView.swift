@@ -23,7 +23,8 @@ struct AddressView: View {
             }
         }
     }
-    @State var province_city: String{
+    
+    @Binding var province_city: String{
         willSet(newValue){
             if(newValue != province_city){
                 district = ""
@@ -31,10 +32,12 @@ struct AddressView: View {
             }
         }
     }
+    
     @State var tintProvince_city: String = "Chọn Tỉnh, thành phố"
     
     @State var selectedDistrict: District?
-    @State var district: String{
+    @Binding var district: String
+    {
         willSet(newValue){
             if(newValue != district){
                 commune = ""
@@ -44,23 +47,22 @@ struct AddressView: View {
     
     @State var tintDistrict: String = "Chọn Quận, huyện"
     
-    @State var commune: String
+    @Binding var commune: String
+    {
+        willSet(newValue){
+            if(newValue != commune){
+                specificAddress = ""
+            }
+        }
+    }
+    
     @State var tintCommune: String = "Chọn Phường, xã, thị trấn"
     
-    @State var specificAddress: String
+    @Binding var specificAddress: String
     @State var tintSpecificAddress = "Nhập địa chỉ cụ thể của bạn"
     
-    let getAddressModel: (AddressModel) -> Void
+    let onCompletion: (String, String, String) -> Void
     
-    
-    init(addressModel: AddressModel, getAddress: @escaping (AddressModel) -> Void){
-        
-        getAddressModel = getAddress
-        _province_city = State(initialValue: addressModel.province ?? "")
-        _district = State(initialValue: addressModel.district ?? "")
-        _commune = State(initialValue: addressModel.commune ?? "")
-        _specificAddress = State(initialValue: addressModel.specific ?? "")
-    }
     
     var body: some View {
         VStack{
@@ -135,9 +137,9 @@ struct AddressView: View {
                     OutlineTextFieldView(label: "Địa chỉ cụ thể", input: $specificAddress, tint: $tintSpecificAddress)
                     
                     Button {
-                        let address = AddressModel(province: province_city, district: district, commune: commune, specific: specificAddress)
-                        getAddressModel(address)
-                        
+//                        let address = AddressModel(province: province_city, district: district, commune: commune, specific: specificAddress)
+//                        getAddressModel(address)
+                        onCompletion(province_city, district,commune)
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("Xong")
@@ -174,7 +176,10 @@ struct AddressView: View {
 
 struct AddressView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressView(addressModel: AddressModel(province: "", district: "", commune: "", specific: "")){ address in
+//        AddressView(addressModel: AddressModel(province: "", district: "", commune: "", specific: "")){ address in
+//
+//        }
+        AddressView(province_city: .constant("abc"), district: .constant("ikl"), commune: .constant("vch"), specificAddress: .constant("iop")){ a,b,c in
             
         }
     }

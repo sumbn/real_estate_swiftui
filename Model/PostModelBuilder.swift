@@ -37,13 +37,28 @@ class PostModelBuilder {
         return self
     }
     
-    func setBuildingName(_ buildingName: String?) -> Self {
+    func setBuildingName(_ buildingName: String) -> Self {
         post.buildingName = buildingName
         return self
     }
     
-    func setAddress(_ address: String?) -> Self {
-        post.address = address
+    func setProvince(_ province: String) -> Self {
+        post.province_city = province
+        return self
+    }
+    
+    func setDistrict(_ district: String) -> Self {
+        post.district = district
+        return self
+    }
+    
+    func setCommune(_ commune: String) -> Self {
+        post.commune = commune
+        return self
+    }
+    
+    func setSpecificAddress(_ specificAddress: String?) -> Self {
+        post.specificAddress = specificAddress
         return self
     }
     
