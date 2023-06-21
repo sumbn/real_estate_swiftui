@@ -9,17 +9,35 @@ import SwiftUI
 
 struct SearchingProjectView: View {
     @Environment(\.presentationMode) var presentationMode
+    let viewModel : SearchingProjectViewModel
+    
+    @State var listSelected = [String]()
     
     @State var search = ""
-    @State var address = "Ho Chi Minh"
-    let viewModel : SearchingProjectViewModel
+    @State var address = ""
+    
+    @State var province : String = ""
+    @State var district : String = ""
+    @State var commnune : String = ""
+    
+    @State private var minPrice: Int?
+    @State private var maxPrice: Int?
+    let priceRanges = [
+        (minPrice: 0, maxPrice: 500_000_000),
+        (minPrice: 500_000_000, maxPrice: 800_000_000),
+        (minPrice: 800_000_000, maxPrice: 1_000_000_000),
+        (minPrice: 1_000_000_000, maxPrice: 2_000_000_000),
+        (minPrice: 2_000_000_000, maxPrice: 3_000_000_000),
+        (minPrice: 3_000_000_000, maxPrice: 5_000_000_000),
+        (minPrice: 5_000_000_000, maxPrice: 10_000_000_000),
+    ]
+    
+    @State var decending: Bool?
     
     init(){
         let container = DependencyContainer()
         viewModel = SearchingProjectViewModel(firestore: container.firestoreService)
     }
-    
-    @State var listSelected = [String]()
     
     var body: some View {
         VStack{
@@ -74,12 +92,52 @@ struct SearchingProjectView: View {
                     .frame(maxWidth: 235, alignment: .leading)
                 
                 Menu {
-//                    ForEach(viewModel.listProvince, id: \.self) { add in
-//                        Button(add.province ?? "") {
-//                            address = add.province ?? ""
-//                        }
-//                    }
-                    
+                    ForEach(viewModel.listProvince, id: \.id) { province in
+                        Menu {
+                            ForEach(province.districts, id: \.id){ district in
+                                Menu {
+                                    ForEach(district.communes, id: \.id){ commune in
+                                        Button {
+                                            address = province.name + district.name + commune.name
+                                            self.province = province.name
+                                            self.district = district.name
+                                            self.commnune = commune.name
+                                        } label: {
+                                            //                                            Text(commune.name)
+                                            HStack {
+                                                Text(commune.name)
+                                                if self.province == province.name && self.district == district.name && self.commnune == commune.name {
+                                                    Spacer()
+                                                    Image(systemName: "checkmark")
+                                                        .foregroundColor(.blue)
+                                                }
+                                            }
+                                        }
+                                    }
+                                } label: {
+                                    HStack {
+                                        Text(district.name)
+                                        if self.province == province.name && self.district == district.name {
+                                            Spacer()
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            
+                            HStack {
+                                Text(province.name)
+                                if self.province == province.name{
+                                    Spacer()
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            
+                        }
+                    }
                 } label: {
                     Image("TriangleDownHome")
                 }
@@ -91,7 +149,7 @@ struct SearchingProjectView: View {
                 
                 LazyHStack {
                     Button {
-                        viewModel.test()
+                        filterData()
                     } label: {
                         HStack(spacing: 4) {
                             Image("SearchingFilterIcon")
@@ -103,7 +161,6 @@ struct SearchingProjectView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(Color("Text6").opacity(0.7))
-                                
                         }
                     }
                     
@@ -125,8 +182,26 @@ struct SearchingProjectView: View {
                         }
                     }
                     
-                    Button {
-                        
+                    Menu {
+                        ForEach(0..<priceRanges.count) { index in
+                            Button {
+                                minPrice = priceRanges[index].minPrice
+                                
+                                print(minPrice)
+                                maxPrice = priceRanges[index].maxPrice
+                            } label: {
+                                HStack {
+                                    Text("\(readNumber(priceRanges[index].minPrice))-\(readNumber(priceRanges[index].maxPrice))")
+                                    
+                                    if self.minPrice == priceRanges[index].minPrice{
+                                        Spacer()
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.blue)
+                                    }
+                                }
+                                
+                            }
+                        }
                     } label: {
                         HStack(spacing: 4) {
                             Text("Giá mua bán")
@@ -142,7 +217,7 @@ struct SearchingProjectView: View {
                     }
                     
                     Button {
-                        
+                        decending = true
                     } label: {
                         HStack(spacing: 4) {
                             Text("Giá +")
@@ -153,7 +228,23 @@ struct SearchingProjectView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color("Background8"))
-                                
+                            
+                        }
+                    }
+                    
+                    Button {
+                        decending = false
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text("Giá -")
+                                .foregroundColor(Color.black)
+                        }
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 9)
+                        .background {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color("Background8"))
+                            
                         }
                     }
                     
@@ -180,10 +271,31 @@ struct SearchingProjectView: View {
             Rectangle()
                 .frame(height: 16)
                 .foregroundColor(Color("Background7"))
-                
+            
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
+    }
+    
+    func filterData(){
+        
+        var filters : [FilterCondition] = []
+        
+        if listSelected.count > 0 {
+            filters.append(FilterCondition(field: "category", filterOperator: .inQuery, value: listSelected))
+        }
+        
+        if let minPrice {
+            if minPrice != 0 {
+                filters.append(FilterCondition(field: "price", filterOperator: .isGreaterThan, value: minPrice))
+            }
+        }
+        
+        if let maxPrice {
+            filters.append(FilterCondition(field: "price", filterOperator: .isLessThan, value: maxPrice))
+        }
+        
+        viewModel.filterData(filter: filters, orderBy: "price", decending: decending, limit: nil)
     }
 }
 
@@ -191,4 +303,13 @@ struct SearchingProjectView_Previews: PreviewProvider {
     static var previews: some View {
         SearchingProjectView()
     }
+}
+
+
+// Helper function to format the price
+func formatPrice(_ price: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.groupingSeparator = ","
+    return formatter.string(from: NSNumber(value: price)) ?? "\(price)"
 }

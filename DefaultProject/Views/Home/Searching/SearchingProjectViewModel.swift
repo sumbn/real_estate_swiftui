@@ -22,11 +22,9 @@ class SearchingProjectViewModel {
         return list
     }
     
-    func test(){
+    func filterData(filter: [FilterCondition], orderBy: String?, decending: Bool?, limit: Int?){
         
-        let filter = FilterCondition(field: "imagesURLs", filterOperator: .arrayContains, value: "https://firebasestorage.googleapis.com:443/v0/b/fir-authentication-7b6d9.appspot.com/o/images%2F20230615150931CAFB25D0-302E-40B5-A326-4B49258CB65D.jpg?alt=media&token=5082f231-301f-4e4f-b529-b3f876be02e3")
-        
-        let test : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: [filter], orderBy: nil, decending: nil, limit: nil)
+        let test : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: filter, orderBy: orderBy, decending: decending, limit: limit)
         
         test
             .sink { completion in

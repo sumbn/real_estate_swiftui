@@ -32,7 +32,7 @@ struct ItemRealEstateHomeView: View {
             
             HStack(spacing: 8){
                 if let price = post.price {
-                    Text(String(price))
+                    Text(readNumber(price))
                         .font(.custom("Work Sans", size: 15))
                         .foregroundColor(Color("Text5"))
                 }
@@ -40,7 +40,7 @@ struct ItemRealEstateHomeView: View {
                 Image("DotHome")
                 
                 if let area = post.area {
-                    Text(String(area))
+                    Text((String(area)) + "m\u{00B2}")
                         .font(.custom("Work Sans", size: 13))
                         .opacity(0.48)
                 }
