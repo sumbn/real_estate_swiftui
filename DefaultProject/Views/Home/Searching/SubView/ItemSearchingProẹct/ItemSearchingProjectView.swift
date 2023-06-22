@@ -16,6 +16,7 @@ struct ItemSearchingProjectView: View {
         self.post = post
         let container = DependencyContainer()
         self.viewModel = ItemSearchingProjectViewModel(fireStore: container.firestoreService)
+        viewModel.getNameUserFromPosting(uid: post.uid ?? "")
     }
     
     var body: some View {
@@ -80,10 +81,6 @@ struct ItemSearchingProjectView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-        }
-        .onAppear{
-            viewModel.getNameUserFromPosting(uid: post.uid ?? "")
-            print(post.uid)
         }
         .frame(maxWidth: 390, alignment: .top)
     }

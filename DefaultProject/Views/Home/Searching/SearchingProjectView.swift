@@ -274,9 +274,12 @@ struct SearchingProjectView: View {
             
             
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(viewModel.listSearchedItem, id: \.id) { post in
-                    ItemSearchingProjectView(post: post)
+                LazyVStack{
+                    ForEach(viewModel.listSearchedItem, id: \.id) { post in
+                        ItemSearchingProjectView(post: post)
+                    }
                 }
+                
             }
         }
         .navigationBarBackButtonHidden(true)
