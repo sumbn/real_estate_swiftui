@@ -41,11 +41,6 @@ struct SearchingProjectView: View {
     
     var body: some View {
         VStack{
-            Button {
-                viewModel.testImplement()
-            } label: {
-                Text("Test")
-            }
 
             HStack(spacing: 0){
                 Button {
@@ -192,8 +187,6 @@ struct SearchingProjectView: View {
                         ForEach(0..<priceRanges.count) { index in
                             Button {
                                 minPrice = priceRanges[index].minPrice
-                                
-                                print(minPrice)
                                 maxPrice = priceRanges[index].maxPrice
                             } label: {
                                 HStack {

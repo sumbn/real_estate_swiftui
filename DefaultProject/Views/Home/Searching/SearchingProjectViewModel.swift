@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import SwiftUI
-import FirebaseFirestore
 
 class SearchingProjectViewModel : ObservableObject {
     
@@ -38,36 +37,12 @@ class SearchingProjectViewModel : ObservableObject {
             .sink { completion in
                 
             } receiveValue: { post in
-                print(post)
+//                print(post.uid)
                 withAnimation {
                     self.listSearchedItem.append(post)
                 }
             }
             .store(in: &cancellable)
         
-    }
-    
-    func testImplement(){
-        
-//        let db = Firestore.firestore()
-//        db.collection(Constants.pathDocument).whereField("imageURLs", arrayContains: "https://firebasestorage.googleapis.com:443/v0/b/fir-authentication-7b6d9.appspot.com/o/images%2F20230621111455734666A0-D8E5-432C-BC38-BD896AD8D719.jpg?alt=media&token=ce27bf14-6a0f-4c3c-b99a-1ee9acd5c7d8").getDocuments { snap, err in
-//            guard let documents = snap?.documents else { return }
-//            print(documents)
-//        }
-        
-        let fiter = FilterCondition(field: "imageURLs", filterOperator: .arrayContains, value: "https://firebasestorage.googleapis.com:443/v0/b/fir-authentication-7b6d9.appspot.com/o/images%2F20230621111455734666A0-D8E5-432C-BC38-BD896AD8D719.jpg?alt=media&token=ce27bf14-6a0f-4c3c-b99a-1ee9acd5c7d8")
-        
-        let fiter2 = FilterCondition(field: "province_city", filterOperator: .isEqualTo, value: "ha")
-        
-        let test : AnyPublisher<PostModel, Error> = firestore.getDocumentsWithCondition(collection: Constants.pathDocument, conditions: [fiter2], orderBy: nil, decending: nil, limit: nil)
-        
-        test
-            .sink { completion in
-                
-            } receiveValue: { post in
-                print(post)
-                
-            }
-            .store(in: &cancellable)
     }
 }

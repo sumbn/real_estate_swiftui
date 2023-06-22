@@ -83,6 +83,7 @@ struct ItemSearchingProjectView: View {
         }
         .onAppear{
             viewModel.getNameUserFromPosting(uid: post.uid ?? "")
+            print(post.uid)
         }
         .frame(maxWidth: 390, alignment: .top)
     }
