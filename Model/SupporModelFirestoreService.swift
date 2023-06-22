@@ -16,7 +16,9 @@ struct FilterCondition {
 enum FilterOperator {
     case isEqualTo
     case isGreaterThan
+    case isGreaterThanOrEqualTo
     case isLessThan
+    case isLessThanThanOrEqualTo
     case inQuery
     case notInQuery
     case arrayContains

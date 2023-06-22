@@ -46,6 +46,10 @@ struct PostModel {
     var postTitle: String?
     var postDescription: String?
     
+//    var keywordsForLookup: [String]? {
+//        [(postTitle ?? "").generateStringSequence(), "\(province_city ?? "") \(district ?? "") \(commune ?? "")".generateStringSequence()].flatMap{ $0 }
+//    }
+    
 }
 
 
@@ -91,6 +95,8 @@ extension PostModel {
         
         dictionary["postTitle"] = postTitle
         dictionary["postDescription"] = postDescription
+        
+//        dictionary["keywordsForLookup"] = keywordsForLookup
         
         return dictionary
     }

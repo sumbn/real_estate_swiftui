@@ -9,16 +9,16 @@ import SwiftUI
 
 struct SearchingProjectView: View {
     @Environment(\.presentationMode) var presentationMode
-    let viewModel : SearchingProjectViewModel
+    @ObservedObject var viewModel : SearchingProjectViewModel
     
     @State var listSelected = [String]()
     
     @State var search = ""
     @State var address = ""
     
-    @State var province : String = ""
-    @State var district : String = ""
-    @State var commnune : String = ""
+    @State var province : String?
+    @State var district : String?
+    @State var commnune : String?
     
     @State private var minPrice: Int?
     @State private var maxPrice: Int?
@@ -41,6 +41,12 @@ struct SearchingProjectView: View {
     
     var body: some View {
         VStack{
+            Button {
+                viewModel.testImplement()
+            } label: {
+                Text("Test")
+            }
+
             HStack(spacing: 0){
                 Button {
                     presentationMode.wrappedValue.dismiss()
@@ -272,6 +278,13 @@ struct SearchingProjectView: View {
                 .frame(height: 16)
                 .foregroundColor(Color("Background7"))
             
+            
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                ForEach(viewModel.listSearchedItem, id: \.id) { post in
+                    ItemSearchingProjectView(post: post)
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
@@ -287,12 +300,24 @@ struct SearchingProjectView: View {
         
         if let minPrice {
             if minPrice != 0 {
-                filters.append(FilterCondition(field: "price", filterOperator: .isGreaterThan, value: minPrice))
+                filters.append(FilterCondition(field: "price", filterOperator: .isGreaterThanOrEqualTo, value: minPrice))
             }
         }
         
         if let maxPrice {
-            filters.append(FilterCondition(field: "price", filterOperator: .isLessThan, value: maxPrice))
+            filters.append(FilterCondition(field: "price", filterOperator: .isLessThanThanOrEqualTo, value: maxPrice))
+        }
+        
+        if let province {
+            filters.append(FilterCondition(field: "province_city", filterOperator: .isEqualTo, value: province))
+        }
+        
+        if let district {
+            filters.append(FilterCondition(field: "district", filterOperator: .isEqualTo, value: district))
+        }
+        
+        if let commnune {
+            filters.append(FilterCondition(field: "commune", filterOperator: .isEqualTo, value: commnune))
         }
         
         viewModel.filterData(filter: filters, orderBy: "price", decending: decending, limit: nil)

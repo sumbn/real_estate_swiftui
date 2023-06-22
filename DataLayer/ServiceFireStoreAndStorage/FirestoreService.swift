@@ -93,8 +93,12 @@ class FirestoreService : FirestoreProtocol {
                     query = query.whereField(field, isEqualTo: value)
                 case .isGreaterThan:
                     query = query.whereField(field, isGreaterThan: value)
+                case .isGreaterThanOrEqualTo:
+                    query = query.whereField(field, isGreaterThanOrEqualTo: value)
                 case .isLessThan:
                     query = query.whereField(field, isLessThan: value)
+                case .isLessThanThanOrEqualTo:
+                    query = query.whereField(field, isLessThanOrEqualTo: value)
                 case .inQuery:
                     query = query.whereField(field, in: value as! [Any])
                 case .notInQuery:
