@@ -58,17 +58,3 @@ func convertStringToDate(from string: String, dateFormat: String = "dd/MM/yyyy")
     return dateFormatter.date(from: string)
 }
 
-func readNumber(_ number: Int) -> String {
-    let billion = 1_000_000_000
-    let million = 1_000_000
-    
-    if number >= billion {
-        let billions = Double(number) / Double(billion)
-        return String(format: "%.1f tỷ", billions)
-    } else if number >= million {
-        let millions = Double(number) / Double(million)
-        return String(format: "%.1f triệu", millions)
-    } else {
-        return "\(number)"
-    }
-}

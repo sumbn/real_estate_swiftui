@@ -1,11 +1,11 @@
 [
     {
         "id" : "pro01",
-        "name" : "HoChiMinh",
+        "name" : "ho chi minh",
         "districts" : [
             {
                 "id" : "dis01",
-                "name" : "Quận 1",
+                "name" : "quận 1",
                 "communes" : [
                     {
                         "id" : "com 01",
@@ -13,21 +13,21 @@
                     },
                     {
                         "id" : "com 02",
-                        "name" : "Phường 02"
+                        "name" : "phường 02"
                     },
                 ]
             },
             {
                 "id" : "dis02",
-                "name" : "Quận 2",
+                "name" : "quận 2",
                 "communes" : [
                     {
                         "id" : "com 01",
-                        "name" : "Phường 01"
+                        "name" : "phường 01"
                     },
                     {
                         "id" : "com 02",
-                        "name" : "Phường 02"
+                        "name" : "phường 02"
                     },
                 ]
             }
@@ -35,33 +35,33 @@
     },
     {
         "id" : "pro02",
-        "name" : "Ha Noi",
+        "name" : "ha noi",
         "districts" : [
             {
                 "id" : "dis01",
-                "name" : "Quận Hoan Kiem",
+                "name" : "quận hoan kiem",
                 "communes" : [
                     {
                         "id" : "com 01",
-                        "name" : "Phường 01"
+                        "name" : "phường 01"
                     },
                     {
                         "id" : "com 02",
-                        "name" : "Phường 02"
+                        "name" : "phường 02"
                     },
                 ]
             },
             {
                 "id" : "dis02",
-                "name" : "Quận Hoang Mai",
+                "name" : "quận hoang mai",
                 "communes" : [
                     {
                         "id" : "com 01",
-                        "name" : "Phường 01"
+                        "name" : "phường 01"
                     },
                     {
                         "id" : "com 02",
-                        "name" : "Phường 02"
+                        "name" : "phường 02"
                     },
                 ]
             }

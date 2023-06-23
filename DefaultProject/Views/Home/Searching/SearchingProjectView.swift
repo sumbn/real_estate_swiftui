@@ -22,14 +22,30 @@ struct SearchingProjectView: View {
     
     @State private var minPrice: Int?
     @State private var maxPrice: Int?
-    let priceRanges = [
-        (minPrice: 0, maxPrice: 500_000_000),
+    //    let priceRanges = [
+    //        (minPrice: 0, maxPrice: 500_000_000),
+    //        (minPrice: 500_000_000, maxPrice: 800_000_000),
+    //        (minPrice: 800_000_000, maxPrice: 1_000_000_000),
+    //        (minPrice: 1_000_000_000, maxPrice: 2_000_000_000),
+    //        (minPrice: 2_000_000_000, maxPrice: 3_000_000_000),
+    //        (minPrice: 3_000_000_000, maxPrice: 5_000_000_000),
+    //        (minPrice: 5_000_000_000, maxPrice: 10_000_000_000),
+    //    ]
+    
+    let priceRanges : [(minPrice: Int?, maxPrice: Int?)] = [
+        (minPrice: nil, maxPrice: 500_000_000),
         (minPrice: 500_000_000, maxPrice: 800_000_000),
         (minPrice: 800_000_000, maxPrice: 1_000_000_000),
         (minPrice: 1_000_000_000, maxPrice: 2_000_000_000),
         (minPrice: 2_000_000_000, maxPrice: 3_000_000_000),
         (minPrice: 3_000_000_000, maxPrice: 5_000_000_000),
-        (minPrice: 5_000_000_000, maxPrice: 10_000_000_000),
+        (minPrice: 5_000_000_000, maxPrice: 7_000_000_000),
+        (minPrice: 7_000_000_000, maxPrice: 10_000_000_000),
+        (minPrice: 10_000_000_000, maxPrice: 20_000_000_000),
+        (minPrice: 20_000_000_000, maxPrice: 30_000_000_000),
+        (minPrice: 30_000_000_000, maxPrice: 40_000_000_000),
+        (minPrice: 40_000_000_000, maxPrice: 60_000_000_000),
+        (minPrice: 60_000_000_000, maxPrice: nil),
     ]
     
     @State var decending: Bool?
@@ -41,7 +57,6 @@ struct SearchingProjectView: View {
     
     var body: some View {
         VStack{
-
             HStack(spacing: 0){
                 Button {
                     presentationMode.wrappedValue.dismiss()
@@ -55,7 +70,7 @@ struct SearchingProjectView: View {
                 
                 HStack(spacing: 0){
                     Button {
-                        
+                        self.searchData()
                     } label: {
                         Image("SearchHome")
                     }
@@ -104,7 +119,6 @@ struct SearchingProjectView: View {
                                             self.district = district.name
                                             self.commnune = commune.name
                                         } label: {
-                                            //                                            Text(commune.name)
                                             HStack {
                                                 Text(commune.name)
                                                 if self.province == province.name && self.district == district.name && self.commnune == commune.name {
@@ -186,19 +200,32 @@ struct SearchingProjectView: View {
                     Menu {
                         ForEach(0..<priceRanges.count) { index in
                             Button {
-                                minPrice = priceRanges[index].minPrice
-                                maxPrice = priceRanges[index].maxPrice
+                                if  minPrice == priceRanges[index].minPrice && maxPrice == priceRanges[index].maxPrice {
+                                    minPrice = nil
+                                    maxPrice = nil
+                                } else {
+                                    minPrice = priceRanges[index].minPrice
+                                    maxPrice = priceRanges[index].maxPrice
+                                }
                             } label: {
                                 HStack {
-                                    Text("\(readNumber(priceRanges[index].minPrice))-\(readNumber(priceRanges[index].maxPrice))")
                                     
-                                    if self.minPrice == priceRanges[index].minPrice{
+                                    if priceRanges[index].minPrice != nil && priceRanges[index].maxPrice != nil {
+                                        Text("\(priceRanges[index].minPrice!.changePriceToString)-\(priceRanges[index].maxPrice!.changePriceToString)")
+                                        
+                                    } else if priceRanges[index].minPrice == nil && priceRanges[index].maxPrice != nil {
+                                        Text("Dưới \(priceRanges[index].maxPrice!.changePriceToString)")
+                                    } else {
+                                        Text("Trên \(priceRanges[index].minPrice!.changePriceToString)")
+                                    }
+                                    
+                                    
+                                    if minPrice == priceRanges[index].minPrice && maxPrice == priceRanges[index].maxPrice{
                                         Spacer()
                                         Image(systemName: "checkmark")
                                             .foregroundColor(.blue)
                                     }
                                 }
-                                
                             }
                         }
                     } label: {
@@ -216,7 +243,12 @@ struct SearchingProjectView: View {
                     }
                     
                     Button {
-                        decending = true
+                        if (decending == true) {
+                            decending = nil
+                        } else {
+                            decending = true
+                        }
+                        
                     } label: {
                         HStack(spacing: 4) {
                             Text("Giá +")
@@ -226,13 +258,17 @@ struct SearchingProjectView: View {
                         .padding(.horizontal, 9)
                         .background {
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color("Background8"))
+                                .fill( decending != nil && decending == true ? Color("Text3") : Color("Background8") )
                             
                         }
                     }
                     
                     Button {
-                        decending = false
+                        if (decending == false) {
+                            decending = nil
+                        } else {
+                            decending = false
+                        }
                     } label: {
                         HStack(spacing: 4) {
                             Text("Giá -")
@@ -242,25 +278,25 @@ struct SearchingProjectView: View {
                         .padding(.horizontal, 9)
                         .background {
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color("Background8"))
+                                .fill(decending != nil && decending == false ? Color("Text3") : Color("Background8") )
                             
                         }
                     }
                     
-                    Button {
-                        
-                    } label: {
-                        HStack(spacing: 4) {
-                            Text("Dự án ")
-                                .foregroundColor(Color.black)
-                        }
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 9)
-                        .background {
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color("Background8"))
-                        }
-                    }
+                    //                    Button {
+                    //
+                    //                    } label: {
+                    //                        HStack(spacing: 4) {
+                    //                            Text("Dự án ")
+                    //                                .foregroundColor(Color.black)
+                    //                        }
+                    //                        .padding(.vertical, 6)
+                    //                        .padding(.horizontal, 9)
+                    //                        .background {
+                    //                            RoundedRectangle(cornerRadius: 4)
+                    //                                .fill(Color("Background8"))
+                    //                        }
+                    //                    }
                 }
             }
             .frame(height: 35, alignment: .leading)
@@ -271,13 +307,15 @@ struct SearchingProjectView: View {
                 .frame(height: 16)
                 .foregroundColor(Color("Background7"))
             
-            
+            if viewModel.listSearchedItem.count > 0 {
+                Text("\(viewModel.listSearchedItem.count) dự án phù hợp")
+                    .font(.custom("Work Sans", size: 15))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack{
-                    ForEach(viewModel.listSearchedItem, id: \.id) { post in
-                        ItemSearchingProjectView(post: post)
-                    }
+                ForEach(viewModel.listSearchedItem, id: \.id) { post in
+                    ItemSearchingProjectView(post: post)
                 }
                 
             }
@@ -295,9 +333,9 @@ struct SearchingProjectView: View {
         }
         
         if let minPrice {
-            if minPrice != 0 {
-                filters.append(FilterCondition(field: "price", filterOperator: .isGreaterThanOrEqualTo, value: minPrice))
-            }
+            
+            filters.append(FilterCondition(field: "price", filterOperator: .isGreaterThanOrEqualTo, value: minPrice))
+            
         }
         
         if let maxPrice {
@@ -316,7 +354,20 @@ struct SearchingProjectView: View {
             filters.append(FilterCondition(field: "commune", filterOperator: .isEqualTo, value: commnune))
         }
         
-        viewModel.filterData(filter: filters, orderBy: "price", decending: decending, limit: nil)
+        if let decending {
+            viewModel.filterData(filter: filters, orderBy: "price", decending: decending, limit: nil)
+        } else {
+            viewModel.filterData(filter: filters, orderBy: nil, decending: decending, limit: nil)
+        }
+    }
+    
+    func searchData(){
+        var filters : [FilterCondition] = []
+        
+        filters.append(FilterCondition(field: "postDescription", filterOperator: .isGreaterThanOrEqualTo, value: search.lowercased()))
+        filters.append(FilterCondition(field: "postDescription", filterOperator: .isLessThan, value: search.lowercased() + "\u{f8ff}"))
+        
+        viewModel.filterData(filter: filters, orderBy: nil, decending: nil, limit: nil)
     }
 }
 
@@ -327,10 +378,3 @@ struct SearchingProjectView_Previews: PreviewProvider {
 }
 
 
-// Helper function to format the price
-func formatPrice(_ price: Int) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.groupingSeparator = ","
-    return formatter.string(from: NSNumber(value: price)) ?? "\(price)"
-}

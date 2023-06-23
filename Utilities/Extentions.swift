@@ -36,13 +36,19 @@ extension Bundle {
     }
 }
 
-//extension String {
-//    func generateStringSequence() -> [String]{
-//        var sequences: [String] = []
-//        for i in 1...self.count{
-//            sequences.append(String(self.prefix(i)))
-//        }
-//        
-//        return sequences
-//    }
-//}
+extension Int {
+    var changePriceToString : String {
+        let billion = 1_000_000_000
+        let million = 1_000_000
+        
+        if self >= billion {
+            let billions = Double(self) / Double(billion)
+            return String(format: "%.1f tỷ", billions)
+        } else if self >= million {
+            let millions = Double(self) / Double(million)
+            return String(format: "%.1f triệu", millions)
+        } else {
+            return "\(self)"
+        }
+    }
+}

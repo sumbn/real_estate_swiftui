@@ -32,7 +32,7 @@ struct ItemRealEstateHomeView: View {
             
             HStack(spacing: 8){
                 if let price = post.price {
-                    Text(readNumber(price))
+                    Text(price.changePriceToString)
                         .font(.custom("Work Sans", size: 15))
                         .foregroundColor(Color("Text5"))
                 }

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import FirebaseFirestore
 
 class SearchingProjectViewModel : ObservableObject {
     
@@ -27,7 +28,7 @@ class SearchingProjectViewModel : ObservableObject {
     
     func filterData(filter: [FilterCondition], orderBy: String?, decending: Bool?, limit: Int?){
         
-        withAnimation {
+        withAnimation(.easeInOut) {
             listSearchedItem.removeAll()
         }
         
@@ -37,12 +38,14 @@ class SearchingProjectViewModel : ObservableObject {
             .sink { completion in
                 
             } receiveValue: { post in
-//                print(post.uid)
-                withAnimation {
+                print(post)
+                withAnimation(.easeInOut) {
                     self.listSearchedItem.append(post)
                 }
             }
             .store(in: &cancellable)
         
     }
+    
 }
+

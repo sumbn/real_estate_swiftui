@@ -41,7 +41,7 @@ struct ItemSearchingProjectView: View {
 
 
             if let price = post.price, let area = post.area {
-                Text("Từ \(readNumber(price/area))/m\u{00B2}")
+                Text("Từ \((price/area).changePriceToString)/m\u{00B2}")
                     .font(.custom("Work Sans Bold", size: 15))
                     .foregroundColor(Color("Text5"))
                     .frame(maxWidth: .infinity, alignment: .leading)
