@@ -87,7 +87,7 @@ class FirestoreService : FirestoreProtocol {
                 let field = condition.field
                 let filterOperator = condition.filterOperator
                 let value = condition.value
-                
+
                 switch filterOperator {
                 case .isEqualTo:
                     query = query.whereField(field, isEqualTo: value)
@@ -153,7 +153,7 @@ class FirestoreService : FirestoreProtocol {
                 }
                 
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     
                     promise(.success(.success(T(dictionary: document.data() ?? ["lỗi":"không thể ép kiểu sang"])!)))
                 } else {

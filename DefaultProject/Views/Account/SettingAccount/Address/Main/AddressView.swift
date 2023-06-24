@@ -73,7 +73,7 @@ struct AddressView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Địa chỉ")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))
@@ -143,7 +143,7 @@ struct AddressView: View {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("Xong")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                             .padding()
                             .frame(maxWidth: .infinity)

@@ -25,7 +25,7 @@ struct PostingScreenView: View {
     
     let star : AttributedString = {
         var result = AttributedString("*")
-        result.font = UIFont(name: "Work Sans", size: 13)
+        result.font = UIFont(name: workSansFont, size: 13)
         result.foregroundColor = .red
         return result
     }()
@@ -139,7 +139,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Đăng tin")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))
@@ -160,7 +160,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     
                     HStack(spacing: 0){
                         Text("Danh mục bất động sản")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                         Text("*")
                             .foregroundColor(Color(hex: "#DF4B4B"))
                     }
@@ -170,7 +170,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     HStack {
                         ForEach(chipOptions, id: \.self) { chip in
                             Text(chip)
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 8)
                                 .background(
@@ -198,7 +198,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack (spacing: 16){
                     
                     Text("Địa chỉ BĐS và hình ảnh")
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -224,7 +224,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         
                         if address == "" {
                             Text("Vui lòng nhập thông tin")
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .foregroundColor(.red)
                         }
                     }
@@ -238,7 +238,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 Image(systemName: "video.and.waveform")
                                 
                                 Text("Đăng tối đa 1 video")
-                                    .font(.custom("Work Sans", size: 17))
+                                    .font(.custom(workSansFont, size: 17))
                                     .foregroundColor(.black)
                             }
                             .frame(maxWidth: .infinity)
@@ -266,7 +266,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                             .foregroundColor(.black)
                                         
                                         Text("Thay video")
-                                            .font(.custom("Work Sans", size: 17))
+                                            .font(.custom(workSansFont, size: 17))
                                             .foregroundColor(.black)
                                             .opacity(0.5)
                                     }
@@ -300,7 +300,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 Image(systemName: "photo.on.rectangle")
                                 
                                 Text("Đăng từ 3 đến 12 hình ( tỷ lệ 16:9)")
-                                    .font(.custom("Work Sans", size: 17))
+                                    .font(.custom(workSansFont, size: 17))
                                     .foregroundColor(.black)
                             }
                             .frame(maxWidth: .infinity)
@@ -358,7 +358,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     
                     if images.count < 3 {
                         Text("Bạn cần nhập vào ít nhất 3 hình ảnh để có thể tiếp tục")
-                            .font(.custom("Work Sans", size: 13))
+                            .font(.custom(workSansFont, size: 13))
                             .foregroundColor(.red)
                     }
                     
@@ -373,7 +373,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack(spacing: 16){
                     Text("Vị trí Bất động sản")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                     //                        .bold()
                     
                     HStack(spacing: 14) {
@@ -402,7 +402,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack(spacing: 16){
                     Text("Thông tin chi tiết")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                     //                        .bold()
                     
                     VStack(spacing: 0) {
@@ -411,7 +411,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         
                         if apartmentType == "" {
                             Text("Vui lòng chọn loại hình căn hộ")
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .foregroundColor(.red)
                         }
                     }
@@ -424,7 +424,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                             
                             if bedrooms == "" {
                                 Text("Vui lòng nhập thông tin")
-                                    .font(.custom("Work Sans", size: 13))
+                                    .font(.custom(workSansFont, size: 13))
                                     .foregroundColor(.red)
                             }
                         }
@@ -434,7 +434,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                             
                             if bathrooms == "" {
                                 Text("Vui lòng nhập thông tin")
-                                    .font(.custom("Work Sans", size: 13))
+                                    .font(.custom(workSansFont, size: 13))
                                     .foregroundColor(.red)
                             }
                         }
@@ -458,7 +458,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack(spacing: 16){
                     Text("Thông tin khác")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                     //                        .bold()
                     
                     FakeDropDownView(selection: $legalDocuments, tint: $tintLegalDocuments, listOptions: listLegalDocuments, label: "Giấy tờ pháp lý")
@@ -475,7 +475,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack(spacing: 16){
                     Text("Diện tích & giá")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                     //                        .bold()
                     
                     VStack(spacing: 0) {
@@ -483,7 +483,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         
                         if area == "" {
                             Text("Vui lòng nhập thông tin")
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .foregroundColor(.red)
                         }
                     }
@@ -495,7 +495,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         
                         if price == "" {
                             Text("Vui lòng nhập thông tin")
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .foregroundColor(.red)
                         }
                     }
@@ -513,7 +513,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                 VStack(spacing: 16){
                     Text("Tiêu đề tin đăng và mô tả chi tiết")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                     //                        .bold()
                     
                     VStack(spacing: 0) {
@@ -522,7 +522,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         
                         if postTitle == "" {
                             Text("Vui lòng nhập thông tin")
-                                .font(.custom("Work Sans", size: 13))
+                                .font(.custom(workSansFont, size: 13))
                                 .foregroundColor(.red)
                         }
                     }
@@ -530,7 +530,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     VStack{
                         ZStack(alignment: .leading) {
                             Text(postDecription)
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom(workSansFont, size: 17))
                                 .foregroundColor(.clear)
                                 .padding(14)
                                 .background(GeometryReader {
@@ -540,7 +540,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                                 )
                             
                             TextEditor(text: $postDecription)
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom(workSansFont, size: 17))
                                 .foregroundColor(isFirstClickOnDecription ? Color.black.opacity(0.5) : Color.black)
                                 .frame(height: max(40,textEditorHeight))
                                 .cornerRadius(10)
@@ -558,7 +558,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                     })
                     .overlay(alignment: .topLeading) {
                         Text(AttributedString("Mô tả chi tiết") + star)
-                            .font(.custom("Work Sans", size: 13))
+                            .font(.custom(workSansFont, size: 13))
                             .padding(.horizontal, 5)
                             .padding(.vertical, 5)
                             .background{
@@ -579,7 +579,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
                         push()
                     } label: {
                         Text("Đăng tin")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                             .foregroundColor(Color.white)
                             .frame(maxWidth: .infinity)

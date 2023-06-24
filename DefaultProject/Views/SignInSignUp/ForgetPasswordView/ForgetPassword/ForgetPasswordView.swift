@@ -43,7 +43,7 @@ struct ForgetPasswordView: View {
                                
                             
                             Text("Lấy lại mật khẩu")
-                                .font(.custom("Work Sans Bold", size: 17))
+                                .font(.custom(workSansBoldFont, size: 17))
                         }
                         .foregroundColor(Color("Background3"))
                     }
@@ -74,7 +74,7 @@ struct ForgetPasswordView: View {
                     }
                 } label: {
                     Text("Đồng ý")
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .bold()
                         .padding()
                         .frame(maxWidth: .infinity)

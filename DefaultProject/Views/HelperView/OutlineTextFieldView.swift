@@ -29,7 +29,7 @@ struct OutlineTextFieldView: View {
         
         self.labelAtribute = {
             var result = AttributedString(label)
-            result.font = UIFont(name: "Work Sans", size: 13)
+            result.font = UIFont(name: workSansFont, size: 13)
             result.foregroundColor = .black
             return result
         }()
@@ -37,7 +37,7 @@ struct OutlineTextFieldView: View {
         if isRequired {
             self.requestAtribute = {
                 var result = AttributedString("*")
-                result.font = UIFont(name: "Work Sans", size: 13)
+                result.font = UIFont(name: workSansFont, size: 13)
                 result.foregroundColor = .red
                 return result
             }()
@@ -65,21 +65,21 @@ struct OutlineTextFieldView: View {
                 Text(tint)
                     .lineLimit(isOneLine ? 1 : nil)
                     .opacity(0.5)
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
             }
             
             TextField("", text: $input)
                 .lineLimit(isOneLine ? 1 : nil)
-                .font(.custom("Work Sans", size: 17))
+                .font(.custom(workSansFont, size: 17))
                 .padding(.horizontal, 20)
             
         }
         .frame(height: 56)
         .overlay(alignment: .topLeading) {
             Text(labelAtribute + requestAtribute)
-                .font(.custom("Work Sans", size: 13))
+                .font(.custom(workSansFont, size: 13))
                 .padding(.horizontal, 5)
                 .padding(.vertical, 5)
                 .background{

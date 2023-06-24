@@ -40,7 +40,7 @@ struct ConfirmPhoneNumberView : View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Xác thực số điện thoại")
-                            .font(.custom("Work sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color("Background3"))
@@ -51,13 +51,13 @@ struct ConfirmPhoneNumberView : View {
             
             
             Text("Xác thực số điện thoại")
-                .font(.custom("Work Sans", size: 24))
+                .font(.custom(workSansFont, size: 24))
                 .bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 16)
             
             Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động: \(coordinator.userSession?.user?.phoneNumber ?? "")")
-                .font(.custom("Work Sans", size: 15))
+                .font(.custom(workSansFont, size: 15))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             OTPField()
@@ -72,7 +72,7 @@ struct ConfirmPhoneNumberView : View {
                 } label: {
                     Text("Xác thực")
                         .foregroundColor(Color("Text3"))
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                 }
             } else {
                 Button {
@@ -82,7 +82,7 @@ struct ConfirmPhoneNumberView : View {
                 } label: {
                     Text("Gởi lại OTP")
                         .foregroundColor(Color("Text3"))
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                         .underline()
                 }
             }

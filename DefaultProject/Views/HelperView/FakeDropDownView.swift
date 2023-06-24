@@ -25,14 +25,14 @@ struct FakeDropDownView: View {
         self.label = label
         self.labelAtribute = {
             var result = AttributedString(label)
-            result.font = UIFont(name: "Work Sans", size: 13)
+            result.font = UIFont(name: workSansFont, size: 13)
             result.foregroundColor = .black
             return result
         }()
         if isRequested{
             self.request = {
                 var result = AttributedString("*")
-                result.font = UIFont(name: "Work Sans", size: 13)
+                result.font = UIFont(name: workSansFont, size: 13)
                 result.foregroundColor = Color(hex: "#DF4B4B")
                 return result
             }()
@@ -56,14 +56,14 @@ struct FakeDropDownView: View {
             if selection == "" {
                 Text(tint)
                     .opacity(0.5)
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
             }
             
             HStack{
                 Text(selection)
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .lineLimit(1)
                 
                 Spacer()
@@ -84,7 +84,7 @@ struct FakeDropDownView: View {
         }
         .overlay(alignment: .topLeading) {
             Text(labelAtribute + request)
-                .font(.custom("Work Sans", size: 13))
+                .font(.custom(workSansFont, size: 13))
                 .padding(.horizontal, 5)
                 .padding(.vertical, 5)
                 .background{

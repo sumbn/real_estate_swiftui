@@ -25,7 +25,7 @@ struct ChosingProvince: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Chọn Tỉnh/ thành phố")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))

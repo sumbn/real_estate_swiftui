@@ -24,7 +24,7 @@ struct ChosingDistrictView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Chọn Quận/ huyện/ thị xã")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))

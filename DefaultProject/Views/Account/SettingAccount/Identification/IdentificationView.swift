@@ -30,7 +30,7 @@ struct IdentificationView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("CCCD/CMND/Hộ chiếu")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))
@@ -55,7 +55,7 @@ struct IdentificationView: View {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Xong")
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .bold()
                         .padding()
                         .frame(maxWidth: .infinity)

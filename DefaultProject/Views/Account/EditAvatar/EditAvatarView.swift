@@ -52,7 +52,7 @@ struct EditAvatarView: View {
                     }
                 
                 Text(shareModel.userSession?.user?.displayName ?? "Test")
-                    .font(.custom("Work Sans", size: 20))
+                    .font(.custom(workSansFont, size: 20))
                 
                 Spacer()
                 

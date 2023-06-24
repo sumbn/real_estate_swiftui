@@ -32,7 +32,7 @@ struct ItemSearchingProjectView: View {
 
             if let title = post.postTitle {
                 Text(title)
-                    .font(.custom("Work Sans Bold", size: 17))
+                    .font(.custom(workSansBoldFont, size: 17))
                     .lineLimit(2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 9)
@@ -42,16 +42,47 @@ struct ItemSearchingProjectView: View {
 
             if let price = post.price, let area = post.area {
                 Text("Từ \((price/area).changePriceToString)/m\u{00B2}")
-                    .font(.custom("Work Sans Bold", size: 15))
+                    .font(.custom(workSansBoldFont, size: 15))
                     .foregroundColor(Color("Text5"))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             if let category = post.category {
                 HStack {
-                    Image("CategoryFilterIcon")
+                    if category == "Biệt thự, liền kề" {
+                        Image("CategoryFilterIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    } else if category == "Khu đô thị mới" {
+                        Image("CategoryFilterIcon3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    } else if category == "Khu nghỉ dưỡng" {
+                        Image("CategoryFilterIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    } else if category == "Khu dân cư" {
+                        Image("CategoryFilterIcon5")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    } else if category == "Cao ốc văn phòng" {
+                        Image("CategoryFilterIcon6")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    } else {
+                        Image("CategoryFilterIcon4")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                    }
+                    
                     Text(category)
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -59,25 +90,40 @@ struct ItemSearchingProjectView: View {
             if let province = post.province_city, let district = post.district, let commune = post.commune {
                 HStack {
                     Image("LocationFilterIcon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                    
                     Text(commune + ", " + district + ", " + province)
                         .lineLimit(1)
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             if let des = post.postDescription {
-                Text(des)
-                    .font(.custom("Work Sans", size: 13))
-                    .lineLimit(3)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(alignment: .top) {
+                    Image("DescriptionFilterIcon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                    
+                    Text(des)
+                        .font(.custom(workSansFont, size: 15))
+                        .lineLimit(3)
+                        .lineSpacing(5)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
 
             HStack {
                 Image("ShowNameUserFilterIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
 
                 Text(viewModel.nameUser)
-                    .font(.custom("Work Sans Bold", size: 13))
+                    .font(.custom(workSansBoldFont, size: 13))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 

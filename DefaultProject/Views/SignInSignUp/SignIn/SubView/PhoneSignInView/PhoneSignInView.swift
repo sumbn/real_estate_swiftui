@@ -57,7 +57,7 @@ struct PhoneSignInView: View {
                 
             } label: {
                 Text("Đăng nhập")
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .bold()
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: 56)

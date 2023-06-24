@@ -50,7 +50,7 @@ struct TypeOfRealEstateView: View {
                         HStack{
                             Image(systemName: "chevron.backward")
                             Text("Loại hình")
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom(workSansFont, size: 17))
                                 .bold()
                         }
                         .foregroundColor(Color(hex: "#072331"))
@@ -65,7 +65,7 @@ struct TypeOfRealEstateView: View {
                 HStack {
                     Image("SearchHome")
                     TextField("Tìm giấy tờ pháp lý", text: $search)
-                        .font(.custom("Work Sans Bold", size: 15))
+                        .font(.custom(workSansBoldFont, size: 15))
                 }
                 .padding(.horizontal, 20)
             
@@ -80,7 +80,7 @@ struct TypeOfRealEstateView: View {
                             }
                         }
                     Text("Tất cả")
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -94,7 +94,7 @@ struct TypeOfRealEstateView: View {
                                 task.isSelected.toggle()
                             }
                         Text(task.name)
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
@@ -113,7 +113,7 @@ struct TypeOfRealEstateView: View {
                 
             } label: {
                 Text("Áp dụng (\(tasks.filter{ $0.isSelected }.count))")
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .bold()
                     .padding(.vertical, 20)
                     .frame(maxWidth: .infinity)

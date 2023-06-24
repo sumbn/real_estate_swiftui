@@ -15,13 +15,13 @@ struct LoginView: View {
             
             VStack(spacing: 0){
                 Text("Đăng nhập")
-                    .font(.custom("Work Sans", size: 24))
+                    .font(.custom(workSansFont, size: 24))
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 12)
                    
                 Text("Đăng nhập để tiếp tục")
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .opacity(0.5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 31)
@@ -32,7 +32,7 @@ struct LoginView: View {
 //                    ForgetPasswordView()
 //                } label: {
 //                    Text("Quên mật khẩu")
-//                        .font(.custom("Work Sans", size: 15))
+//                        .font(.custom(workSans, size: 15))
 //                        .foregroundColor(Color("Text3"))
 //                }
 //                .padding(.top, 16)
@@ -42,7 +42,7 @@ struct LoginView: View {
                     .frame(maxHeight: 62)
                 
                 Text("hoặc sử dụng")
-                    .font(.custom("Work Sans", size: 15))
+                    .font(.custom(workSansFont, size: 15))
                     .opacity(0.47)
                 
                 HStack(spacing: 18){
@@ -82,13 +82,13 @@ struct LoginView: View {
                 
                 HStack(spacing: 0) {
                     Text("Chưa có tài khoản?")
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                         .foregroundColor(Color("Text4"))
                     NavigationLink {
                         SignUpView()
                     } label: {
                         Text(" Đăng ký ngay")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                             .foregroundColor(Color("Text3"))
                     }
                 }

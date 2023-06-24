@@ -36,7 +36,7 @@ struct AccountView: View {
             
             VStack(spacing: 0){
                 Text("Tài khoản")
-                    .font(.custom("Work Sans", size: 32))
+                    .font(.custom(workSansFont, size: 32))
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -57,7 +57,7 @@ struct AccountView: View {
                         }
                     
                     Text(name)
-                        .font(.custom("Work Sans", size: 20))
+                        .font(.custom(workSansFont, size: 20))
                     
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -69,7 +69,7 @@ struct AccountView: View {
                             .padding(12)
                         
                         Text("Bật/ Tắt thông báo")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                         
                         Toggle(isOn: $toggle) {
                             
@@ -88,7 +88,7 @@ struct AccountView: View {
                             .padding(12)
                         
                         Text("Tin đã lưu")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                         
                         Spacer()
                         
@@ -111,7 +111,7 @@ struct AccountView: View {
                                 .padding(12)
                             
                             Text("Cài đặt tài khoản")
-                                .font(.custom("Work Sans", size: 15))
+                                .font(.custom(workSansFont, size: 15))
                                 .foregroundColor(.black)
                             
                             Spacer()
@@ -133,7 +133,7 @@ struct AccountView: View {
                             .padding(12)
                         
                         Text("Trợ giúp")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                         
                         Spacer()
                         
@@ -165,7 +165,7 @@ struct AccountView: View {
                                 .padding(12)
                             
                             Text("Đăng xuất")
-                                .font(.custom("Work Sans", size: 15))
+                                .font(.custom(workSansFont, size: 15))
                                 .foregroundColor(.black)
                             
                             

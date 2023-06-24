@@ -23,7 +23,7 @@ struct ItemRealEstateHomeView: View {
             
             if let title = post.postTitle {
                 Text(title)
-                    .font(.custom("Work Sans", size: 13))
+                    .font(.custom(workSansFont, size: 13))
                     .lineLimit(2)
                     .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
                     .padding(.top, 9)
@@ -33,7 +33,7 @@ struct ItemRealEstateHomeView: View {
             HStack(spacing: 8){
                 if let price = post.price {
                     Text(price.changePriceToString)
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                         .foregroundColor(Color("Text5"))
                 }
                 
@@ -41,7 +41,7 @@ struct ItemRealEstateHomeView: View {
                 
                 if let area = post.area {
                     Text((String(area)) + "m\u{00B2}")
-                        .font(.custom("Work Sans", size: 13))
+                        .font(.custom(workSansFont, size: 13))
                         .opacity(0.48)
                 }
             }

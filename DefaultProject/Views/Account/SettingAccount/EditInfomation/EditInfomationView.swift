@@ -75,7 +75,7 @@ struct EditInfomationView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Chỉnh sửa trang cá nhân")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color(hex: "#072331"))
@@ -91,7 +91,7 @@ struct EditInfomationView: View {
                 VStack(spacing: 16){
                     
                     Text("Thông tin cá nhân")
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 8)
@@ -120,12 +120,12 @@ struct EditInfomationView: View {
                     
                     VStack(spacing: 8){
                         Text("Cho phép người mua liên lạc qua điện thoại")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Text("Khi bật tính năng này, số điện thoại sẽ hiển thị trên tất cả tin đăng của bạn")
-                            .font(.custom("Work Sans", size: 15))
+                            .font(.custom(workSansFont, size: 15))
                             .opacity(0.47)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -190,7 +190,7 @@ struct EditInfomationView: View {
                                         isShowDatePicker = false
                                     } label: {
                                         Text("Done")
-                                            .font(.custom("Work Sans", size: 17))
+                                            .font(.custom(workSansFont, size: 17))
                                             .bold()
                                             .foregroundColor(Color.white)
                                             .padding(.vertical, 10)
@@ -212,7 +212,7 @@ struct EditInfomationView: View {
                         
                     } label: {
                         Text("Lưu")
-                            .font(.custom("Work Sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                             .padding()
                             .frame(maxWidth: .infinity)

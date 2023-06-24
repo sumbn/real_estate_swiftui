@@ -34,7 +34,7 @@ struct PhoneVerificationView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Lấy lại mật khẩu")
-                            .font(.custom("Work Sans Bold", size: 17))
+                            .font(.custom(workSansBoldFont, size: 17))
                     }
                     .foregroundColor(Color(hex: "#072331"))
                 }
@@ -43,13 +43,13 @@ struct PhoneVerificationView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Text("Lấy lại mật khẩu")
-                .font(.custom("Work Sans Bold", size: 24))
+                .font(.custom(workSansBoldFont, size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 .padding(.top, 40)
             
             Text("Nhập mã OTP mà chúng tôi đã gửi vào số di động \(shareModel.userSession?.user?.phoneNumber ?? "")")
-                .font(.custom("Work Sans", size: 15))
+                .font(.custom(workSansFont, size: 15))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -68,7 +68,7 @@ struct PhoneVerificationView: View {
                 } label: {
                     Text("Xác thực")
                         .foregroundColor(Color(hex: "#5276F0"))
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                 }
             } else {
                 Button {
@@ -79,7 +79,7 @@ struct PhoneVerificationView: View {
                 } label: {
                     Text("Gởi lại OTP")
                         .foregroundColor(Color(hex: "#5276F0"))
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                         .underline()
                 }
             }

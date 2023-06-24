@@ -22,15 +22,6 @@ struct SearchingProjectView: View {
     
     @State private var minPrice: Int?
     @State private var maxPrice: Int?
-    //    let priceRanges = [
-    //        (minPrice: 0, maxPrice: 500_000_000),
-    //        (minPrice: 500_000_000, maxPrice: 800_000_000),
-    //        (minPrice: 800_000_000, maxPrice: 1_000_000_000),
-    //        (minPrice: 1_000_000_000, maxPrice: 2_000_000_000),
-    //        (minPrice: 2_000_000_000, maxPrice: 3_000_000_000),
-    //        (minPrice: 3_000_000_000, maxPrice: 5_000_000_000),
-    //        (minPrice: 5_000_000_000, maxPrice: 10_000_000_000),
-    //    ]
     
     let priceRanges : [(minPrice: Int?, maxPrice: Int?)] = [
         (minPrice: nil, maxPrice: 500_000_000),
@@ -57,6 +48,7 @@ struct SearchingProjectView: View {
     
     var body: some View {
         VStack{
+            
             HStack(spacing: 0){
                 Button {
                     presentationMode.wrappedValue.dismiss()
@@ -77,7 +69,7 @@ struct SearchingProjectView: View {
                     .padding(.horizontal, 10)
                     
                     TextField("Tìm kiếm nhà, đất, khu vực", text: $search)
-                        .font(.custom("Work Sans Bold", size: 15))
+                        .font(.custom(workSansBoldFont, size: 15))
                 }
                 .frame(maxWidth: .infinity, maxHeight: 45)
                 .background {
@@ -98,7 +90,7 @@ struct SearchingProjectView: View {
                 Image("SearchingLocationIcon")
                 
                 Text("Khu vực:")
-                    .font(.custom("Work Sans", size: 15))
+                    .font(.custom(workSansFont, size: 15))
                     .foregroundColor(Color("Text6"))
                 
                 Text(address)
@@ -309,15 +301,17 @@ struct SearchingProjectView: View {
             
             if viewModel.listSearchedItem.count > 0 {
                 Text("\(viewModel.listSearchedItem.count) dự án phù hợp")
-                    .font(.custom("Work Sans", size: 15))
+                    .font(.custom(workSansFont, size: 15))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             
-            ScrollView(.vertical, showsIndicators: false) {
-                ForEach(viewModel.listSearchedItem, id: \.id) { post in
-                    ItemSearchingProjectView(post: post)
-                }
+            ScrollView{
                 
+                LazyVStack {
+                    ForEach(viewModel.listSearchedItem, id: \.id) { post in
+                        ItemSearchingProjectView(post: post)
+                    }
+                }
             }
         }
         .navigationBarBackButtonHidden(true)

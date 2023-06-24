@@ -3,6 +3,8 @@ import SwiftUI
 
 extension Font{
     static var custom = "SFProDisplay"
+    
+    
     public static func heavy(size: CGFloat) -> Font{
         //let font = custom(custom+"-Bold", size: size)
         return .system(size: size, weight: .heavy)

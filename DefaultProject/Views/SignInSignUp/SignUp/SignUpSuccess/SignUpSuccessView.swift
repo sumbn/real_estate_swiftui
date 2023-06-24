@@ -26,7 +26,7 @@ struct SignUpSuccessView: View {
                     HStack{
                         Image(systemName: "chevron.backward")
                         Text("Đăng ký thành công")
-                            .font(.custom("Work sans", size: 17))
+                            .font(.custom(workSansFont, size: 17))
                             .bold()
                     }
                     .foregroundColor(Color("Background3"))
@@ -43,19 +43,19 @@ struct SignUpSuccessView: View {
                 .padding(.bottom, 16)
             
             Text("Chúc mừng bạn đã đăng ký thành công")
-                .font(.custom("Work sans", size: 24))
+                .font(.custom(workSansFont, size: 24))
                 .bold()
                 .multilineTextAlignment(.center)
             
             Text("Đăng nhập để trải nghiệm dịch vụ")
-                .font(.custom("Work sans", size: 15))
+                .font(.custom(workSansFont, size: 15))
                 .padding(.vertical, 16)
             
             Button {
                 coordinator.isNotAuth = false
             } label: {
                 Text("Trải nghiệm ngay")
-                    .font(.custom("Work sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .foregroundColor(.white)
                     .bold()
                     .padding(.vertical, 16)

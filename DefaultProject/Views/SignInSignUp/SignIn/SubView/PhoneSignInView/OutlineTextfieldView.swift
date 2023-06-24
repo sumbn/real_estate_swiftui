@@ -26,7 +26,7 @@ struct OutlineTextfieldView: View {
             
             Text(label)
                 .frame(width: CGFloat(label.count) * modifier , height: 20)
-                .font(.custom("Work Sans", size: 17))
+                .font(.custom(workSansFont, size: 17))
                 .multilineTextAlignment(.leading)
                 .background(.white)
                 .padding(.leading, 10)
@@ -39,7 +39,7 @@ struct OutlineTextfieldView: View {
                 }
                 
             })
-            .font(.custom("Work Sans", size: 17))
+            .font(.custom(workSansFont, size: 17))
             .textFieldStyle(.plain)
             .foregroundColor(.black)
             .opacity(isActive ? 1 : 0.5)

@@ -17,7 +17,7 @@ struct GetAllPostView: View {
                     ForEach(getAllPostViewModel.list, id: \.id) { post in
                         NavigationLink(destination: PostItemView(postModel: post)) {
                             Text(post.id)
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom(workSansFont, size: 17))
                                 .bold()
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: .infinity)

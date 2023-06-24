@@ -26,7 +26,7 @@ struct OutlineWithOptionView <T : View>: View {
         
         self.labelAtribute = {
             var result = AttributedString(label)
-            result.font = UIFont(name: "Work Sans", size: 13)
+            result.font = UIFont(name: workSansFont, size: 13)
             result.foregroundColor = .black
             return result
         }()
@@ -34,7 +34,7 @@ struct OutlineWithOptionView <T : View>: View {
         if isRequired {
             self.requestAtribute = {
                 var result = AttributedString("*")
-                result.font = UIFont(name: "Work Sans", size: 13)
+                result.font = UIFont(name: workSansFont, size: 13)
                 result.foregroundColor = .red
                 return result
             }()
@@ -62,21 +62,21 @@ struct OutlineWithOptionView <T : View>: View {
                 Text(tint)
                     .lineLimit(1)
                     .opacity(0.5)
-                    .font(.custom("Work Sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
             }
             
             Text(input)
                 .lineLimit(1)
-                .font(.custom("Work Sans", size: 17))
+                .font(.custom(workSansFont, size: 17))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
         }
         .frame(height: 56)
         .overlay(alignment: .topLeading) {
             Text(labelAtribute + requestAtribute)
-                .font(.custom("Work Sans", size: 13))
+                .font(.custom(workSansFont, size: 13))
                 .padding(.horizontal, 5)
                 .padding(.vertical, 5)
                 .background{

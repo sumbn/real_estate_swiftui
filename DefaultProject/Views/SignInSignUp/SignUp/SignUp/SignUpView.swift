@@ -39,13 +39,13 @@ struct SignUpView: View {
             NavigationLink(destination: ConfirmPhoneNumberView(), isActive: $isChangeScreen) {
             }
             Text("Đăng ký")
-                .font(.custom("Work Sans", size: 24))
+                .font(.custom(workSansFont, size: 24))
                 .bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 12)
             
             Text("Tạo tài khoản ngay")
-                .font(.custom("Work Sans", size: 17))
+                .font(.custom(workSansFont, size: 17))
                 .opacity(0.3)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 31)
@@ -65,7 +65,7 @@ struct SignUpView: View {
             } label: {
                 VStack{
                     Text("Đăng ký")
-                        .font(.custom("Work Sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .foregroundColor(Color.white)
                         .bold()
                         .frame(maxWidth: .infinity)
@@ -77,13 +77,13 @@ struct SignUpView: View {
             .padding(.bottom, 16)
             
             Text("Bằng việc đăng ký, bạn đã đồng ý với")
-                .font(.custom("Work Sans", size: 13))
+                .font(.custom(workSansFont, size: 13))
             
             HStack {
                 Button(action: {
                 }) {
                     Text("Điều khoản sử dụng")
-                        .font(.custom("Work Sans", size: 13))
+                        .font(.custom(workSansFont, size: 13))
                         .underline()
                         .foregroundColor(Color("Text3"))
                 }
@@ -91,7 +91,7 @@ struct SignUpView: View {
                 
                 
                 Text("của chúng tôi")
-                    .font(.custom("Work Sans", size: 13))
+                    .font(.custom(workSansFont, size: 13))
                     
             }
             .padding(.bottom, 62)
@@ -99,7 +99,7 @@ struct SignUpView: View {
             
             
             Text("hoặc sử dụng")
-                .font(.custom("Work Sans", size: 15))
+                .font(.custom(workSansFont, size: 15))
                 .opacity(0.47)
             
             HStack(spacing: 18){
@@ -138,12 +138,12 @@ struct SignUpView: View {
             
             HStack {
                 Text("Bạn đã có tài khoản?")
-                    .font(.custom("Work Sans", size: 15))
+                    .font(.custom(workSansFont, size: 15))
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Đăng nhập ngay")
-                        .font(.custom("Work Sans", size: 15))
+                        .font(.custom(workSansFont, size: 15))
                         .foregroundColor(Color("Text3"))
                 }
             }

@@ -51,7 +51,7 @@ struct HomeView: View {
 //                        .padding(.horizontal, 10)
 //
 //                        TextField("Tìm kiếm nhà, đất, khu vực", text: $search)
-//                            .font(.custom("Work Sans Bold", size: 15))
+//                            .font(.custom(workSansBoldFont, size: 15))
 //
 //                    }
 //                    .frame(maxWidth: .infinity, maxHeight: 45)
@@ -93,7 +93,7 @@ struct HomeView: View {
                                     }
                                     
                                     Text("Mua bán")
-                                        .font(.custom("Work Sans Bold", size: 15))
+                                        .font(.custom(workSansBoldFont, size: 15))
                                 }
                                 
                                 VStack {
@@ -104,7 +104,7 @@ struct HomeView: View {
                                     }
                                     
                                     Text("Cho thuê")
-                                        .font(.custom("Work Sans Bold", size: 15))
+                                        .font(.custom(workSansBoldFont, size: 15))
                                 }
                                 
                                 VStack {
@@ -115,7 +115,7 @@ struct HomeView: View {
                                     }
                                     
                                     Text("Dự án")
-                                        .font(.custom("Work Sans Bold", size: 15))
+                                        .font(.custom(workSansBoldFont, size: 15))
                                 }
                             }
                             .padding(.top, 46)
@@ -124,7 +124,7 @@ struct HomeView: View {
                             
                             HStack{
                                 Text("Mua bán bất động sản")
-                                    .font(.custom("Work Sans Bold", size: 17))
+                                    .font(.custom(workSansBoldFont, size: 17))
                                 Spacer()
                                 
                                 Button {
@@ -145,7 +145,7 @@ struct HomeView: View {
                             
                             HStack{
                                 Text("Cho thuê bất động sản")
-                                    .font(.custom("Work Sans Bold", size: 17))
+                                    .font(.custom(workSansBoldFont, size: 17))
                                 Spacer()
                                 
                                 Button {
@@ -176,7 +176,7 @@ struct HomeView: View {
                         VStack(spacing: 0){
                             HStack{
                                 Text("Dự án được quan tâm")
-                                    .font(.custom("Work Sans Bold", size: 17))
+                                    .font(.custom(workSansBoldFont, size: 17))
                                 Spacer()
                                 
                                 Button {

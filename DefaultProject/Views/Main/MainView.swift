@@ -23,7 +23,7 @@ struct MainView: View {
                                 .renderingMode(.template)
                             
                             Text("Trang chủ")
-                                .font(.custom("Work Sans", size: 11))
+                                .font(.custom(workSansFont, size: 11))
                         }
                         .tag(0)
                     
@@ -33,7 +33,7 @@ struct MainView: View {
                                 .renderingMode(.template)
                             
                             Text("Quản lý tin")
-                                .font(.custom("Work Sans", size: 11))
+                                .font(.custom(workSansFont, size: 11))
                         }
                         .tag(1)
                     
@@ -43,11 +43,14 @@ struct MainView: View {
                                 .renderingMode(.template)
                             
                             Text("Tài khoản")
-                                .font(.custom("Work Sans", size: 11))
+                                .font(.custom(workSansFont, size: 11))
                         }
                         .tag(2)
                 }
                 .accentColor(Color("Text3"))
+                .onAppear{
+                    UITabBar.appearance().backgroundColor = .white
+                }
                 
                 VStack{
                     Button {
@@ -58,7 +61,7 @@ struct MainView: View {
                             Image("PostingNews")
                             
                             Text("Đăng tin")
-                                .font(.custom("Work Sans", size: 17))
+                                .font(.custom(workSansFont, size: 17))
                                 .bold()
                                 .foregroundColor(.white)
                         }
@@ -76,8 +79,6 @@ struct MainView: View {
             .fullScreenCover(isPresented: $isFSCShowPosting) {
                 PostingScreenView()
             }
-        
-       
     }
 }
 

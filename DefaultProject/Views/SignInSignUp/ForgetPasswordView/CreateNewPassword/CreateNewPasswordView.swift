@@ -75,7 +75,7 @@ struct CreateNewPasswordView: View {
                 }
             } label: {
                 Text("Tạo mật khẩu mới")
-                    .font(.custom("Work sans", size: 17))
+                    .font(.custom(workSansFont, size: 17))
                     .bold()
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -93,7 +93,7 @@ struct CreateNewPasswordView: View {
             VStack(spacing: 0){
                 ZStack{
                     Text("Tạo mật khẩu mới thành công")
-                        .font(.custom("Work sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .fontWeight(.bold)
                        
                     
@@ -113,7 +113,7 @@ struct CreateNewPasswordView: View {
                 .padding(.bottom, 5)
                 
                 Text("Giờ đây bạn có thể đăng nhập với mật khẩu mới")
-                    .font(.custom("Work sans", size: 15))
+                    .font(.custom(workSansFont, size: 15))
                     .opacity(0.5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 10)
@@ -128,7 +128,7 @@ struct CreateNewPasswordView: View {
                     
                 } label: {
                     Text("Đăng nhập")
-                        .font(.custom("Work sans", size: 17))
+                        .font(.custom(workSansFont, size: 17))
                         .bold()
                         .padding(20)
                         .frame(maxWidth: .infinity)
