@@ -39,6 +39,8 @@ struct PostItemView: View {
 
 struct PostItemView_Previews: PreviewProvider {
     static var previews: some View {
+        
+    
         PostItemView(postModel: PostModel())
     }
 }

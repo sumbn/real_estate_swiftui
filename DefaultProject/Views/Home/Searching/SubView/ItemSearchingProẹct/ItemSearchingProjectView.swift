@@ -10,13 +10,11 @@ import Kingfisher
 
 struct ItemSearchingProjectView: View {
     let post : PostModel
-    @ObservedObject var viewModel : ItemSearchingProjectViewModel
+    let accountName: String
     
-    init(post: PostModel) {
+    init(post: PostModel, accountName: String) {
         self.post = post
-        let container = DependencyContainer()
-        self.viewModel = ItemSearchingProjectViewModel(fireStore: container.firestoreService)
-        viewModel.getNameUserFromPosting(uid: post.uid ?? "")
+        self.accountName = accountName
     }
     
     var body: some View {
@@ -122,7 +120,7 @@ struct ItemSearchingProjectView: View {
                     .scaledToFit()
                     .frame(width: 25, height: 25)
 
-                Text(viewModel.nameUser)
+                Text(accountName)
                     .font(.custom(workSansBoldFont, size: 13))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -145,6 +143,6 @@ struct ItemSearchingProjectView_Previews: PreviewProvider {
         post.commune = "Phường 1"
         post.uid = "lw7PH29SnHQJrLRxysv2BA5kHbk1"
         post.postDescription = "ạdhkjfhj ạkdfhajksf adfjhasjhaf. adjkfhajkshf ậhkdhf adfjhasjkfh adfjhasjkdfh ấhdjfh adjfhajsdfh adfjhajkshfa ậhkasha aksdjf adjhfjkashdfjk adfjhasjkdhfahdsfjkhasdjfh"
-        return ItemSearchingProjectView(post: post)
+        return ItemSearchingProjectView(post: post, accountName: "abc")
     }
 }

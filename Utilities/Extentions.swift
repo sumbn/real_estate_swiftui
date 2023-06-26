@@ -52,3 +52,12 @@ extension Int {
         }
     }
 }
+
+extension Date {
+    var dateFormatWithTimezone7: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 7 * 60 * 60)
+        return dateFormatter.string(from: self)
+    }
+}

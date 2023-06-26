@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+
 class PostModelBuilder {
     private var post: PostModel
     
@@ -149,6 +151,11 @@ class PostModelBuilder {
     
     func setPostDecription(_ postDecription: String?) -> Self {
         post.postDescription = postDecription
+        return self
+    }
+    
+    func setPostingTime(_ postingTime: Double?) -> Self{
+        post.postingTime = postingTime
         return self
     }
     

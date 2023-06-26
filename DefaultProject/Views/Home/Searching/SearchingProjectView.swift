@@ -301,15 +301,20 @@ struct SearchingProjectView: View {
             
             if viewModel.listSearchedItem.count > 0 {
                 Text("\(viewModel.listSearchedItem.count) dự án phù hợp")
-                    .font(.custom(workSansFont, size: 15))
+                    .font(.custom(workSansBoldFont, size: 17))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
             }
+                
             
             ScrollView{
                 
                 LazyVStack {
-                    ForEach(viewModel.listSearchedItem, id: \.id) { post in
-                        ItemSearchingProjectView(post: post)
+                    ForEach(Array(viewModel.listSearchedItem.enumerated()), id: \.element.id) { index, value in
+                        
+                        if index < viewModel.listAccount.count {
+                            ItemSearchingProjectView(post: value, accountName: viewModel.listAccount[index])
+                        }
                     }
                 }
             }

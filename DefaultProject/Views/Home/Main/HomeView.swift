@@ -108,8 +108,8 @@ struct HomeView: View {
                                 }
                                 
                                 VStack {
-                                    Button {
-                                        
+                                    NavigationLink {
+                                       AllProjectView()
                                     } label: {
                                         Image("IconProjectHome")
                                     }

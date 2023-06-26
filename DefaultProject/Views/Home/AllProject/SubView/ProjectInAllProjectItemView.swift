@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct ProjectBeingOpeningItemView: View {
+struct ProjectInAllProjectItemView: View {
     
     let post: PostModel
     
@@ -117,7 +117,7 @@ struct ProjectBeingOpeningItemView: View {
     }
 }
 
-struct ProjectBeingOpeningView_Previews: PreviewProvider {
+struct ProjectInAllProjectItemView_Previews: PreviewProvider {
     static var previews: some View {
         var post = PostModel()
         post.imageURLs = ["https://firebasestorage.googleapis.com:443/v0/b/fir-authentication-7b6d9.appspot.com/o/images%2F20230615150931DEC01F05-0FEB-4279-AD0F-9783AD603D4B.jpg?alt=media&token=26fe76c2-2805-47fc-b66c-039e67f422de"]
@@ -130,6 +130,6 @@ struct ProjectBeingOpeningView_Previews: PreviewProvider {
         post.commune = "Phường 1"
         post.uid = "lw7PH29SnHQJrLRxysv2BA5kHbk1"
         post.postDescription = "ạdhkjfhj ạkdfhajksf adfjhasjhaf. adjkfhajkshf ậhkdhf adfjhasjkfh adfjhasjkdfh ấhdjfh adjfhajsdfh adfjhajkshfa ậhkasha aksdjf adjhfjkashdfjk adfjhasjkdhfahdsfjkhasdjfh"
-        return ProjectBeingOpeningItemView(post: post)
+        return ProjectInAllProjectItemView(post: post)
     }
 }

@@ -41,7 +41,6 @@ struct AccountView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack{
-                    
                     KFImage(imageURL)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

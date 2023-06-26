@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct PostModel {
     
     var id : String = generateUniqueString()
@@ -46,7 +47,7 @@ struct PostModel {
     var postTitle: String?
     var postDescription: String?
     
-    
+    var postingTime: Double?
     
 }
 
@@ -67,9 +68,6 @@ extension PostModel {
         dictionary["district"] = district
         dictionary["commune"] = commune
         dictionary["specificAddress"] = specificAddress
-        
-        
-        
         
         dictionary["videoURL"] = videoURL
         dictionary["imageURLs"] = imageURLs
@@ -93,6 +91,8 @@ extension PostModel {
         
         dictionary["postTitle"] = postTitle
         dictionary["postDescription"] = postDescription
+        
+        dictionary["postingTime"] = postingTime
         
 //        dictionary["keywordsForLookup"] = keywordsForLookup
         
@@ -134,5 +134,7 @@ extension PostModel : InitializableProtocol {
         self.depositAmount = dictionary["depositAmount"] as? String
         self.postTitle = dictionary["postTitle"] as? String
         self.postDescription = dictionary["postDescription"] as? String
+        
+        self.postingTime = dictionary["postingTime"] as? Double
     }
 }

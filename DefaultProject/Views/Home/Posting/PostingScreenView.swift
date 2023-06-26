@@ -636,6 +636,7 @@ Ví dụ: Toạ lạc tại đường số 2 Đ.N4, căn hộ Duplex Cenladon Ci
             .setDepositAmount(depositAmount)
             .setPostTitle(postTitle.lowercased())
             .setPostDecription(postDecription.lowercased())
+            .setPostingTime(Date().timeIntervalSince1970)
             .build()
         
         viewModel.createPost(withVideo: urlVideo ?? nil, andImages: images, post: buildModel){ result in
