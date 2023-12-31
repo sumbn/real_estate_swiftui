@@ -81,6 +81,9 @@ struct ImagePicker : UIViewControllerRepresentable {
     
 }
 
+//Phân loại
+
 enum TypePicker {
     case video, image
 }
+
